@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/views/main_page.dart';
+import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
 
 class TeleDoctor extends StatefulWidget {
   @override
@@ -13,7 +14,9 @@ class _TeleDoctorState extends State<TeleDoctor> {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => MainPage(),
+        '/': (context) => SignInPage(),
+        // 'signUp' : (context) => SignUp()
+        'mainPage': (context) => MainPage()
       },
     );
   }
