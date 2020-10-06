@@ -17,7 +17,7 @@ class ProfileButtonCard extends StatelessWidget {
       textColor: Colors.black87,
       padding: const EdgeInsets.all(0.0),
       child: Container(
-        width: 300,
+        width: 150,
         height: 100,
         decoration: BoxDecoration(
           boxShadow: [

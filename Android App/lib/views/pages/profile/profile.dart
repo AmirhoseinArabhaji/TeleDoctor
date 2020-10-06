@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/utilities/colors.dart';
 import 'package:tele_doctor/views/pages/profile/widgets/image_profile.dart';
-import 'package:tele_doctor/views/pages/profile/widgets/information.dart';
+import 'package:tele_doctor/views/pages/profile/widgets/information/information.dart';
 import 'package:tele_doctor/views/pages/profile/widgets/profile_name.dart';
 import 'package:tele_doctor/views/pages/profile/widgets/profile_raised_button.dart';
 
