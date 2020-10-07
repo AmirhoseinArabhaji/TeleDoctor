@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'doctor.apps.DoctorConfig',
     'patient.apps.PatientConfig',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,9 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'users.User'
+
 
 WSGI_APPLICATION = 'Teledoctor.wsgi.application'
 
