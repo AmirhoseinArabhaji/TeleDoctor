@@ -27,5 +27,5 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/person.jpg
+    - assets/
   uses-material-design: true

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/utilities/colors.dart';
-import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
-import 'package:tele_doctor/views/registerPages/widgets/upper_text.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -21,18 +19,6 @@ class _SignInState extends State<SignIn> {
           AspectRatio(
             aspectRatio: 83 / 100,
             child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  UpperText(),
-                  RegisterTextField(title: "E-Mail", obscure: false),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 13),
-                    child: RegisterTextField(title: "Password", obscure: true),
-                  ),
-                ],
-              ),
               width: 500,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -40,7 +26,7 @@ class _SignInState extends State<SignIn> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 3),
+                    offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
                 color: kRegisterBoxColor,

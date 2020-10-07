@@ -6,3 +6,5 @@ const Color kMainColor = Color(0xFFE1E7E5);
 const Color kCardColor = Color(0xFF71E9C5);
 const Color kFirstColorButton = Color(0xFF11A4FF);
 const Color kSecondColorButton = Color(0xFFB8E4FF);
+const Color kRegisterBoxColor = Color(0xFFFDF9FC);
+const Color kTextFieldColor = Color(0xFFFFF3E4);

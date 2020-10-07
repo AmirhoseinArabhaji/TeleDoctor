@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/views/main_page.dart';
-import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
+import 'package:tele_doctor/views/registerPages/sign_in/sign_in_page.dart';
 
 class TeleDoctor extends StatefulWidget {
   @override
