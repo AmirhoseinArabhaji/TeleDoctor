@@ -9,7 +9,6 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    MediaQueryData _queryData = MediaQuery.of(context);
     return SafeArea(
       child: Column(
         children: [

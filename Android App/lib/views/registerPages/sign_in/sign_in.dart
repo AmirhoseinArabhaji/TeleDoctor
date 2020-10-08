@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/utilities/colors.dart';
+import 'package:tele_doctor/views/registerPages/sign_in/widgets/sign_in_button.dart';
+import 'package:tele_doctor/views/registerPages/widgets/blue_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
 import 'package:tele_doctor/views/registerPages/widgets/upper_text.dart';
 
@@ -11,7 +13,6 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    MediaQueryData _queryData = MediaQuery.of(context);
     return SafeArea(
       child: Column(
         children: [
@@ -30,6 +31,33 @@ class _SignInState extends State<SignIn> {
                   Padding(
                     padding: const EdgeInsets.only(top: 13),
                     child: RegisterTextField(title: "Password", obscure: true),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 21),
+                    child: SignInButton(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 23),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(fontSize: 12, color: Colors.black54),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 80.0),
+                    child: Center(
+                      child: RegisterBlueButton(
+                        title: "Create Account",
+                        onTap: () {
+                          Navigator.pushNamed(context, 'signUp');
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -50,7 +78,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

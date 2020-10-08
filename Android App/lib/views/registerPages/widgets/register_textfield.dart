@@ -5,7 +5,7 @@ class RegisterTextField extends StatelessWidget {
   final bool _obscure;
   RegisterTextField({@required String title, @required bool obscure})
       : this._obscure = obscure,
-        this._title = title {}
+        this._title = title;
   final TextEditingController _controller = TextEditingController();
 
   @override
