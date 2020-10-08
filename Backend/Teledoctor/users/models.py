@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinLengthValidator
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, phone_number, first_name, last_name, social_id, password=None, is_staff=False, is_superuser=False, is_active=False):
+    def create_user(self, email, phone_number, first_name, last_name, social_id, password=None,
+                    is_staff=False, is_superuser=False, is_active=True):
+
         if not email or not phone_number or not first_name or not last_name or not social_id:
             raise ValueError('fill all the fields')
         if not password:
@@ -27,7 +29,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    
+
     def create_staffuser(self, email, phone_number, first_name, last_name, social_id, password=None):
         user = self.create_user(
             email,
@@ -36,7 +38,7 @@ class UserManager(BaseUserManager):
             last_name = last_name,
             social_id = social_id,
             password=password,
-            is_staff=True
+            is_staff=True,
         )
         return user
 
@@ -49,7 +51,7 @@ class UserManager(BaseUserManager):
             social_id = social_id,
             password=password,
             is_staff=True,
-            is_superuser=True
+            is_superuser=True,
         )
         return user
 
@@ -57,7 +59,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     first_name       = models.CharField(max_length=50, blank=False)
     last_name        = models.CharField(max_length=50, blank=False)
-    date_of_birth    = models.DateField(auto_now=False, auto_now_add=False)
+    date_of_birth    = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     email            = models.EmailField(blank=False, unique=True)
     phone_number     = models.CharField(validators=[MinLengthValidator(11)],max_length=11, blank=False, unique=True)
     social_id        = models.CharField(validators=[MinLengthValidator(10)],max_length=10, blank=False, unique=True)
@@ -79,20 +81,12 @@ class User(AbstractBaseUser):
     def get_full_name(self):
         return self.first_name + self.last_name
 
+    def get_short_name(self):
+        return self.last_name
+
     def has_perm(self, perm, obj=None):
         return True
 
     def has_module_perms(self, app_label):
         return True
     
-    @property
-    def is_superuser(self):
-        return self.is_superuser
-
-    @property
-    def is_staff(self):
-        return self.is_staff
-
-    @property
-    def is_active(self):
-        return self.is_active
