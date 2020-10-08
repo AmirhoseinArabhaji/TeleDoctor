@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User' # change the built-in user model
 
 
 WSGI_APPLICATION = 'Teledoctor.wsgi.application'
