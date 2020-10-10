@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ProfileImage extends StatelessWidget {
-  const ProfileImage({
-    Key key,
-  }) : super(key: key);
-
+  const ProfileImage({Key key, @required String imageURL})
+      : this._imageURL = imageURL,
+        super(key: key);
+  final String _imageURL;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +16,7 @@ class ProfileImage extends StatelessWidget {
           shape: BoxShape.circle,
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/person.jpg'),
+            image: AssetImage(_imageURL),
           ),
         ),
       ),

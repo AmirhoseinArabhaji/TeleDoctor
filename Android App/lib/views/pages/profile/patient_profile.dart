@@ -5,12 +5,12 @@ import 'package:tele_doctor/views/pages/profile/widgets/information/information.
 import 'package:tele_doctor/views/pages/profile/widgets/profile_name.dart';
 import 'package:tele_doctor/views/pages/profile/widgets/profile_raised_button.dart';
 
-class Profile extends StatefulWidget {
+class PatientProfile extends StatefulWidget {
   @override
-  _ProfileState createState() => _ProfileState();
+  _PatientProfileState createState() => _PatientProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _PatientProfileState extends State<PatientProfile> {
 //Bellatrix Lestrange
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _ProfileState extends State<Profile> {
             children: [
               Row(
                 children: [
-                  ProfileImage(),
+                  ProfileImage(imageURL: 'assets\person.jpg'),
                   Column(
                     children: [
                       ProfileName(),
