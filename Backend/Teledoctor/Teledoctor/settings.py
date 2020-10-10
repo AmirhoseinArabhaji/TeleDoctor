@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'doctor.apps.DoctorConfig',
     'patient.apps.PatientConfig',
     'users.apps.UsersConfig',
+    'api.apps.ApiConfig',
 
     'rest_framework',
 ]
