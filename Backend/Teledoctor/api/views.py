@@ -1,7 +1,12 @@
 from django.shortcuts import render
+
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+# from rest_framework.authentication import TokenAuthentication # TODO for class based view
+# from rest_framework.pagination import PageNumberPagination # TODO for pagination
+# from rest_framework.generics import ListAPIView # TODO for pagination
 
 from users.models import User
 from doctor.models import Doctor
@@ -45,11 +50,17 @@ def registration_view(request):
 
 
 @api_view(['GET', ])
+@permission_classes((IsAuthenticated,))
 def doctor_detail(request, email):
     try:
         doctor = Doctor.objects.get(user__email=email)
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+    # only the author of the blog post
+    user = request.user
+    if doctor.user != user:
+        return Response({'response': 'You dont have permission to do that.'})
 
     if request.method == 'GET':
         serializer = DoctorSerializer(doctor)
@@ -66,3 +77,4 @@ def patient_detail(request, email):
     if request.method == 'GET':
         serializer = PatientSerializer(patient)
         return Response(serializer.data)
+

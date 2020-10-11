@@ -31,17 +31,26 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'password': 'Passwords do not match.'})
 
         user.set_password(password)
-        user.save() # becauser we overwrited save method
+        user.save() # because we overwrited save method
         return user
 
 
 class DoctorSerializer(serializers.ModelSerializer):
+
+    email = serializers.EmailField(source='user.email')
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.SerializerMethodField('get_last_name_from_user') # both methods work which one to use TODO ??
+
     class Meta:
         model = Doctor
-        fields = ['user', 'mc_code', ]
+        fields = ['user', 'mc_code', 'email', 'first_name', 'last_name']
+
+    def get_last_name_from_user(self, doctor):
+        last_name = doctor.user.last_name
+        return last_name
 
         
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = ['user', ]
+        fields = ['user',]
