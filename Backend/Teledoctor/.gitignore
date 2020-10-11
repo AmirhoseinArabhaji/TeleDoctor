@@ -4,3 +4,4 @@ db.sqlite3
 *.pyc
 **/migrations/*.py
 **/migrations/*
+media/profile_pics/*

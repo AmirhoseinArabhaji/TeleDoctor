@@ -5,8 +5,17 @@ from django.core.validators import MinLengthValidator
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name, last_name, phone_number, social_id, password=None,
-                    is_staff=False, is_superuser=False, is_active=True):
+    def create_user(
+        self,
+        email,
+        first_name,
+        last_name,
+        phone_number,
+        social_id,
+        password=None,
+        is_staff=False,
+        is_superuser=False,
+        is_active=True):
 
         if not email or not phone_number or not first_name or not last_name or not social_id:
             raise ValueError('fill all the fields')
@@ -63,6 +72,7 @@ class User(AbstractBaseUser):
     email            = models.EmailField(blank=False, unique=True)
     phone_number     = models.CharField(validators=[MinLengthValidator(11)],max_length=11, blank=False, unique=True)
     social_id        = models.CharField(validators=[MinLengthValidator(10)],max_length=10, blank=False, unique=True)
+    profile_pic      = models.ImageField(default='default.jpg', upload_to='profile_pics')
     date_joined      = models.DateTimeField(auto_now_add=True)
     last_login       = models.DateTimeField(auto_now=True)
     is_active        = models.BooleanField(default=True) # can login
