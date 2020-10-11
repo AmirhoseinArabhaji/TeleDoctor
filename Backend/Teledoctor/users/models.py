@@ -12,6 +12,7 @@ class UserManager(BaseUserManager):
         last_name,
         phone_number,
         social_id,
+        gender,
         password=None,
         is_staff=False,
         is_superuser=False,
@@ -27,7 +28,8 @@ class UserManager(BaseUserManager):
             first_name = first_name,
             last_name = last_name,
             phone_number = phone_number,
-            social_id = social_id
+            social_id = social_id,
+            gender = gender,
         )
 
         user.set_password(password)
@@ -39,25 +41,27 @@ class UserManager(BaseUserManager):
         return user
 
 
-    def create_staffuser(self, email, first_name, last_name ,phone_number, social_id, password=None):
+    def create_staffuser(self, email, first_name, last_name ,phone_number, social_id, gender, password=None):
         user = self.create_user(
             email,
             first_name = first_name,
             last_name = last_name,
             phone_number = phone_number,
             social_id = social_id,
+            gender=gender,
             password=password,
             is_staff=True,
         )
         return user
 
-    def create_superuser(self, email, first_name, last_name, phone_number, social_id, password=None):
+    def create_superuser(self, email, first_name, last_name, phone_number, social_id, gender, password=None):
         user = self.create_user(
             email,
             first_name = first_name,
             last_name = last_name,
             phone_number = phone_number,
             social_id = social_id,
+            gender = gender,
             password=password,
             is_staff=True,
             is_superuser=True,
@@ -66,12 +70,19 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+
+    GENDER = [
+        ('MALE', 'male'),
+        ('FEMALE', 'female'),
+    ]
+
     first_name       = models.CharField(max_length=50, blank=False)
     last_name        = models.CharField(max_length=50, blank=False)
     date_of_birth    = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     email            = models.EmailField(blank=False, unique=True)
     phone_number     = models.CharField(validators=[MinLengthValidator(11)],max_length=11, blank=False, unique=True)
     social_id        = models.CharField(validators=[MinLengthValidator(10)],max_length=10, blank=False, unique=True)
+    gender           = models.CharField(max_length=6, choices=GENDER, default='MALE')
     profile_pic      = models.ImageField(default='default.jpg', upload_to='profile_pics')
     date_joined      = models.DateTimeField(auto_now_add=True)
     last_login       = models.DateTimeField(auto_now=True)
@@ -81,7 +92,7 @@ class User(AbstractBaseUser):
 
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number', 'social_id']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number', 'social_id', 'gender',]
 
     object = UserManager()
 
