@@ -13,6 +13,7 @@ from .serializers import (
     PatientSerializer,
 )
 
+from rest_framework.authtoken.models import Token
 
 @api_view(['GET', ])
 def test_api(request):
@@ -36,6 +37,8 @@ def registration_view(request):
             data['last_name'] = user.last_name
             data['phone_number'] = user.phone_number
             data['social_id'] = user.social_id
+            token = Token.objects.get(user=user).key
+            data['token'] = token
         else:
             data = serializer.errors
         return Response(data)
@@ -51,7 +54,6 @@ def doctor_detail(request, email):
     if request.method == 'GET':
         serializer = DoctorSerializer(doctor)
         return Response(serializer.data)
-
 
 
 @api_view(['GET', ])
