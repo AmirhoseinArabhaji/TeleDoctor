@@ -6,5 +6,5 @@ class Doctor(models.Model):
     mc_code = models.PositiveIntegerField(blank=True, null=True) # Medical Council Code
 
     def __str__(self):
-        return self.user.get_full_name() + '(doctor)'
+        return self.user.get_full_name()
 
