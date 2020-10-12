@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/utilities/colors.dart';
+import 'package:tele_doctor/utilities/device_essentials.dart';
 import 'package:tele_doctor/views/pages_handler.dart';
 
 class MainPage extends StatefulWidget {
@@ -14,6 +15,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    device = Device(MediaQuery.of(context).size);
+
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,

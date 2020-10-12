@@ -1,4 +1,5 @@
 class Person {
+  final String _token;
   String _firstName;
   String _lastName;
   String _phoneNumber;
@@ -6,9 +7,10 @@ class Person {
   String _email;
   int _age;
 
-  Person(String firstName, String lastName, String phoneNumber, String socialID,
-      String email, int age)
-      : this._firstName = firstName,
+  Person(String token, String firstName, String lastName, String phoneNumber,
+      String socialID, String email, int age)
+      : this._token = token,
+        this._firstName = firstName,
         this._lastName = lastName,
         this._age = age,
         this._email = email,
@@ -21,7 +23,7 @@ class Person {
   String get socialID => _socialID;
   String get email => _email;
   int get age => _age;
-
+  String get token => _token;
   set firstName(String firstName) => this._firstName = firstName;
   set lastName(String lastName) => this._lastName = lastName;
   set email(String email) => this._email = email;

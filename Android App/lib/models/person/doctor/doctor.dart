@@ -12,6 +12,7 @@ class Doctor extends Person {
   String _university;
   String _currentHospital;
   Doctor(
+    String token,
     String firstName,
     String lastName,
     String phoneNumber,
@@ -22,5 +23,5 @@ class Doctor extends Person {
     String university,
     String currentHospital,
     Status status,
-  }) : super(firstName, lastName, phoneNumber, socialID, email, age);
+  }) : super(token, firstName, lastName, phoneNumber, socialID, email, age);
 }

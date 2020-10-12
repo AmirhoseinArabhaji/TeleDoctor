@@ -24,7 +24,7 @@ class _PatientProfileState extends State<PatientProfile> {
             children: [
               Row(
                 children: [
-                  ProfileImage(imageURL: 'assets\person.jpg'),
+                  ProfileImage(imageURL: 'assets/person.jpg'),
                   Column(
                     children: [
                       ProfileName(),

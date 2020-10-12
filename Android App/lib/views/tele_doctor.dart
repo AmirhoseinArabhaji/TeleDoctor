@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tele_doctor/utilities/device_essentials.dart';
 import 'package:tele_doctor/views/main_page.dart';
-import 'package:tele_doctor/views/pages/profile/doctor_profile.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
 import 'package:tele_doctor/views/registerPages/sign_up/sign_up.dart';
 
