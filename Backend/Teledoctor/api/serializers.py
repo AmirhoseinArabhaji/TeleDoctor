@@ -5,7 +5,7 @@ from doctor.models import Doctor
 from patient.models import Patient
 
 
-class RegistrationSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
@@ -16,7 +16,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             'password': {'write_only': True}
         }
 
-    def save(self):
+    def create(self, validated_data):
         user = User(
             email=self.validated_data['email'],
             first_name = self.validated_data['first_name'],
@@ -31,26 +31,32 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'password': 'Passwords do not match.'})
 
         user.set_password(password)
-        user.save() # because we overwrited save method
+        user.save()
         return user
 
-
+    
 class DoctorSerializer(serializers.ModelSerializer):
-
-    email = serializers.EmailField(source='user.email')
-    first_name = serializers.CharField(source='user.first_name')
-    last_name = serializers.SerializerMethodField('get_last_name_from_user') # both methods work which one to use TODO ??
+    
+    user = UserSerializer()
 
     class Meta:
         model = Doctor
-        fields = ['user', 'mc_code', 'email', 'first_name', 'last_name']
-
-    def get_last_name_from_user(self, doctor):
-        last_name = doctor.user.last_name
-        return last_name
-
+        fields = ['email', 'first_name', 'last_name', 'phone_number', 'social_id', 'password', 'password2', 'mc_code']
         
+
+    def create(self):
+        doctor = Doctor(
+            user=user,
+            mc_code=self.validated_data['mc_code']
+        )
+        doctor.save()
+        return doctor
+
 class PatientSerializer(serializers.ModelSerializer):
+    
+    user = UserSerializer()
+
     class Meta:
         model = Patient
-        fields = ['user',]
+        fields = []
+
