@@ -14,7 +14,7 @@ class Visit(models.Model):
         'Patient',
         on_delete=models.CASCADE,
     )
-    doctor = models.OneToOneField(
+    doctor = models.ForeignKey(
         'doctor.Doctor',
         on_delete=models.DO_NOTHING,
     )
