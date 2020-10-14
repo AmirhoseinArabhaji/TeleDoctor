@@ -11,6 +11,16 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  TextEditingController _email;
+  TextEditingController _password;
+
+  @override
+  void initState() {
+    super.initState();
+    _email = TextEditingController();
+    _password = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,10 +37,11 @@ class _SignInState extends State<SignIn> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   UpperText(),
-                  RegisterTextField(title: "E-Mail", obscure: false),
+                  RegisterTextField(_email, title: "E-Mail", obscure: false),
                   Padding(
                     padding: const EdgeInsets.only(top: 13),
-                    child: RegisterTextField(title: "Password", obscure: true),
+                    child: RegisterTextField(_password,
+                        title: "Password", obscure: true),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 21),

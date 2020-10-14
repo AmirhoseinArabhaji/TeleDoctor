@@ -10,13 +10,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  ///helps to switch between pages in CurvedNavigationBar
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    /** fill device object and get physical Device's informations */
     device = Device(MediaQuery.of(context).size);
-
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,

@@ -7,7 +7,8 @@ class LowerText extends StatelessWidget {
     return Container(
       child: Text(
         "Already Have an Account? ",
-        style: GoogleFonts.workSans(fontSize: 12, color: Colors.grey),
+        style: GoogleFonts.workSans(
+            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
       ),
     );
   }

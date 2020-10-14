@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class RegisterTextField extends StatelessWidget {
   final String _title;
   final bool _obscure;
-  RegisterTextField({@required String title, @required bool obscure})
-      : this._obscure = obscure,
+  RegisterTextField(TextEditingController controller,
+      {@required String title, @required bool obscure})
+      : this._controller = controller,
+        this._obscure = obscure,
         this._title = title;
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class RegisterTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(32),
         ),
         child: TextField(
+          autofocus: true,
           obscureText: _obscure,
           controller: _controller,
           textAlign: TextAlign.center,

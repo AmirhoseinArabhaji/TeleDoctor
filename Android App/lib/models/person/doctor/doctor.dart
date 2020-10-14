@@ -15,13 +15,17 @@ class Doctor extends Person {
     String token,
     String firstName,
     String lastName,
-    String phoneNumber,
-    String socialID,
     String email,
-    int age, {
+    String password, {
     String address,
     String university,
     String currentHospital,
     Status status,
-  }) : super(token, firstName, lastName, phoneNumber, socialID, email, age);
+  }) : super(
+          token,
+          firstName,
+          lastName,
+          email,
+          password,
+        );
 }

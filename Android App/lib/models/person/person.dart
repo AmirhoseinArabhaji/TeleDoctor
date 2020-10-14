@@ -3,19 +3,18 @@ class Person {
   String _firstName;
   String _lastName;
   String _phoneNumber;
+  String _password;
   String _socialID;
   String _email;
   int _age;
 
-  Person(String token, String firstName, String lastName, String phoneNumber,
-      String socialID, String email, int age)
+  Person(String token, String firstName, String lastName, String email,
+      String password)
       : this._token = token,
         this._firstName = firstName,
         this._lastName = lastName,
-        this._age = age,
-        this._email = email,
-        this._socialID = socialID,
-        this._phoneNumber = phoneNumber;
+        this._password = password,
+        this._email = email;
 
   String get firstName => _firstName;
   String get lastName => _lastName;

@@ -16,7 +16,7 @@ class _TeleDoctorState extends State<TeleDoctor> {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => MainPage(),
+        '/': (context) => SignUp(),
         'signUp': (context) => SignUp(),
         'singIn': (context) => SignIn(),
         'mainPage': (context) => MainPage()

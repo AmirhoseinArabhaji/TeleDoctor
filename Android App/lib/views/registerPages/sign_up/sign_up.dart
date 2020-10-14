@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/utilities/colors.dart';
+import 'package:tele_doctor/view_models/implementations/patient_handler.dart';
 import 'package:tele_doctor/views/registerPages/sign_up/widgets/lower_text.dart';
 import 'package:tele_doctor/views/registerPages/widgets/blue_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
@@ -11,9 +13,27 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  Patient patient;
+  PatientHandler pl;
+  TextEditingController _fName;
+  TextEditingController _lName;
+  TextEditingController _email;
+  TextEditingController _password;
+  @override
+  void initState() {
+    super.initState();
+    this.pl = PatientHandler();
+    _fName = TextEditingController();
+    _lName = TextEditingController();
+    _email = TextEditingController();
+    _password = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -32,22 +52,34 @@ class _SignUpState extends State<SignUp> {
                       Padding(
                         padding: const EdgeInsets.only(top: 13.0),
                         child: RegisterTextField(
-                            title: "First Name", obscure: false),
+                          _fName,
+                          title: "First Name",
+                          obscure: false,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 26.0),
                         child: RegisterTextField(
-                            title: "Last Name", obscure: false),
+                          _lName,
+                          title: "Last Name",
+                          obscure: false,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 26.0),
-                        child:
-                            RegisterTextField(title: "E-Mail", obscure: false),
+                        child: RegisterTextField(
+                          _email,
+                          title: "E-Mail",
+                          obscure: false,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 26.0),
-                        child:
-                            RegisterTextField(title: "Password", obscure: true),
+                        child: RegisterTextField(
+                          _password,
+                          title: "Password",
+                          obscure: true,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 66.0),
@@ -56,6 +88,15 @@ class _SignUpState extends State<SignUp> {
                             title: "Submit",
                             onTap: () {
                               //ToDO complete submit
+                              patient = Patient(
+                                "1235a4b23fd856a8sd2f4ds621ef4w6e2f32",
+                                firstName: _fName.text,
+                                lastName: _lName.text,
+                                email: _email.text,
+                                password: _password.text,
+                              );
+                              pl.patient = patient;
+                              pl.savePatient(patient);
                             },
                           ),
                         ),
