@@ -34,16 +34,11 @@ def test_api(request):
 def user_registration_view(request):
 
     if request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
+        serializer = UserRegisterSerializer(data=request.data)
         data = {}
         if serializer.is_valid():
             user = serializer.save()
             data['response'] = 'successfully registered.'
-            data['email'] = user.email
-            data['first_name'] = user.first_name
-            data['last_name'] = user.last_name
-            data['phone_number'] = user.phone_number
-            data['social_id'] = user.social_id
             token = Token.objects.get(user=user).key
             data['token'] = token
         else:
@@ -59,12 +54,6 @@ def doctor_registration_view(request):
         if serializer.is_valid():
             doctor = serializer.save()
             data['response'] = 'successfully registered.'
-            data['email'] = doctor.user.email
-            data['first_name'] = doctor.user.first_name
-            data['last_name'] = doctor.user.last_name
-            data['phone_number'] = doctor.user.phone_number
-            data['social_id'] = doctor.user.social_id
-            data['mc_code'] = doctor.mc_code
             token = Token.objects.get(user=doctor.user).key
             data['token'] = token
         else:
@@ -81,12 +70,6 @@ def patient_registration_view(request):
         if serializer.is_valid():
             patient = serializer.save()
             data['response'] = 'successfully registered.'
-            data['email'] = patient.user.email
-            data['first_name'] = patient.user.first_name
-            data['last_name'] = patient.user.last_name
-            data['phone_number'] = patient.user.phone_number
-            data['social_id'] = patient.user.social_id
-            data['mc_code'] = patient.mc_code
             token = Token.objects.get(user=patient.user).key
             data['token'] = token
         else:
@@ -95,31 +78,31 @@ def patient_registration_view(request):
 
 
 
-@api_view(['GET', ])
-@permission_classes(())
-def doctor_detail(request, email):
-    try:
-        doctor = Doctor.objects.get(user__email=email)
-    except Doctor.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET', ])
+# @permission_classes(())
+# def doctor_detail(request, email):
+#     try:
+#         doctor = Doctor.objects.get(user__email=email)
+#     except Doctor.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    # user = request.user
-    # if doctor.user != user:
-    #     return Response({'response': 'You dont have permission to do that.'})
+#     # user = request.user
+#     # if doctor.user != user:
+#     #     return Response({'response': 'You dont have permission to do that.'})
 
-    if request.method == 'GET':
-        serializer = DoctorRegisterSerializer(doctor)
-        return Response(serializer.data)
+#     if request.method == 'GET':
+#         serializer = DoctorRegisterSerializer(doctor)
+#         return Response(serializer.data)
 
 
-@api_view(['GET', ])
-def patient_detail(request, email):
-    try:
-        patient = Patient.objects.get(user__email=email)
-    except Patient.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET', ])
+# def patient_detail(request, email):
+#     try:
+#         patient = Patient.objects.get(user__email=email)
+#     except Patient.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
-        serializer = PatientRegisterSerializer(patient)
-        return Response(serializer.data)
+#     if request.method == 'GET':
+#         serializer = PatientRegisterSerializer(patient)
+#         return Response(serializer.data)
 

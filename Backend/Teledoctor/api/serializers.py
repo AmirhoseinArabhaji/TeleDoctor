@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from users.models import User
 from doctor.models import Doctor
-from patient.models import Patient
+from patient.models import Patient, Visit
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -19,7 +19,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User(
             email=self.validated_data['email'],
-            first_name = self.validated_data['first_name'],
+            first_name=self.validated_data['first_name'],
             last_name=self.validated_data['last_name'],
             phone_number=self.validated_data['phone_number'],
             social_id=self.validated_data['social_id'],
@@ -67,7 +67,7 @@ class PatientRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Patient
-        fields = []
+        fields = '__all__'
 
     
     def create(self, validated_data):
@@ -86,3 +86,51 @@ class PatientRegisterSerializer(serializers.ModelSerializer):
 
         return patient
 
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+
+
+class DoctorUpdateSerializer(serializers.ModelSerializer):
+
+    user = UserUpdateSerializer()
+
+    class Meta:
+        model = Doctor
+
+
+class PatientUpdateSerializer(serializers.ModelSerializer):
+
+    user = UserUpdateSerializer()
+    
+    class Meta:
+        model = Patient
+
+class UserSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+
+class DoctorSerializer(serializers.ModelSerializer):
+    
+    user = UserSerializer()
+
+    class Meta:
+        model = Doctor
+
+class PatientSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer()
+
+    class Meta:
+        model = Patient
+
+class VisitSerializer(serializers.ModelSerializer):
+    
+    doctor = DoctorSerializer()
+    patient = PatientSerializer()
+
+    class Meta:
+        model = Visit
