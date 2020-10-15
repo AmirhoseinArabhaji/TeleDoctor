@@ -96,7 +96,7 @@ class _SignUpState extends State<SignUp> {
                                 password: _password.text,
                               );
                               pl.patient = patient;
-                              pl.savePatient(patient);
+                              pl.savePatient();
                             },
                           ),
                         ),

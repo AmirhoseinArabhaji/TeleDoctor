@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tele_doctor/models/json_handler.dart';
+import 'package:tele_doctor/models/widgets/interfaces/json_handler.dart';
 import 'package:tele_doctor/models/person/doctor/doctor.dart';
 import 'package:tele_doctor/models/person/patient/widgets/insurance.dart';
 import 'package:tele_doctor/models/person/person.dart';
