@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.response import Response
+from rest_framework.generics import UpdateAPIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 # from rest_framework.authentication import TokenAuthentication # TODO for class based view
@@ -17,6 +18,7 @@ from .serializers import (
     UserRegisterSerializer,
     DoctorRegisterSerializer,
     PatientRegisterSerializer,
+    ChangePasswordSerializer,
 )
 
 
@@ -76,6 +78,36 @@ def patient_registration_view(request):
             data = serializer.errors
         return Response(data)
 
+
+class ChangePasswordView(generics.UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    model = User
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            if not self.object.check_password(serializer.data.get('old_password')):
+                return Response({'message': 'Wrong password.'}, status=status.HTTP_400_BAD_REQUEST)
+            if serializer.data.get('new_password') != serializer.data.get('new_password2'):
+                return Response({'message': 'Passwords do not match.'})
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get('new_password'))
+            self.object.save()
+            response = {
+                'status': 'success',
+                'message': 'Password updated successfully',
+            }
+            return Response(response)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # @api_view(['GET', ])

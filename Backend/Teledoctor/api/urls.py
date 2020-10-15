@@ -4,6 +4,7 @@ from .views import (
     user_registration_view,
     doctor_registration_view,
     patient_registration_view,
+    ChangePasswordView
     # doctor_detail, 
     # patient_detail,
 )
@@ -17,6 +18,7 @@ urlpatterns = [
     path('test/', test_api, name='test-api'),
 
     path('login', obtain_auth_token, name='login'),
+    path('change-password', ChangePasswordView.as_view(), name='change-password'),
 
     path('register', user_registration_view, name='register-user'),
     path('register/doctor', doctor_registration_view, name='register-doctor'),

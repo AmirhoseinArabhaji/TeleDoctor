@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth import admin as auth_admin
 from .models import User
 from .forms import UserAdminCreationForm, UserAdminChangeForm
 from django.contrib.auth.models import Group
@@ -13,7 +14,7 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('first_name', 'last_name', 'email', 'phone_number', 'is_superuser', 'is_staff')
+    list_display = ('first_name', 'last_name', 'email', 'social_id', 'phone_number', 'is_superuser', 'is_staff')
     list_filter = ('is_superuser', 'is_staff', 'is_active')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),

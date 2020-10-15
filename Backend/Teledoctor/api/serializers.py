@@ -1,3 +1,5 @@
+from django.contrib.auth import password_validation
+
 from rest_framework import serializers
 
 from users.models import User
@@ -11,7 +13,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['email', 'first_name', 'last_name', 'phone_number', 'social_id', 'password', 'password2', 'gender']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -42,7 +44,7 @@ class DoctorRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
-        fields = '__all__'
+        fields = ['user', 'mc_code', ]
 
 
     def create(self, validated_data):
@@ -67,7 +69,7 @@ class PatientRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Patient
-        fields = '__all__'
+        fields = ['user', ]
 
     
     def create(self, validated_data):
@@ -86,11 +88,27 @@ class PatientRegisterSerializer(serializers.ModelSerializer):
 
         return patient
 
+class ChangePasswordSerializer(serializers.ModelSerializer):
+    
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+    new_password2 = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['old_password', 'new_password', 'new_password2']
+
+
 
 class UserUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
+        fields = ['first_name', 'last_name', 'gender']
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
+
 
 
 class DoctorUpdateSerializer(serializers.ModelSerializer):
@@ -99,6 +117,11 @@ class DoctorUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
+        fields = []
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
+
 
 
 class PatientUpdateSerializer(serializers.ModelSerializer):
@@ -107,6 +130,12 @@ class PatientUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Patient
+        fields = []
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     

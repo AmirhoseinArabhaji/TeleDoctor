@@ -97,7 +97,7 @@ class User(AbstractBaseUser):
     object = UserManager()
 
     def __str__(self):
-        return self.first_name + self.last_name + self.phone_number
+        return self.first_name + ' ' + self.last_name + ' ' + self.social_id
 
     def get_full_name(self):
         return self.first_name + self.last_name
@@ -110,4 +110,4 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-    
+
