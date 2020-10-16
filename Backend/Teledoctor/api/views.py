@@ -19,6 +19,7 @@ from .serializers import (
     DoctorRegisterSerializer,
     PatientRegisterSerializer,
     ChangePasswordSerializer,
+    UserUpdateSerializer,
 )
 
 
@@ -109,6 +110,19 @@ class ChangePasswordView(generics.UpdateAPIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['PUT', ])
+@permission_classes((IsAuthenticated, ))
+def user_update_view(request):
+    if request.method == 'PUT':
+        serializer = UserUpdateSerializer(data=request.data)
+        data = {}
+        if serializer.is_valid():
+            Patient = serializer.save()
+            data['response'] = 'successfully updated'
+        else:
+            data = serializer.errors
+        return Response(data)
 
 # @api_view(['GET', ])
 # @permission_classes(())

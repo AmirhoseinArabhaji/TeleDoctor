@@ -117,11 +117,17 @@ class DoctorUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
-        fields = []
+        fields = ['email', 'first_name', 'last_name', 'gender', 'social_id', 'phone_number']
 
     def update(self, instance, validated_data):
-        return super().update(instance, validated_data)
-
+        instance.email = validated_data.get('email', instance.title)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.social_id = validated_data.get('social_id', instance.social_id)
+        instance.gender = validated_data.get('gender', instance.gender)
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.save()
+        return instance
 
 
 class PatientUpdateSerializer(serializers.ModelSerializer):
