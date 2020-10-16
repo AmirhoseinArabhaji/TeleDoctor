@@ -2,6 +2,6 @@
 db.sqlite3
 *.sqlite3
 *.pyc
-**/migrations/*.py
-**/migrations/*
+**/migrations/__pycache__
+**/migrations/[0-9]*
 media/profile_pics/*
