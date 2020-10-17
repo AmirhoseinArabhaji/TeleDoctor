@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisterBlueButton extends StatelessWidget {
+  final double borderRadius = 15;
   final Function _onTap;
   final String _title;
   RegisterBlueButton(
@@ -17,11 +18,11 @@ class RegisterBlueButton extends StatelessWidget {
       height: 50,
       child: Material(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         color: Color(0xFF537DF1),
         child: InkWell(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(borderRadius),
           onTap: _onTap,
           onTapCancel: () {},
           splashColor: Color(0xFFE3F3F1),

@@ -10,23 +10,9 @@ class User implements JsonHandler {
   String _password2;
   Gender _gender;
 
-  User({
-    String firstName,
-    String lastName,
-    String email,
-    String phoneNumber,
-    String socialID,
-    String password,
-    String password2,
-    Gender gender,
-  })  : this._firstName = firstName,
-        this._lastName = lastName,
-        this._email = email,
-        this._gender = gender,
-        this._password = password,
-        this._password2 = password2,
-        this._socialID = socialID,
-        this._phoneNumber = phoneNumber;
+  User(String email, String password)
+      : this._email = email,
+        this._password = password;
 
   String get email => this._email;
   String get firstName => this._firstName;
@@ -36,6 +22,15 @@ class User implements JsonHandler {
   String get password2 => this._password2;
   String get password => this._password;
   Gender get gender => this._gender;
+
+  set email(String email) => this._email = email;
+  set firstName(String firstName) => this._firstName = firstName;
+  set lastName(String lastName) => this._lastName = lastName;
+  set phoneNumber(String phoneNumber) => this._phoneNumber = phoneNumber;
+  set password(String password) => this._password = password;
+  set password2(String password) => this._password2 = password;
+  set socialID(String socialID) => this._socialID = socialID;
+  set gender(Gender gender) => this._gender = gender;
 
   @override
   Map<String, dynamic> toJson() {

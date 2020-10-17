@@ -12,6 +12,7 @@ class TeleDoctor extends StatefulWidget {
 class _TeleDoctorState extends State<TeleDoctor> {
   @override
   Widget build(BuildContext context) {
+    // device = Device(context.size);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
