@@ -100,7 +100,7 @@ class User(AbstractBaseUser):
         return self.first_name + ' ' + self.last_name + ' ' + self.social_id
 
     def get_full_name(self):
-        return self.first_name + self.last_name
+        return self.first_name + ' ' + self.last_name
 
     def get_short_name(self):
         return self.last_name

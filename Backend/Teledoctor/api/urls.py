@@ -6,6 +6,8 @@ from .views import (
     patient_registration_view,
     ChangePasswordView,
     user_update_view,
+    # get_doctors_list_view,
+    ApiDoctorListView,
     # doctor_detail, 
     # patient_detail,
 )
@@ -25,7 +27,9 @@ urlpatterns = [
     path('register/doctor', doctor_registration_view, name='register-doctor'),
     path('register/patient', patient_registration_view, name='register-patient'),
 
-    path('update/user', user_update_view, name='update-user')
+    path('update/user', user_update_view, name='update-user'),
+
+    path('list/doctors', ApiDoctorListView.as_view(), name='doctors')
     # path('doctor/<str:email>', doctor_detail, name='doctor-detail'),
     # path('patient/<str:email>', patient_detail, name='patient-datail'),
 ]

@@ -147,6 +147,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
+        fields = '__all__'
 
 class DoctorSerializer(serializers.ModelSerializer):
     
@@ -154,6 +155,7 @@ class DoctorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
+        fields = '__all__'
 
 class PatientSerializer(serializers.ModelSerializer):
 
@@ -161,6 +163,7 @@ class PatientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Patient
+        fields = '__all__'
 
 class VisitSerializer(serializers.ModelSerializer):
     
@@ -169,3 +172,4 @@ class VisitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Visit
+

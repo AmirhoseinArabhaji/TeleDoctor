@@ -2,13 +2,16 @@ from django.shortcuts import render
 
 from rest_framework import status, generics
 from rest_framework.response import Response
-from rest_framework.generics import UpdateAPIView
+from rest_framework.generics import UpdateAPIView, ListAPIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 # from rest_framework.authentication import TokenAuthentication # TODO for class based view
 # from rest_framework.pagination import PageNumberPagination # TODO for pagination
 # from rest_framework.generics import ListAPIView # TODO for pagination
 from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from users.models import User
 from doctor.models import Doctor
@@ -20,6 +23,9 @@ from .serializers import (
     PatientRegisterSerializer,
     ChangePasswordSerializer,
     UserUpdateSerializer,
+    UserSerializer,
+    DoctorSerializer,
+    PatientSerializer,
 )
 
 
@@ -123,6 +129,18 @@ def user_update_view(request):
         else:
             data = serializer.errors
         return Response(data)
+
+
+
+class ApiDoctorListView(ListAPIView):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    pagination_class = PageNumberPagination
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('user__first_name', 'user__last_name', )
+
 
 # @api_view(['GET', ])
 # @permission_classes(())
