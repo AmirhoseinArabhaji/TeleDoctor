@@ -8,6 +8,7 @@ from .views import (
     user_update_view,
     # get_doctors_list_view,
     ApiDoctorListView,
+    doctor_profile_view
     # doctor_detail, 
     # patient_detail,
 )
@@ -29,7 +30,9 @@ urlpatterns = [
 
     path('update/user', user_update_view, name='update-user'),
 
-    path('list/doctors', ApiDoctorListView.as_view(), name='doctors')
+    path('list/doctors', ApiDoctorListView.as_view(), name='doctors'),
+
+    path('profile/doctor/<int:pk>/', doctor_profile_view, name='doctor-profile')
     # path('doctor/<str:email>', doctor_detail, name='doctor-detail'),
     # path('patient/<str:email>', patient_detail, name='patient-datail'),
 ]

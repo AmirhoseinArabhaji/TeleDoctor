@@ -4,7 +4,7 @@ from .models import Patient, Visit
 
 class PatientAdmin(admin.ModelAdmin):
 
-    list_display = ('first_name', 'last_name', 'email', 'social_id',)
+    list_display = ('id', 'first_name', 'last_name', 'email', 'social_id',)
     search_fields =('email', 'last_name', 'social_id')
 
     def first_name(self, obj):
@@ -18,6 +18,9 @@ class PatientAdmin(admin.ModelAdmin):
 
     def social_id(self, obj):
         return obj.user.social_id
+
+    def id(self, obj):
+        return obj.user.id
 
 
 admin.site.register(Patient, PatientAdmin)

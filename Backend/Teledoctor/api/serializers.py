@@ -37,7 +37,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-
 class DoctorRegisterSerializer(serializers.ModelSerializer):
 
     user = UserRegisterSerializer()
@@ -99,7 +98,6 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         fields = ['old_password', 'new_password', 'new_password2']
 
 
-
 class UserUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -108,8 +106,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         return super().update(instance, validated_data)
-
-
 
 class DoctorUpdateSerializer(serializers.ModelSerializer):
 
@@ -128,7 +124,6 @@ class DoctorUpdateSerializer(serializers.ModelSerializer):
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.save()
         return instance
-
 
 class PatientUpdateSerializer(serializers.ModelSerializer):
 

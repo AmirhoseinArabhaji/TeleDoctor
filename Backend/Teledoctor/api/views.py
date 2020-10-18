@@ -142,6 +142,18 @@ class ApiDoctorListView(ListAPIView):
     search_fields = ('user__first_name', 'user__last_name', )
 
 
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated, ))
+def doctor_profile_view(request, pk):
+    
+    try:
+        doctor = Doctor.objects.get(pk=pk)
+    except Doctor.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = DoctorSerializer(doctor)
+        return Response(serializer.data)
 # @api_view(['GET', ])
 # @permission_classes(())
 # def doctor_detail(request, email):
