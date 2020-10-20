@@ -76,13 +76,13 @@ class User(AbstractBaseUser):
         ('FEMALE', 'female'),
     ]
 
-    first_name       = models.CharField(max_length=50, blank=False)
-    last_name        = models.CharField(max_length=50, blank=False)
-    date_of_birth    = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
-    email            = models.EmailField(blank=False, unique=True)
-    phone_number     = models.CharField(validators=[MinLengthValidator(11)],max_length=11, blank=False, unique=True)
-    social_id        = models.CharField(validators=[MinLengthValidator(10)],max_length=10, blank=False, unique=True)
-    gender           = models.CharField(max_length=6, choices=GENDER, default='MALE')
+    first_name       = models.CharField(max_length=50, null=True, blank=False)
+    last_name        = models.CharField(max_length=50, null=True, blank=False)
+    date_of_birth    = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=False)
+    email            = models.EmailField(blank=False, null=False, unique=True)
+    phone_number     = models.CharField(validators=[MinLengthValidator(11)],max_length=11, unique=True, null=True)
+    social_id        = models.CharField(validators=[MinLengthValidator(10)],max_length=10, unique=True, null=True)
+    gender           = models.CharField(max_length=6, choices=GENDER, null=True)
     profile_pic      = models.ImageField(default='default.jpg', upload_to='profile_pics')
     date_joined      = models.DateTimeField(auto_now_add=True)
     last_login       = models.DateTimeField(auto_now=True)
@@ -92,17 +92,23 @@ class User(AbstractBaseUser):
 
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number', 'social_id', 'gender',]
+    # REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number', 'social_id', 'gender',]
 
     object = UserManager()
 
     def __str__(self):
+        if self.first_name == None or self.last_name == None or self.social_id == None:
+            return 'no detail for user'
         return self.first_name + ' ' + self.last_name + ' ' + self.social_id
 
     def get_full_name(self):
+        if self.first_name == None or self.last_name == None:
+            return 'no detail for user'
         return self.first_name + ' ' + self.last_name
 
     def get_short_name(self):
+        if self.last_name == None:
+            return 'Unknown'
         return self.last_name
 
     def has_perm(self, perm, obj=None):

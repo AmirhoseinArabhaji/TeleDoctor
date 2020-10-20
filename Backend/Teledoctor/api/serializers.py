@@ -9,11 +9,12 @@ from patient.models import Patient, Visit
 
 class UserRegisterSerializer(serializers.ModelSerializer):
 
-    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    # password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'phone_number', 'social_id', 'password', 'password2', 'gender']
+        # fields = ['email', 'first_name', 'last_name', 'phone_number', 'social_id', 'password', 'password2', 'gender']
+        fields = ['email', 'password']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -21,17 +22,17 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User(
             email=self.validated_data['email'],
-            first_name=self.validated_data['first_name'],
-            last_name=self.validated_data['last_name'],
-            phone_number=self.validated_data['phone_number'],
-            social_id=self.validated_data['social_id'],
-            gender=self.validated_data['gender']
+            # first_name=self.validated_data['first_name'],
+            # last_name=self.validated_data['last_name'],
+            # phone_number=self.validated_data['phone_number'],
+            # social_id=self.validated_data['social_id'],
+            # gender=self.validated_data['gender']
         )
         password = self.validated_data['password']
-        password2 = self.validated_data['password2']
+        # password2 = self.validated_data['password2']
 
-        if password != password2:
-            raise serializers.ValidationError({'password': 'Passwords do not match.'})
+        # if password != password2:
+            # raise serializers.ValidationError({'password': 'Passwords do not match.'})
 
         user.set_password(password)
         user.save()
@@ -43,7 +44,8 @@ class DoctorRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
-        fields = ['user', 'mc_code', ]
+        # fields = ['user', 'mc_code', ]
+        fields = ['user',]
 
 
     def create(self, validated_data):
@@ -56,7 +58,7 @@ class DoctorRegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(user_ser.errors)
         doctor = Doctor(
             user=user,
-            mc_code=self.validated_data['mc_code']
+            # mc_code=self.validated_data['mc_code']
             )
         doctor.save()
 
