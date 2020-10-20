@@ -26,6 +26,7 @@ from .serializers import (
     UserSerializer,
     DoctorSerializer,
     PatientSerializer,
+    VisitSerializer,
 )
 
 
@@ -154,6 +155,38 @@ def doctor_profile_view(request, pk):
     if request.method == 'GET':
         serializer = DoctorSerializer(doctor)
         return Response(serializer.data)
+
+
+@api_view(['POST', ])
+@permission_classes((IsAuthenticated, ))
+def add_visit_view(request, doctor_pk):
+    try:
+        patient = Token.objects.get(key=request.auth.key).user.patient
+        doctor = Doctor.objects.get(pk=doctor_pk)
+    except Patient.DoesNotExist:
+        return Response(data={'error': 'patient does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+    except Doctor.DoesNotExist:
+        return Response(data={'error': 'doctor does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+
+    # user = request.user
+    # if patient != user:
+    #     return Response({'error': 'user and patient do not match'}, status=status.HTTP_400_BAD_REQUEST)
+
+    context = {
+        'doctor': doctor,
+        'patient': patient
+    }
+    serializer = VisitSerializer(data=request.data, context=context)
+    data = {}
+    if serializer.is_valid():
+        patient = serializer.save(doctor=doctor, patient=patient)
+        data['message'] = 'visit added successfully'
+    else:
+        data = serializer.errors
+
+    return Response(data)
+
+
 # @api_view(['GET', ])
 # @permission_classes(())
 # def doctor_detail(request, email):

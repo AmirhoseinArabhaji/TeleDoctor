@@ -161,10 +161,11 @@ class PatientSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class VisitSerializer(serializers.ModelSerializer):
-    
-    doctor = DoctorSerializer()
-    patient = PatientSerializer()
 
+    patient = serializers.ReadOnlyField()
+    doctor = serializers.ReadOnlyField()
+    
     class Meta:
         model = Visit
+        fields = '__all__'
 
