@@ -5,17 +5,15 @@ from rest_framework.response import Response
 from rest_framework.generics import UpdateAPIView, ListAPIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-# from rest_framework.authentication import TokenAuthentication # TODO for class based view
-# from rest_framework.pagination import PageNumberPagination # TODO for pagination
-# from rest_framework.generics import ListAPIView # TODO for pagination
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter, OrderingFilter
+from datetime import datetime
 
 from users.models import User
 from doctor.models import Doctor
-from patient.models import Patient
+from patient.models import Patient, Visit
 
 from .serializers import (
     UserRegisterSerializer,
@@ -33,6 +31,7 @@ from .serializers import (
     PatientSerializer,
 
     VisitSerializer,
+    PatientVisitSerializer,
 )
 
 
@@ -224,31 +223,11 @@ def patient_update_view(request):
         return Response(data=data, status=status.HTTP_200_OK)
 
 
-# @api_view(['GET', ])
-# @permission_classes(())
-# def doctor_detail(request, email):
-#     try:
-#         doctor = Doctor.objects.get(user__email=email)
-#     except Doctor.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-
-#     # user = request.user
-#     # if doctor.user != user:
-#     #     return Response({'response': 'You dont have permission to do that.'})
-
-#     if request.method == 'GET':
-#         serializer = DoctorRegisterSerializer(doctor)
-#         return Response(serializer.data)
-
-
-# @api_view(['GET', ])
-# def patient_detail(request, email):
-#     try:
-#         patient = Patient.objects.get(user__email=email)
-#     except Patient.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-
-#     if request.method == 'GET':
-#         serializer = PatientRegisterSerializer(patient)
-#         return Response(serializer.data)
-
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated, ))
+def get_visits_from_now_for_patient(request):
+    patient_pk = Token.objects.get(key=request.auth.key).user.patient.pk
+    today = datetime.today()
+    visits = Visit.objects.filter(patient__pk=patient_pk).filter(date__gte=today)
+    seriaizer = PatientVisitSerializer(visits, many=True)
+    return Response(data=seriaizer.data)
