@@ -1,6 +1,8 @@
 from django.contrib.auth import password_validation
 
 from rest_framework import serializers
+from drf_writable_nested.serializers import WritableNestedModelSerializer
+from drf_writable_nested.mixins import NestedCreateMixin, NestedUpdateMixin, UniqueFieldsMixin
 
 from users.models import User
 from doctor.models import Doctor
@@ -100,43 +102,29 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         fields = ['old_password', 'new_password', 'new_password2']
 
 
-class UserUpdateSerializer(serializers.ModelSerializer):
+class UserUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'gender']
+        fields = ['id', 'first_name', 'last_name', 'gender', 'phone_number', 'social_id', 'gender', ]
 
-    def update(self, instance, validated_data):
-        return super().update(instance, validated_data)
 
-class DoctorUpdateSerializer(serializers.ModelSerializer):
+class DoctorUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
 
     user = UserUpdateSerializer()
 
     class Meta:
         model = Doctor
-        fields = ['email', 'first_name', 'last_name', 'gender', 'social_id', 'phone_number']
+        fields = ['id', 'user', 'mc_code', ]
 
-    def update(self, instance, validated_data):
-        instance.email = validated_data.get('email', instance.title)
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.social_id = validated_data.get('social_id', instance.social_id)
-        instance.gender = validated_data.get('gender', instance.gender)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
-        instance.save()
-        return instance
 
-class PatientUpdateSerializer(serializers.ModelSerializer):
+class PatientUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
 
     user = UserUpdateSerializer()
     
     class Meta:
         model = Patient
-        fields = []
-
-    def update(self, instance, validated_data):
-        return super().update(instance, validated_data)
+        fields = ['id', 'user', ]
 
 
 

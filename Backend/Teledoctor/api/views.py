@@ -21,11 +21,17 @@ from .serializers import (
     UserRegisterSerializer,
     DoctorRegisterSerializer,
     PatientRegisterSerializer,
+
     ChangePasswordSerializer,
+
     UserUpdateSerializer,
+    DoctorUpdateSerializer,
+    PatientUpdateSerializer,
+
     UserSerializer,
     DoctorSerializer,
     PatientSerializer,
+
     VisitSerializer,
 )
 
@@ -185,6 +191,37 @@ def add_visit_view(request, doctor_pk):
         data = serializer.errors
 
     return Response(data)
+
+
+@api_view(['PUT', ])
+@permission_classes((IsAuthenticated, ))
+def doctor_update_view(request):
+
+    doctor = Token.objects.get(key=request.auth.key).user.doctor
+    if request.method == 'PUT':
+        serializer = DoctorUpdateSerializer(data=request.data, instance=doctor)
+        data = {}
+        if serializer.is_valid():
+            serializer.save()
+            data['response'] = 'update successfull.'
+        else:
+            data = serializer.errors
+        return Response(data=data, status=status.HTTP_200_OK)
+
+
+@api_view(['PUT', ])
+@permission_classes((IsAuthenticated, ))
+def patient_update_view(request):
+    patient = Token.objects.get(key=request.auth.key).user.patient
+    if request.method == 'PUT':
+        serializer = PatientUpdateSerializer(data=request.data, instance=patient)
+        data = {}
+        if serializer.is_valid():
+            serializer.save()
+            data['response'] = 'update successfull.'
+        else:
+            data = serializer.errors
+        return Response(data=data, status=status.HTTP_200_OK)
 
 
 # @api_view(['GET', ])

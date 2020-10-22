@@ -1,17 +1,22 @@
 from django.urls import path
 from .views import (
     test_api,
+
     user_registration_view,
     doctor_registration_view,
     patient_registration_view,
+
     ChangePasswordView,
+
     user_update_view,
+    doctor_update_view,
+    patient_update_view,
+
     ApiDoctorListView,
     doctor_profile_view,
+
     add_visit_view,
 
-    # doctor_detail, 
-    # patient_detail,
 )
 
 from rest_framework.authtoken.views import obtain_auth_token
@@ -30,8 +35,10 @@ urlpatterns = [
     path('register/patient', patient_registration_view, name='register-patient'),
 
     path('update/user', user_update_view, name='update-user'),
+    path('update/doctor', doctor_update_view, name='update-doctor'),
+    path('update/patient', patient_update_view, name='update-patient'),
 
-    path('list/doctors', ApiDoctorListView.as_view(), name='doctors'),
+    path('list/doctors/', ApiDoctorListView.as_view(), name='doctors'),
 
     path('profile/doctor/<int:pk>/', doctor_profile_view, name='doctor-profile'),
 

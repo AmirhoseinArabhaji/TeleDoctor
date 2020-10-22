@@ -76,34 +76,34 @@ class User(AbstractBaseUser):
         ('FEMALE', 'female'),
     ]
 
-    first_name       = models.CharField(max_length=50, null=True, blank=False)
-    last_name        = models.CharField(max_length=50, null=True, blank=False)
-    date_of_birth    = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=False)
-    email            = models.EmailField(blank=False, null=False, unique=True)
-    phone_number     = models.CharField(validators=[MinLengthValidator(11)],max_length=11, unique=True, null=True)
-    social_id        = models.CharField(validators=[MinLengthValidator(10)],max_length=10, unique=True, null=True)
-    gender           = models.CharField(max_length=6, choices=GENDER, null=True)
-    profile_pic      = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    date_joined      = models.DateTimeField(auto_now_add=True)
-    last_login       = models.DateTimeField(auto_now=True)
-    is_active        = models.BooleanField(default=True) # can login
-    is_superuser     = models.BooleanField(default=False) # staff user non superuser
-    is_staff         = models.BooleanField(default=False) # superuser
+    first_name      = models.CharField(max_length=50, null=True, blank=False)
+    last_name       = models.CharField(max_length=50, null=True, blank=False)
+    date_of_birth   = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=False)
+    email           = models.EmailField(unique=True, blank=False, null=False)
+    phone_number    = models.CharField(validators=[MinLengthValidator(11)], max_length=11, unique=True, null=True)
+    social_id       = models.CharField(validators=[MinLengthValidator(10)], max_length=10, unique=True, null=True)
+    gender          = models.CharField(max_length=6, choices=GENDER, null=True)
+    profile_pic     = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    date_joined     = models.DateTimeField(auto_now_add=True)
+    last_login      = models.DateTimeField(auto_now=True)
+    is_active       = models.BooleanField(default=True) # can login
+    is_superuser    = models.BooleanField(default=False) # staff user non superuser
+    is_staff        = models.BooleanField(default=False) # superuser
 
 
     USERNAME_FIELD = 'email'
     # REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number', 'social_id', 'gender',]
 
-    object = UserManager()
+    objects = UserManager()
 
     def __str__(self):
         if self.first_name == None or self.last_name == None or self.social_id == None:
-            return 'no detail for user'
+            return self.email
         return self.first_name + ' ' + self.last_name + ' ' + self.social_id
 
     def get_full_name(self):
         if self.first_name == None or self.last_name == None:
-            return 'no detail for user'
+            return self.email
         return self.first_name + ' ' + self.last_name
 
     def get_short_name(self):
