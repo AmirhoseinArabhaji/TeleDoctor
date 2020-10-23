@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tele_doctor/models/widgets/user/user.dart';
 import 'package:tele_doctor/utilities/colors.dart';
 import 'package:tele_doctor/view_models/API_Gate/send_interface.dart';
+import 'package:tele_doctor/view_models/API_Gate/widgets/authentication/user/user.dart';
 import 'package:tele_doctor/views/registerPages/sign_up/complete_sign_up_data.dart';
 import 'package:tele_doctor/views/registerPages/widgets/blue_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';

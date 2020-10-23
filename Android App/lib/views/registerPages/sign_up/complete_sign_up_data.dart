@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/models/widgets/gender.dart';
-import 'package:tele_doctor/models/widgets/user/user.dart';
+import 'package:tele_doctor/view_models/API_Gate/widgets/authentication/user/user.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
 
 class CompleteSignInInfo extends StatefulWidget {

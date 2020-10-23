@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tele_doctor/utilities/device_essentials.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
 import 'package:tele_doctor/views/registerPages/sign_up/sign_up.dart';
+import 'package:tele_doctor/views/start_page.dart';
 
 class TeleDoctor extends StatefulWidget {
   @override
@@ -12,12 +12,11 @@ class TeleDoctor extends StatefulWidget {
 class _TeleDoctorState extends State<TeleDoctor> {
   @override
   Widget build(BuildContext context) {
-    // device = Device(context.size);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => SignUp(),
+        '/': (context) => StartPage(),
         'signUp': (context) => SignUp(),
         'singIn': (context) => SignIn(),
         'mainPage': (context) => MainPage()

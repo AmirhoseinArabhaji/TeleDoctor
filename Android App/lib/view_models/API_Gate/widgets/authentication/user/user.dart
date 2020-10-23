@@ -1,7 +1,6 @@
-import 'package:tele_doctor/models/widgets/interfaces/json_handler.dart';
 import 'package:tele_doctor/models/widgets/gender.dart';
 
-class User implements JsonHandler {
+class User {
   String _email;
   String _firstName, _lastName;
   String _phoneNumber;
@@ -9,7 +8,6 @@ class User implements JsonHandler {
   String _password;
   String _password2;
   Gender _gender;
-
   User(String email, String password)
       : this._email = email,
         this._password = password;
@@ -43,5 +41,10 @@ class User implements JsonHandler {
       "password2": password2,
       "gender": gender
     };
+  }
+
+  @override
+  void fromJson(Map<String, dynamic> json) {
+    // TODO: implement fromJson
   }
 }

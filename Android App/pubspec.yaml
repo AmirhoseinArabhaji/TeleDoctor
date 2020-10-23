@@ -21,6 +21,8 @@ dependencies:
   flutter_slidable: ^0.5.7
   http: ^0.12.2
   google_sign_in: ^4.5.5
+  json_serializable: ^3.5.0
+  path_provider: ^1.6.21
 
 dev_dependencies:
   flutter_test:
@@ -31,4 +33,5 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+    - assets/json_files/enter_properties/enter_properties.json
   uses-material-design: true

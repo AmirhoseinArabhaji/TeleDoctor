@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tele_doctor/models/widgets/interfaces/json_handler.dart';
 import 'package:tele_doctor/models/person/doctor/doctor.dart';
 import 'package:tele_doctor/models/person/patient/widgets/insurance.dart';
 import 'package:tele_doctor/models/person/person.dart';
 import 'package:tele_doctor/models/widgets/visit.dart';
 
-class Patient extends Person implements JsonHandler {
+class Patient extends Person {
   List<Visit> _visits;
   List<Notification> _notifications;
   List<Doctor> _favoriteDoctors;
@@ -23,26 +22,48 @@ class Patient extends Person implements JsonHandler {
     this._notifications = [];
   }
 
+  factory Patient.fromJson(Map<String, dynamic> json) => _$PatientFromJson(json);
+
+
   set insurance(Insurance insurance) => this._insurance = insurance;
+
   Insurance get insurance => this._insurance;
 
   List<Visit> get visits => this._visits;
+
   List<Notification> get notifications => this._notifications;
+
   List<Doctor> get favoriteDoctros => this._favoriteDoctors;
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      "token": token,
-      "firstName": firstName,
-      "lastName": lastName,
-      "socialID": socialID,
-      "age": age,
-      "phoneNumber": phoneNumber,
-      "email": email,
-      "insurance": insurance,
-      "visits": visits,
-      "notifications": notifications,
-      "favoriteDoctors": favoriteDoctros
-    };
-  }
+
+  Map<String, dynamic> toJson() => _$PatientToJson(this);
+
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+Map<String, dynamic> _$PatientToJson(Patient patient) {
+  return {
+    "token": patient.token,
+    "firstName": patient.firstName,
+    "lastName": patient.lastName,
+    "socialID": patient.socialID,
+    "password" : patient.password,
+    "age": patient.age,
+    "phoneNumber": patient.phoneNumber,
+    "email": patient.email,
+    "insurance": patient.insurance,
+    "visits": patient.visits,
+    "notifications": patient.notifications,
+    "favoriteDoctors": patient.favoriteDoctros
+  };
+}
+
+
+Patient _$PatientFromJson(Map<String, dynamic> json) {
+  return Patient(
+    json["token"],
+    firstName: json["firstName"],
+    lastName: json["lastName"],
+    email: json["email"],
+    password: json["password"],
+  );
 }

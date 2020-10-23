@@ -15,7 +15,8 @@ class Person {
         this._lastName = lastName,
         this._password = password,
         this._email = email;
-
+  String get password => _password;
+  set password(String password) => this._password = password;
   String get firstName => _firstName;
   String get lastName => _lastName;
   String get phoneNumber => _phoneNumber;
