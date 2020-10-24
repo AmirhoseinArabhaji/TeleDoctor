@@ -40,11 +40,8 @@ class _StartPageState extends State<StartPage> {
     return ep;
   }
 
-  Widget findPage(EnterProperties ep) {
-    if (ep.logout)
-      return SignIn();
-    else
-      return MainPage();
+  Scaffold findPage(EnterProperties ep) {
+    return Scaffold(resizeToAvoidBottomInset: false,body: ep.logout ? SignIn() : MainPage(),);
   }
 
   @override

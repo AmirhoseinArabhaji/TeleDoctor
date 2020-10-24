@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/utilities/colors.dart';
+import 'package:tele_doctor/utilities/strings/strings.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/widgets/sign_in_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/blue_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
@@ -23,56 +25,55 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Column(
         children: [
-          Image(
-            image: AssetImage('assets/registerVector.png'),
+          Expanded(
+            flex: 1,
+            child: Image(
+              width: width,
+              fit: BoxFit.fill,
+              image: AssetImage('assets/registerVector.png'),
+            ),
           ),
-          AspectRatio(
-            aspectRatio: 83 / 100,
+          Expanded(
+            flex: 2,
             child: Container(
+              width: width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  UpperText(),
-                  RegisterTextField(_email, title: "E-Mail", obscure: false),
                   Padding(
-                    padding: const EdgeInsets.only(top: 13),
-                    child: RegisterTextField(_password,
-                        title: "Password", obscure: true),
+                    padding: const EdgeInsets.all(28.0),
+                    child: buildWelcomText(),
+                  ),
+                  RegisterTextField(_email,
+                      title: stringsSignIn["email"], obscure: false),
+                  SizedBox(height: 12),
+                  RegisterTextField(_password,
+                      title: stringsSignIn["password"], obscure: true),
+                  SizedBox(height: 36),
+                  Center(
+                    child: RegisterBlueButton(
+                        title: stringsSignIn["submit"], onTap: () {}),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 21),
-                    child: SignInButton(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 23),
+                    padding: const EdgeInsets.all(18.0),
                     child: Center(
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          "Forgot Password?",
-                          style: TextStyle(fontSize: 12, color: Colors.black54),
+                      child: Text(
+                        stringsSignIn["lowerText"],
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.blueAccent,
+                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 80.0),
-                    child: Center(
-                      child: RegisterBlueButton(
-                        title: "Create Account",
-                        onTap: () {
-                          Navigator.pushNamed(context, 'signUp');
-                        },
-                      ),
-                    ),
-                  ),
+                  //Todo sign in with google
                 ],
               ),
-              width: 500,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -91,6 +92,17 @@ class _SignInState extends State<SignIn> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Text buildWelcomText() {
+    return Text(
+      stringsSignIn["welcome"],
+      style: GoogleFonts.peddana(
+        letterSpacing: 3,
+        fontSize: 32,
+        fontWeight: FontWeight.w700,
       ),
     );
   }

@@ -20,12 +20,12 @@ class RegisterBlueButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-        color: Color(0xFF537DF1),
+        color: Color(0xFF96E9F1),
         child: InkWell(
           borderRadius: BorderRadius.circular(borderRadius),
           onTap: _onTap,
           onTapCancel: () {},
-          splashColor: Color(0xFFE3F3F1),
+          splashColor: Color(0xFFEDFDFF),
           child: Center(
             child: Text(
               _title,
