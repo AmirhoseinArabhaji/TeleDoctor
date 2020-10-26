@@ -14,46 +14,51 @@ class _PatientProfileState extends State<PatientProfile> {
 //Bellatrix Lestrange
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: SingleChildScrollView(
         child: Container(
-          width: 500,
-          height: 800,
+          width: width,
+          height: height,
           color: kMainColor,
           child: Column(
             children: [
-              Row(
-                children: [
-                  ProfileImage(imageURL: 'assets/person.jpg'),
-                  Column(
-                    children: [
-                      ProfileName(),
-                      SizedBox(height: 8),
-                      ProfileEditButton(),
-                    ],
-                  ),
-                ],
+              Expanded(
+                flex: 1,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ProfileImage(imageURL: 'assets/person.jpg'),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ProfileName(),
+                            SizedBox(height: 8),
+                            ProfileEditButton(
+                              onTap: () {
+                                setState(
+                                  () {
+                                    Navigator.pushNamed(context, "editProfile");
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Information(),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 20),
-              //   child: Column(
-              //     children: [
-              //       ProfileButtonCard("Visits"),
-              //       SizedBox(
-              //         height: 21,
-              //       ),
-              //       ProfileButtonCard("My Doctors"),
-              //       SizedBox(
-              //         height: 21,
-              //       ),
-              //       ProfileButtonCard("Sickness Types"),
-              //       SizedBox(
-              //         height: 21,
-              //       ),
-              //     ],
-              //   ),
-              // ),
+              Expanded(flex: 3, child: Information()),
             ],
           ),
         ),

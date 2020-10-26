@@ -13,7 +13,6 @@ class _MainPageState extends State<MainPage> {
   ///helps to switch between pages in CurvedNavigationBar
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     /** fill device object and get physical Device's informations */
@@ -30,7 +29,7 @@ class _MainPageState extends State<MainPage> {
         },
         color: kNavBarColor,
         buttonBackgroundColor: kMainColor,
-        backgroundColor: kMainColor,
+        backgroundColor: Color(0x00000000),
         items: [
           Icon(Icons.notifications_active, size: 30, color: kButtonNavBarColor),
           Icon(Icons.add, size: 30, color: kButtonNavBarColor),

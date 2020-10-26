@@ -8,11 +8,15 @@ import 'package:tele_doctor/utilities/device_essentials.dart';
 class ListCard extends StatelessWidget {
   final Function _onTap;
   final PatientNotify notify;
+
   const ListCard({@required PatientNotify notify, @required Function onTap})
       : this.notify = notify,
         this._onTap = onTap;
+
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Slidable(
       actionPane: SlidableScrollActionPane(),
       secondaryActions: <Widget>[
@@ -24,10 +28,10 @@ class ListCard extends StatelessWidget {
         ),
       ],
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 0.2),
+        padding: const EdgeInsets.only(bottom: 1.5),
         child: Container(
-          width: device.width,
-          height: device.height / 10,
+          width: width,
+          height: height / 8,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 0.3),
             borderRadius: BorderRadius.circular(8),

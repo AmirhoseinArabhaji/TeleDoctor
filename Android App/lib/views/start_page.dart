@@ -24,7 +24,7 @@ class _StartPageState extends State<StartPage> {
     await jp.getLocalPath();
     jp.save(
       EnterProperties(
-        logout: true,
+        logout: false,
         patient: Patient(
           "asdsad",
           firstName: "asd",
@@ -35,13 +35,14 @@ class _StartPageState extends State<StartPage> {
       ),
     );
     ep = await jp.load(ep);
-    print(ep.patient);
-
     return ep;
   }
 
   Scaffold findPage(EnterProperties ep) {
-    return Scaffold(resizeToAvoidBottomInset: false,body: ep.logout ? SignIn() : MainPage(),);
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: ep.logout ? SignIn() : MainPage(),
+    );
   }
 
   @override

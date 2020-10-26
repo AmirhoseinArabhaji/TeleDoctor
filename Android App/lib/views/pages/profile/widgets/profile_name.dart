@@ -8,9 +8,10 @@ class ProfileName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Text(
       "Bellatrix Lestrange",
-      style: GoogleFonts.libreBaskerville(fontSize: 22),
+      style: GoogleFonts.libreBaskerville(fontSize: width/20),
     );
   }
 }

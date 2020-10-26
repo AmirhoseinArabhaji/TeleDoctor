@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 class ProfileEditButton extends StatelessWidget {
-  const ProfileEditButton({
-    Key key,
-  }) : super(key: key);
+  final Function onTap;
+
+  const ProfileEditButton({Key key, @required Function onTap})
+      : this.onTap = onTap,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return RaisedButton(
-      onPressed: () {},
+      onPressed: onTap,
       textColor: Colors.white,
       padding: const EdgeInsets.all(0.0),
       child: Container(
-        width: 200,
+        width: width / 2,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: <Color>[

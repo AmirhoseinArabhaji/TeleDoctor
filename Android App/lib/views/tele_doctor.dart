@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/views/main_page.dart';
+import 'package:tele_doctor/views/pages/profile/edit_profile/edit_profile.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
 import 'package:tele_doctor/views/registerPages/sign_up/sign_up.dart';
 import 'package:tele_doctor/views/start_page.dart';
@@ -19,7 +20,8 @@ class _TeleDoctorState extends State<TeleDoctor> {
         '/': (context) => StartPage(),
         'signUp': (context) => SignUp(),
         'singIn': (context) => SignIn(),
-        'mainPage': (context) => MainPage()
+        'mainPage': (context) => MainPage(),
+        'editProfile' : (context) => EditProfile(),
       },
     );
   }

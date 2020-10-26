@@ -20,32 +20,35 @@ class _InformationState extends State<Information> {
   };
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InformationTag("Personal"),
-        SizedBox(
-          height: 13,
-        ),
-        InformationGridView(
-          information: information,
-          crossAxisCount: 1,
-        ),
-        SizedBox(
-          height: 13,
-        ),
-        InformationTag("Insurance"),
-        InformationGridView(information: insurance, crossAxisCount: 2),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(width: 13),
-            ProfileButtonCard("Doctors"),
-            SizedBox(width: 13),
-            ProfileButtonCard("Visits"),
-          ],
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(13.0),
+      child: Column(
+        children: [
+          InformationTag("Personal"),
+          SizedBox(
+            height: 13,
+          ),
+          InformationGridView(
+            information: information,
+            crossAxisCount: 1,
+          ),
+          SizedBox(
+            height: 13,
+          ),
+          InformationTag("Insurance"),
+          InformationGridView(information: insurance, crossAxisCount: 2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 13),
+              ProfileButtonCard("Doctors"),
+              SizedBox(width: 13),
+              ProfileButtonCard("Visits"),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

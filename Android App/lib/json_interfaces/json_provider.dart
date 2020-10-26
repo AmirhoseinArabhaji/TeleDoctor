@@ -16,10 +16,13 @@ class JsonProvider {
     _file.writeAsString(encoded);
   }
 
+  Future<bool> get firstEnter async {
+    print(await _file.length());
+  }
+
   Future<EnterProperties> load(EnterProperties ep) async {
     Map<String, dynamic> map = json.jsonDecode(await _file.readAsString());
     ep = EnterProperties.fromJson(map);
     return ep;
   }
-
 }
