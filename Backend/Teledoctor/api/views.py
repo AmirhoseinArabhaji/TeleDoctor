@@ -231,3 +231,12 @@ def get_visits_from_now_for_patient(request):
     visits = Visit.objects.filter(patient__pk=patient_pk).filter(date__gte=today)
     seriaizer = PatientVisitSerializer(visits, many=True)
     return Response(data=seriaizer.data)
+
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated,))
+def get_visits_from_now_for_doctor(request):
+    doctor_pk = Token.objects.get(key=request.auth.key).user.doctor.pk
+    today = datetime.today()
+    visits = Visit.objects.filter(doctor__pk=doctor_pk).filter(date__gte=today)
+    serializer = PatientVisitSerializer(visits, many=True)
+    return Response(data=serializer.data)

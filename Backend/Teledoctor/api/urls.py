@@ -18,6 +18,7 @@ from .views import (
     add_visit_view,
 
     get_visits_from_now_for_patient,
+    get_visits_from_now_for_doctor,
 )
 
 from rest_framework.authtoken.views import obtain_auth_token
@@ -46,4 +47,5 @@ urlpatterns = [
     path('visit/add/<int:doctor_pk>', add_visit_view, name='add-visit'),
 
     path('patient/visits/', get_visits_from_now_for_patient, name='get-visits-patient'),
+    path('doctor/visits/', get_visits_from_now_for_doctor, name='get-visits-doctor'),
 ]
