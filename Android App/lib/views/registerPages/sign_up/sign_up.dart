@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tele_doctor/utilities/colors.dart';
-import 'package:tele_doctor/view_models/API_Gate/send_interface.dart';
-import 'package:tele_doctor/view_models/API_Gate/widgets/authentication/user/user.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
+import 'package:tele_doctor/viewModels/API_Gate/send_interface.dart';
+import 'package:tele_doctor/viewModels/API_Gate/widgets/authentication/user/user.dart';
 import 'package:tele_doctor/views/registerPages/sign_up/complete_sign_up_data.dart';
 import 'package:tele_doctor/views/registerPages/widgets/blue_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                             child: RegisterBlueButton(
                               title: "Submit",
                               onTap: () {
-                                user = User(_email.text, _password.text);
+                                user = User();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

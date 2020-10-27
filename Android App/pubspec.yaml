@@ -23,7 +23,7 @@ dependencies:
   google_sign_in: ^4.5.5
   json_serializable: ^3.5.0
   path_provider: ^1.6.21
-  syncfusion_flutter_calendar: ^18.3.42
+  flutter_datetime_picker: ^1.4.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/edit_profile_photo.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/edit_textfield.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/label_text.dart';
@@ -8,13 +8,19 @@ class EditProfileLayout extends StatefulWidget {
   @override
   _EditProfileLayoutState createState() => _EditProfileLayoutState();
 }
-//Todo better UI and create sections seperate
+//Todo make calendar
 
 class _EditProfileLayoutState extends State<EditProfileLayout> {
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
     return SafeArea(
       child: Container(
         width: width,
@@ -94,7 +100,10 @@ class ChangeDateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return RaisedButton(
       onPressed: () {
         displayBottomSheet(context);
@@ -132,12 +141,8 @@ class ChangeDateButton extends StatelessWidget {
 }
 
 void displayBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-      context: context,
-      builder: (ctx) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.4,
-          child: SfCalendar(),
-        );
-      });
+  DatePicker.showPicker(context, showTitleActions: true, onChanged: (date){
+
+  });
 }
+

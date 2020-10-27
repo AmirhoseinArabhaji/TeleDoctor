@@ -1,4 +1,4 @@
-import 'package:tele_doctor/view_models/API_Gate/connection_interface.dart';
+import 'package:tele_doctor/viewModels/API_Gate/connection_interface.dart';
 import 'package:http/http.dart' as http;
 
 class Send<A> extends Connnection {

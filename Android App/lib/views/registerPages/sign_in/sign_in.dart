@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tele_doctor/utilities/colors.dart';
-import 'package:tele_doctor/utilities/strings/strings.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
+import 'package:tele_doctor/models/utilities/strings/strings.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/widgets/sign_in_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/blue_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';

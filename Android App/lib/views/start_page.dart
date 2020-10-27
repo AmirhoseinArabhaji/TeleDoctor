@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tele_doctor/json_interfaces/json_provider.dart';
+
 import 'package:tele_doctor/models/enter_properties/enter_properties.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
+import 'package:tele_doctor/viewModels/json_interfaces/json_provider.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
 

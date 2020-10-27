@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tele_doctor/utilities/colors.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
 
 class SignIn extends StatefulWidget {
   @override

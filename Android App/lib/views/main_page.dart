@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:tele_doctor/utilities/colors.dart';
-import 'package:tele_doctor/utilities/device_essentials.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
+import 'package:tele_doctor/models/utilities/device_essentials.dart';
 import 'package:tele_doctor/views/pages_handler.dart';
 
 class MainPage extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tele_doctor/models/widgets/patient_notify.dart';
-import 'package:tele_doctor/utilities/colors.dart';
-import 'package:tele_doctor/utilities/device_essentials.dart';
+import 'package:tele_doctor/models/person/patient/widgets/patient_notify.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
+import 'package:tele_doctor/models/utilities/device_essentials.dart';
 
 class ListCard extends StatelessWidget {
   final Function _onTap;

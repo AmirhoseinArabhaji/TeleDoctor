@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tele_doctor/models/widgets/patient_notify.dart';
-import 'package:tele_doctor/utilities/colors.dart';
+import 'package:tele_doctor/models/person/patient/widgets/patient_notify.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/views/pages/notifications/widgets/list_card.dart';
 
 class Notifications extends StatefulWidget {

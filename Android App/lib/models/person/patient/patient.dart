@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:tele_doctor/models/person/doctor/doctor.dart';
 import 'package:tele_doctor/models/person/patient/widgets/insurance.dart';
 import 'package:tele_doctor/models/person/person.dart';
-import 'package:tele_doctor/models/widgets/visit.dart';
+import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/models/person/widgets/visit.dart';
 
 class Patient extends Person {
   List<Visit> _visits;

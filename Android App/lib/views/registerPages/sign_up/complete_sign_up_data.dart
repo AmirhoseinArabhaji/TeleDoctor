@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tele_doctor/models/widgets/gender.dart';
-import 'package:tele_doctor/view_models/API_Gate/widgets/authentication/user/user.dart';
+import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/models/person/widgets/gender.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
+import 'package:tele_doctor/viewModels/API_Gate/widgets/authentication/user/user.dart';
 
 class CompleteSignInInfo extends StatefulWidget {
   final User _user;
@@ -11,6 +11,7 @@ class CompleteSignInInfo extends StatefulWidget {
   _CompleteSignInInfoState createState() =>
       _CompleteSignInInfoState(user: _user);
 }
+
 
 class _CompleteSignInInfoState extends State<CompleteSignInInfo> {
   final User _user;

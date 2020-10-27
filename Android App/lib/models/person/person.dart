@@ -1,4 +1,4 @@
-import 'package:tele_doctor/models/widgets/gender.dart';
+import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/models/person/widgets/gender.dart';
 
 class Person {
   final String _token;
