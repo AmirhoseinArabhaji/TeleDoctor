@@ -2,10 +2,10 @@ from django.contrib import admin
 
 from .models import Patient, Visit
 
-class PatientAdmin(admin.ModelAdmin):
 
+class PatientAdmin(admin.ModelAdmin):
     list_display = ('id', 'first_name', 'last_name', 'email', 'social_id',)
-    search_fields =('email', 'last_name', 'social_id')
+    search_fields = ('email', 'last_name', 'social_id')
 
     def first_name(self, obj):
         return obj.user.first_name

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from doctor.models import Doctor
 
+
 class Patient(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='patient')
     favorite = models.ManyToManyField(Doctor, related_name='favorite', symmetrical=False, blank=True)

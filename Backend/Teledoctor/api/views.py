@@ -47,7 +47,6 @@ def test_api(request):
 @api_view(['POST', ])
 @permission_classes(())
 def user_registration_view(request):
-
     if request.method == 'POST':
         serializer = UserRegisterSerializer(data=request.data)
         data = {}
@@ -59,6 +58,7 @@ def user_registration_view(request):
         else:
             data = serializer.errors
         return Response(data)
+
 
 @api_view(['POST', ])
 @permission_classes(())
@@ -124,7 +124,7 @@ class ChangePasswordView(generics.UpdateAPIView):
 
 
 @api_view(['PUT', ])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def user_update_view(request):
     if request.method == 'PUT':
         serializer = UserUpdateSerializer(data=request.data)
@@ -137,7 +137,6 @@ def user_update_view(request):
         return Response(data)
 
 
-
 class ApiDoctorListView(ListAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
@@ -145,13 +144,12 @@ class ApiDoctorListView(ListAPIView):
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('user__first_name', 'user__last_name', )
+    search_fields = ('user__first_name', 'user__last_name',)
 
 
 @api_view(['GET', ])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def doctor_profile_view(request, pk):
-    
     try:
         doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
@@ -163,7 +161,7 @@ def doctor_profile_view(request, pk):
 
 
 @api_view(['POST', ])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def add_visit_view(request, doctor_pk):
     try:
         patient = Token.objects.get(key=request.auth.key).user.patient
@@ -193,9 +191,8 @@ def add_visit_view(request, doctor_pk):
 
 
 @api_view(['PUT', ])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def doctor_update_view(request):
-
     doctor = Token.objects.get(key=request.auth.key).user.doctor
     if request.method == 'PUT':
         serializer = DoctorUpdateSerializer(data=request.data, instance=doctor)
@@ -209,7 +206,7 @@ def doctor_update_view(request):
 
 
 @api_view(['PUT', ])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def patient_update_view(request):
     patient = Token.objects.get(key=request.auth.key).user.patient
     if request.method == 'PUT':
@@ -224,13 +221,14 @@ def patient_update_view(request):
 
 
 @api_view(['GET', ])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def get_visits_from_now_for_patient(request):
     patient_pk = Token.objects.get(key=request.auth.key).user.patient.pk
     today = datetime.today()
     visits = Visit.objects.filter(patient__pk=patient_pk).filter(date__gte=today)
     seriaizer = PatientVisitSerializer(visits, many=True)
     return Response(data=seriaizer.data)
+
 
 @api_view(['GET', ])
 @permission_classes((IsAuthenticated,))

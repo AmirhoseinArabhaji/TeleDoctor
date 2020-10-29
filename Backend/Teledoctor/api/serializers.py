@@ -10,7 +10,6 @@ from patient.models import Patient, Visit
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
-
     # password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     class Meta:
@@ -34,25 +33,24 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         # password2 = self.validated_data['password2']
 
         # if password != password2:
-            # raise serializers.ValidationError({'password': 'Passwords do not match.'})
+        # raise serializers.ValidationError({'password': 'Passwords do not match.'})
 
         user.set_password(password)
         user.save()
         return user
 
-class DoctorRegisterSerializer(serializers.ModelSerializer):
 
+class DoctorRegisterSerializer(serializers.ModelSerializer):
     user = UserRegisterSerializer()
 
     class Meta:
         model = Doctor
         # fields = ['user', 'mc_code', ]
-        fields = ['user',]
-
+        fields = ['user', ]
 
     def create(self, validated_data):
 
-        user_data = validated_data.pop('user')        
+        user_data = validated_data.pop('user')
         user_ser = UserRegisterSerializer(data=user_data)
         if user_ser.is_valid():
             user = user_ser.save()
@@ -61,23 +59,22 @@ class DoctorRegisterSerializer(serializers.ModelSerializer):
         doctor = Doctor(
             user=user,
             # mc_code=self.validated_data['mc_code']
-            )
+        )
         doctor.save()
 
         return doctor
 
+
 class PatientRegisterSerializer(serializers.ModelSerializer):
-    
     user = UserRegisterSerializer()
 
     class Meta:
         model = Patient
         fields = ['user', ]
 
-    
     def create(self, validated_data):
 
-        user_data = validated_data.pop('user')        
+        user_data = validated_data.pop('user')
         user_ser = UserRegisterSerializer(data=user_data)
         if user_ser.is_valid():
             user = user_ser.save()
@@ -86,13 +83,13 @@ class PatientRegisterSerializer(serializers.ModelSerializer):
         patient = Patient(
             user=user,
             # set other fields here
-            )
+        )
         patient.save()
 
         return patient
 
+
 class ChangePasswordSerializer(serializers.ModelSerializer):
-    
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
     new_password2 = serializers.CharField(required=True)
@@ -103,62 +100,59 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
 
 class UserUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
-    
     class Meta:
         model = User
         fields = ['id', 'first_name', 'last_name', 'gender', 'phone_number', 'social_id', 'gender', ]
 
-class DoctorUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
 
+class DoctorUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
     user = UserUpdateSerializer()
 
     class Meta:
         model = Doctor
         fields = ['id', 'user', 'mc_code', ]
 
-class PatientUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
 
+class PatientUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
     user = UserUpdateSerializer()
-    
+
     class Meta:
         model = Patient
         fields = ['id', 'user', ]
 
 
 class UserSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = User
         fields = '__all__'
 
+
 class DoctorSerializer(serializers.ModelSerializer):
-    
     user = UserSerializer()
 
     class Meta:
         model = Doctor
         fields = '__all__'
 
-class PatientSerializer(serializers.ModelSerializer):
 
+class PatientSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 
     class Meta:
         model = Patient
         fields = '__all__'
 
-class VisitSerializer(serializers.ModelSerializer):
 
+class VisitSerializer(serializers.ModelSerializer):
     patient = serializers.ReadOnlyField()
     doctor = serializers.ReadOnlyField()
-    
+
     class Meta:
         model = Visit
         fields = '__all__'
 
 
 class PatientVisitSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Visit
         fields = '__all__'

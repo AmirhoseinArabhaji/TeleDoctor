@@ -6,17 +6,17 @@ from django.core.validators import MinLengthValidator
 
 class UserManager(BaseUserManager):
     def create_user(
-        self,
-        email,
-        first_name,
-        last_name,
-        phone_number,
-        social_id,
-        gender,
-        password=None,
-        is_staff=False,
-        is_superuser=False,
-        is_active=True):
+            self,
+            email,
+            first_name,
+            last_name,
+            phone_number,
+            social_id,
+            gender,
+            password=None,
+            is_staff=False,
+            is_superuser=False,
+            is_active=True):
 
         if not email or not phone_number or not first_name or not last_name or not social_id:
             raise ValueError('fill all the fields')
@@ -24,12 +24,12 @@ class UserManager(BaseUserManager):
             raise ValueError('must have pasword')
 
         user = self.model(
-            email = self.normalize_email(email),
-            first_name = first_name,
-            last_name = last_name,
-            phone_number = phone_number,
-            social_id = social_id,
-            gender = gender,
+            email=self.normalize_email(email),
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=phone_number,
+            social_id=social_id,
+            gender=gender,
         )
 
         user.set_password(password)
@@ -40,14 +40,13 @@ class UserManager(BaseUserManager):
 
         return user
 
-
-    def create_staffuser(self, email, first_name, last_name ,phone_number, social_id, gender, password=None):
+    def create_staffuser(self, email, first_name, last_name, phone_number, social_id, gender, password=None):
         user = self.create_user(
             email,
-            first_name = first_name,
-            last_name = last_name,
-            phone_number = phone_number,
-            social_id = social_id,
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=phone_number,
+            social_id=social_id,
             gender=gender,
             password=password,
             is_staff=True,
@@ -57,11 +56,11 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, first_name, last_name, phone_number, social_id, gender, password=None):
         user = self.create_user(
             email,
-            first_name = first_name,
-            last_name = last_name,
-            phone_number = phone_number,
-            social_id = social_id,
-            gender = gender,
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=phone_number,
+            social_id=social_id,
+            gender=gender,
             password=password,
             is_staff=True,
             is_superuser=True,
@@ -70,26 +69,24 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-
     GENDER = [
         ('MALE', 'male'),
         ('FEMALE', 'female'),
     ]
 
-    first_name      = models.CharField(max_length=50, null=True, blank=False)
-    last_name       = models.CharField(max_length=50, null=True, blank=False)
-    date_of_birth   = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=False)
-    email           = models.EmailField(unique=True, blank=False, null=False)
-    phone_number    = models.CharField(validators=[MinLengthValidator(11)], max_length=11, unique=True, null=True)
-    social_id       = models.CharField(validators=[MinLengthValidator(10)], max_length=10, unique=True, null=True)
-    gender          = models.CharField(max_length=6, choices=GENDER, null=True)
-    profile_pic     = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    date_joined     = models.DateTimeField(auto_now_add=True)
-    last_login      = models.DateTimeField(auto_now=True)
-    is_active       = models.BooleanField(default=True) # can login
-    is_superuser    = models.BooleanField(default=False) # staff user non superuser
-    is_staff        = models.BooleanField(default=False) # superuser
-
+    first_name = models.CharField(max_length=50, null=True, blank=False)
+    last_name = models.CharField(max_length=50, null=True, blank=False)
+    date_of_birth = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=False)
+    email = models.EmailField(unique=True, blank=False, null=False)
+    phone_number = models.CharField(validators=[MinLengthValidator(11)], max_length=11, unique=True, null=True)
+    social_id = models.CharField(validators=[MinLengthValidator(10)], max_length=10, unique=True, null=True)
+    gender = models.CharField(max_length=6, choices=GENDER, null=True)
+    profile_pic = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    date_joined = models.DateTimeField(auto_now_add=True)
+    last_login = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)  # can login
+    is_superuser = models.BooleanField(default=False)  # staff user non superuser
+    is_staff = models.BooleanField(default=False)  # superuser
 
     USERNAME_FIELD = 'email'
     # REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number', 'social_id', 'gender',]
@@ -116,4 +113,3 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-

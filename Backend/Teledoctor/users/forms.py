@@ -3,6 +3,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import forms as auth_forms
 from .models import User
 
+
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -11,7 +12,7 @@ class UserAdminCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email','password1', 'password2', 'first_name', 'last_name', 'phone_number', 'social_id',)
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'phone_number', 'social_id',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -36,13 +37,14 @@ class UserAdminChangeForm(forms.ModelForm):
     password hash display field.
     """
     password = ReadOnlyPasswordHashField(label=("Password"),
-        help_text=("Raw passwords are not stored, so there is no way to see "
-                    "this user's password, but you can change the password "
-                    "using <a href=\"../password/\">this form</a>."))
+                                         help_text=("Raw passwords are not stored, so there is no way to see "
+                                                    "this user's password, but you can change the password "
+                                                    "using <a href=\"../password/\">this form</a>."))
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'first_name', 'last_name', 'phone_number', 'social_id', 'is_active', 'is_staff', 'is_superuser')
+        fields = ('email', 'password', 'first_name', 'last_name', 'phone_number', 'social_id', 'is_active', 'is_staff',
+                  'is_superuser')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
