@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/views/pages/profile/widgets/doctor_widgets/educations.dart';
 import 'package:tele_doctor/views/pages/profile/widgets/doctor_widgets/location_doctor.dart';
-import 'package:tele_doctor/views/pages/profile/widgets/image_profile.dart';
+import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/views/pages/profile/widgets/patient_profile_widgets/image_profile.dart';
 import 'package:tele_doctor/views/pages/profile/widgets/status_card.dart';
 
 import 'widgets/doctor_widgets/calendar_doctor.dart';

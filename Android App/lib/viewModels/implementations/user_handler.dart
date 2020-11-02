@@ -1,4 +1,4 @@
-import 'package:tele_doctor/view_models/interfaces/sign_up_interface.dart';
+import 'package:tele_doctor/viewModels/interfaces/sign_up_interface.dart';
 
 class UserHandler implements SignUpInterface {
   @override

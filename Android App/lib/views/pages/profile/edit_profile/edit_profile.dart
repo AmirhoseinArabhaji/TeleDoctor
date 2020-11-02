@@ -11,7 +11,10 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -22,7 +25,6 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFFFFFFF),
         title: Text(
           "Edit Profile",
           style: GoogleFonts.lato(color: Colors.black),

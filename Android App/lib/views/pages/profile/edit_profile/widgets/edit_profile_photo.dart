@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tele_doctor/views/pages/profile/widgets/image_profile.dart';
+import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/views/pages/profile/widgets/patient_profile_widgets/image_profile.dart';
 
 class EditProfilePhoto extends StatelessWidget {
   const EditProfilePhoto({

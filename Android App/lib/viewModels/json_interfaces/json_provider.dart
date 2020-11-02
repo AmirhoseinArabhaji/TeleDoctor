@@ -12,12 +12,21 @@ class JsonProvider {
   }
 
   save(EnterProperties ep) {
+    if (ep.patient == null) throw NoSuchMethodError;
     String encoded = json.jsonEncode(ep.toJson());
     _file.writeAsString(encoded);
   }
 
   Future<bool> get firstEnter async {
     print(await _file.length());
+  }
+
+  clear() async {
+    try {
+      await _file.delete(recursive: true);
+    } catch (e) {
+//      print(e);
+    }
   }
 
   Future<EnterProperties> load(EnterProperties ep) async {

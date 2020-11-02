@@ -49,7 +49,7 @@ class ListCard extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  flex: 6,
+                  flex: 5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,

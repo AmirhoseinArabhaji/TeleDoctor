@@ -24,6 +24,7 @@ dependencies:
   json_serializable: ^3.5.0
   path_provider: ^1.6.21
   flutter_datetime_picker: ^1.4.0
+  font_awesome_flutter: ^8.10.0
 
 dev_dependencies:
   flutter_test:

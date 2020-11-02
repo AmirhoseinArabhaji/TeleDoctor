@@ -5,6 +5,7 @@ import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/viewModels/json_interfaces/json_provider.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
+import 'package:tele_doctor/views/registerPages/sign_up/sign_up.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -23,18 +24,13 @@ class _StartPageState extends State<StartPage> {
     EnterProperties ep;
     JsonProvider jp = JsonProvider();
     await jp.getLocalPath();
-    jp.save(
-      EnterProperties(
-        logout: false,
-        patient: Patient(
-          "asdsad",
-          firstName: "asd",
-          lastName: "SAD",
-          email: "ASD",
-          password: "qwer",
-        ),
-      ),
-    );
+    await jp.save(ep = EnterProperties(
+        patient: Patient("SADSAD",
+            firstName: "asd",
+            lastName: "SAD",
+            email: "Asd",
+            password: "ASDSAD"),
+        logout: false));
     ep = await jp.load(ep);
     return ep;
   }

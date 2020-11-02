@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:convert' as JSON;
 import 'package:tele_doctor/models/person/patient/patient.dart';
-import 'package:tele_doctor/view_models/interfaces/patient_interface.dart';
+import 'package:tele_doctor/viewModels/interfaces/patient_interface.dart';
 import 'package:path_provider/path_provider.dart';
 
 class PatientHandler implements PatientInterface {

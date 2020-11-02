@@ -19,9 +19,9 @@ class ProfileEditButton extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: <Color>[
-              Color(0xFF94E6ED),
-              Color(0xFF44BFCA),
-              Color(0xFF00A3B2),
+              Color(0xFF2FCA8E),
+              Color(0xFF238A62),
+              Color(0xFF095135),
             ],
           ),
         ),
