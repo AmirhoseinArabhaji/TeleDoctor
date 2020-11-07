@@ -20,8 +20,8 @@ class _TeleDoctorState extends State<TeleDoctor> {
         '/': (context) => StartPage(),
         'signUp': (context) => SignUp(),
         'singIn': (context) => SignIn(),
-        'mainPage': (context) => MainPage(),
-        'editProfile' : (context) => EditProfile(),
+        'mainPage': (context) => MainPage(null),
+        'editProfile': (context) => EditProfile(null),
       },
     );
   }

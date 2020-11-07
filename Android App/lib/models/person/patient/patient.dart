@@ -20,10 +20,12 @@ class Patient extends Person {
     this._favoriteDoctors = [];
     this._visits = [];
     this._notifications = [];
+    this._insurance =
+        Insurance(code: "654", expiredDate: DateTime.now(), title: "Iran");
   }
 
-  factory Patient.fromJson(Map<String, dynamic> json) => _$PatientFromJson(json);
-
+  factory Patient.fromJson(Map<String, dynamic> json) =>
+      _$PatientFromJson(json);
 
   set insurance(Insurance insurance) => this._insurance = insurance;
 
@@ -46,17 +48,16 @@ Map<String, dynamic> _$PatientToJson(Patient patient) {
     "firstName": patient.firstName,
     "lastName": patient.lastName,
     "socialID": patient.socialID,
-    "password" : patient.password,
+    "password": patient.password,
     "age": patient.age,
     "phoneNumber": patient.phoneNumber,
     "email": patient.email,
-    "insurance": patient.insurance,
+    "insurance": patient.insurance.toJson(),
     "visits": patient.visits,
     "notifications": patient.notifications,
     "favoriteDoctors": patient.favoriteDoctros
   };
 }
-
 
 Patient _$PatientFromJson(Map<String, dynamic> json) {
   return Patient(

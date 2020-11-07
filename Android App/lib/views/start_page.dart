@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:tele_doctor/models/enter_properties/enter_properties.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
-import 'package:tele_doctor/viewModels/json_interfaces/json_provider.dart';
+import 'package:tele_doctor/viewModels/object_factory/user_maker.dart';
+import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';
-import 'package:tele_doctor/views/registerPages/sign_up/sign_up.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -14,40 +14,29 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   Widget startWidget;
+  PatientHandler patientHandler;
 
   @override
   void initState() {
     super.initState();
   }
 
-  Future<EnterProperties> _getPage() async {
-    EnterProperties ep;
-    JsonProvider jp = JsonProvider();
-    await jp.getLocalPath();
-    await jp.save(ep = EnterProperties(
-        patient: Patient("SADSAD",
-            firstName: "asd",
-            lastName: "SAD",
-            email: "Asd",
-            password: "ASDSAD"),
-        logout: false));
-    ep = await jp.load(ep);
-    return ep;
-  }
-
   Scaffold findPage(EnterProperties ep) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: ep.logout ? SignIn() : MainPage(),
+      body: ep.logout ? SignIn() : MainPage(patientHandler),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<EnterProperties>(
-      future: _getPage(),
+      future: fetchUserFromFile(),
       builder: (context, snapShot) {
         if (snapShot.hasError) print(snapShot.error);
+        if (snapShot.hasData) {
+          patientHandler = PatientHandler(snapShot.data.patient);
+        }
         return snapShot.hasData
             ? findPage(snapShot.data)
             : Container(

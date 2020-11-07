@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 class ProfileEditButton extends StatelessWidget {
   final Function onTap;
+  final String title;
 
-  const ProfileEditButton({Key key, @required Function onTap})
-      : this.onTap = onTap,
+  const ProfileEditButton({
+    Key key,
+    @required Function onTap,
+    @required String title,
+  })  : this.onTap = onTap,
+        this.title = title,
         super(key: key);
 
   @override
@@ -27,7 +32,7 @@ class ProfileEditButton extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(10.0),
         child: Center(
-          child: const Text('Edit Profile', style: TextStyle(fontSize: 20)),
+          child: Text(title, style: TextStyle(fontSize: 20)),
         ),
       ),
     );
