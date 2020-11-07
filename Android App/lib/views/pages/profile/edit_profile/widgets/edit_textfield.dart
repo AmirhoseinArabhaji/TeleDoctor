@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 class EditTextField extends StatelessWidget {
   final String title;
   final bool isNumber;
+  final TextEditingController controller;
 
   const EditTextField(
-      {Key key, @required String title, @required bool isNumber})
-      : this.title = title,
-        this.isNumber = isNumber,
-        super(key: key);
+      {Key key,
+      @required this.title,
+      @required this.isNumber,
+      @required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class EditTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(32),
       ),
       child: TextField(
+        controller: controller,
         keyboardType: isNumber ? TextInputType.number : TextInputType.text,
         autofocus: true,
         obscureText: false,

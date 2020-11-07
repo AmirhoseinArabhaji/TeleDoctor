@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
+import 'package:tele_doctor/models/utilities/strings/edit_profile_strings.dart';
 import 'package:tele_doctor/viewModels/edit/edit_profile.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/viewModels/observers_interfaces/observers/observer.dart';
@@ -25,11 +26,27 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
   PatientHandler patientHandler;
   Patient _patient;
   ProfileEditor _editor;
+  TextEditingController _firstName;
+  TextEditingController _lastName;
+  TextEditingController _email;
+  TextEditingController _password;
+  TextEditingController _phoneNumber;
+  TextEditingController _socialID;
+  TextEditingController _insuranceCode;
+  TextEditingController _insuranceTitle;
 
   _EditProfileLayoutState(this.patientHandler) {
     this.patientHandler.registerObserver(this);
     this.patientHandler.notifyObservers();
     _editor = ProfileEditor();
+    this._firstName = TextEditingController();
+    this._lastName = TextEditingController();
+    this._email = TextEditingController();
+    this._socialID = TextEditingController();
+    this._insuranceCode = TextEditingController();
+    this._insuranceTitle = TextEditingController();
+    this._password = TextEditingController();
+    this._phoneNumber = TextEditingController();
   }
 
   @override
@@ -51,48 +68,57 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: LabelText(
-                      title: "Profile Info",
+                      title: editProfileStrings["profileInfo"],
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
+                      controller: _firstName,
                       title: _editor.titleValidation(
-                          _patient.firstName, "First Name"),
+                          _patient.firstName, editProfileStrings["firstName"]),
                       isNumber: false,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
+                        controller: _lastName,
                         title: _editor.titleValidation(
-                            _patient.lastName, "Last Name"),
+                            _patient.lastName, editProfileStrings["lastName"]),
                         isNumber: false),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        title:
-                            _editor.titleValidation(_patient.email, "E-Mail"),
+                        controller: _email,
+                        title: _editor.titleValidation(
+                            _patient.email, editProfileStrings["email"]),
                         isNumber: false),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        title: _editor.titleValidation(
-                            _patient.phoneNumber, "Phone Number"),
+                        controller: _phoneNumber,
+                        title: _editor.titleValidation(_patient.phoneNumber,
+                            editProfileStrings["phoneNumber"]),
                         isNumber: true),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
+                        controller: _socialID,
                         title: _editor.titleValidation(
-                            _patient.socialID, "Social ID"),
+                            _patient.socialID, editProfileStrings["socialID"]),
                         isNumber: true),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
-                    child: ChangeDateButton(),
+                    child: ChangeDateButton(
+                      onTap: () {},
+                      title: _editor.titleValidation(_patient.birthDayString,
+                          editProfileStrings["changeBirthDay"]),
+                    ),
                   ),
                 ],
               ),
@@ -100,26 +126,31 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: LabelText(title: "Insurance Info"),
+                    child:
+                        LabelText(title: editProfileStrings["insuranceInfo"]),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        title: _editor.titleValidation(
-                            _patient.insurance.code, "Insurance Code"),
+                        controller: _insuranceCode,
+                        title: _editor.titleValidation(_patient.insurance.code,
+                            editProfileStrings["insuranceCode"]),
                         isNumber: true),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        title: _editor.titleValidation(
-                            _patient.insurance.title, "Insurance Title"),
+                        controller: _insuranceTitle,
+                        title: _editor.titleValidation(_patient.insurance.title,
+                            editProfileStrings["insuranceTitle"]),
                         isNumber: false),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 0.0, vertical: 20),
-                    child: ChangeDateButton(),
+                    child: ChangeDateButton(
+                        onTap: () {},
+                        title: editProfileStrings["changeExpiredDate"]),
                   ),
                 ],
               ),
