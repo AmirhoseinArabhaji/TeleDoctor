@@ -6,22 +6,24 @@ import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/views/pages/newVisits/new_visit.dart';
 import 'package:tele_doctor/views/pages/notifications/notifications.dart';
 import 'package:tele_doctor/views/pages/profile/patient_profile.dart';
-import 'package:tele_doctor/views/pages_handler.dart';
 
 class MainPage extends StatefulWidget {
   PatientHandler patientHandler;
+  int index;
 
-  MainPage(this.patientHandler);
+  MainPage(this.patientHandler, this.index);
 
   @override
-  _MainPageState createState() => _MainPageState(this.patientHandler);
+  _MainPageState createState() =>
+      _MainPageState(this.patientHandler, this.index);
 }
 
 class _MainPageState extends State<MainPage> {
   ///helps to switch between pages in CurvedNavigationBar
   PatientHandler patientHandler;
 
-  _MainPageState(this.patientHandler) {
+  _MainPageState(this.patientHandler, int index) {
+    this._page = index;
     screens = {
       0: Notifications(),
       1: AddPage(),
@@ -29,7 +31,7 @@ class _MainPageState extends State<MainPage> {
     };
   }
 
-  int _page = 0;
+  int _page;
   GlobalKey _bottomNavigationKey = GlobalKey();
   Map<int, Widget> screens;
 

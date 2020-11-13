@@ -24,7 +24,7 @@ class _StartPageState extends State<StartPage> {
   Scaffold findPage(EnterProperties ep) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: ep.logout ? SignIn() : MainPage(patientHandler),
+      body: ep.logout ? SignIn() : MainPage(patientHandler, 0),
     );
   }
 

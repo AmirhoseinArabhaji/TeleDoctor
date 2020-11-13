@@ -32,6 +32,7 @@ class _EditProfileState extends State<EditProfile> implements IObserver {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
+
             Navigator.pop(context);
           },
           icon: Icon(

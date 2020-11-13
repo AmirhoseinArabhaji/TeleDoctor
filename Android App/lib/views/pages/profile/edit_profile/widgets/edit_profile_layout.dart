@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/models/utilities/strings/edit_profile_strings.dart';
 import 'package:tele_doctor/viewModels/edit/edit_profile.dart';
@@ -8,6 +9,9 @@ import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/date_picker
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/edit_profile_photo.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/edit_textfield.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/label_text.dart';
+import 'package:tele_doctor/views/pages/profile/patient_profile.dart';
+
+import '../../../../main_page.dart';
 
 class EditProfileLayout extends StatefulWidget {
   PatientHandler patientHandler;
@@ -152,6 +156,48 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                         onTap: () {},
                         title: editProfileStrings["changeExpiredDate"]),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 0.0, vertical: 20),
+                    child: EditSubmit(
+                      onTap: () {
+                        setState(() {
+                          this._patient.firstName =
+                              _editor.controllerTextValidation(
+                                  _firstName.text, _patient.firstName);
+                          this._patient.lastName =
+                              _editor.controllerTextValidation(
+                                  _lastName.text, _patient.lastName);
+                          this._patient.email =
+                              _editor.controllerTextValidation(
+                                  _email.text, _patient.email);
+                          this._patient.phoneNumber =
+                              _editor.controllerTextValidation(
+                                  _phoneNumber.text, _patient.phoneNumber);
+                          this._patient.socialID =
+                              _editor.controllerTextValidation(
+                                  _socialID.text, _patient.socialID);
+//                        this._patient.birthDay
+                          this._patient.insurance.title =
+                              _editor.controllerTextValidation(
+                                  _insuranceTitle.text,
+                                  _patient.insurance.title);
+                          this._patient.insurance.code =
+                              _editor.controllerTextValidation(
+                                  _insuranceCode.text, _patient.insurance.code);
+                          patientHandler.changePatient(_patient);
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) =>
+                                    MainPage(patientHandler, 2)),
+                          );
+                        });
+                      },
+                      width: width,
+                      height: height,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -164,5 +210,46 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
   @override
   void update(Object o) {
     this._patient = o as Patient;
+  }
+}
+
+class EditSubmit extends StatelessWidget {
+  final Function onTap;
+  final double width;
+  final double height;
+
+  const EditSubmit({
+    Key key,
+    @required this.onTap,
+    @required this.width,
+    @required this.height,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width / 2,
+      height: height / 15,
+      child: Material(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        color: Color(0xFF65DA1D),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(15),
+          onTap: onTap,
+          splashColor: Color(0xFFD3E59D),
+          child: Center(
+            child: Text(
+              editProfileStrings["submit"],
+              style: GoogleFonts.notoSerif(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -23,7 +23,6 @@ class _PatientProfileState extends State<PatientProfile> implements IObserver {
 
   _PatientProfileState(this.patientHandler) {
     patientHandler.registerObserver(this);
-    patientHandler.notifyObservers();
   }
 
   @override

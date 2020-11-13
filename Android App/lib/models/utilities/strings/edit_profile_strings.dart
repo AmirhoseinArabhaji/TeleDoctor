@@ -10,4 +10,5 @@ const Map<String, String> editProfileStrings = {
   "insuranceCode": "Insurance Code",
   "InsuranceTitle": "Insurance Title",
   "changeExpiredDate": "Change Expired Date",
+  "submit" : "Submit"
 };
