@@ -25,7 +25,6 @@ class JsonProvider {
     try {
       await _file.delete(recursive: true);
     } catch (e) {
-//      print(e);
     }
   }
 

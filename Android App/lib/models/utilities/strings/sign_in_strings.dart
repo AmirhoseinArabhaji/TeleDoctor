@@ -5,4 +5,6 @@ const Map<String, String> stringsSignIn = {
   "password": "Password",
   "submit": "Sign In",
   "lowerText" : "Forgot Password?",
+  "signUpText" : "New to Tele Doctor?",
+  "signUp" : "SignUp",
 };

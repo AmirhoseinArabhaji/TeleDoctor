@@ -1,0 +1,3 @@
+class ConnectionFailed implements Exception{
+
+}

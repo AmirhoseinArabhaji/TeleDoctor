@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/models/utilities/strings/edit_profile_strings.dart';
-import 'package:tele_doctor/viewModels/edit/edit_profile.dart';
+import 'package:tele_doctor/viewModels/controllers/edit/edit_profile.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/viewModels/observers_interfaces/observers/observer.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/date_picker.dart';

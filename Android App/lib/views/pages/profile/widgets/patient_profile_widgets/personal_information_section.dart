@@ -25,7 +25,7 @@ class PersonalInformation extends StatelessWidget implements IObserver {
                 ? patientStrings["personal"]["fullName"]
                 : _patient.firstName + " " + _patient.lastName),
         buildInformationTag(
-            Icons.email_outlined,
+            Icons.add,
             _patient.email == ""
                 ? patientStrings["personal"]["email"]
                 : _patient.email),
@@ -40,7 +40,7 @@ class PersonalInformation extends StatelessWidget implements IObserver {
                 ? patientStrings["personal"]["socialID"]
                 : _patient.socialID),
         buildInformationTag(
-            Icons.calendar_today_outlined,
+            Icons.add,
             _patient.birthDay == null
                 ? patientStrings["personal"]["birthDay"]
                 : _patient.birthDay.toString()),

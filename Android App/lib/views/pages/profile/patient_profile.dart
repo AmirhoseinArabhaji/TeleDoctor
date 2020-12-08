@@ -27,6 +27,7 @@ class _PatientProfileState extends State<PatientProfile> implements IObserver {
 
   @override
   Widget build(BuildContext context) {
+    print(patient.token);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -41,6 +42,7 @@ class _PatientProfileState extends State<PatientProfile> implements IObserver {
             ProfileEditButton(
                 onTap: () {
                   setState(() {
+                    print(this.patient.token);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -10,19 +10,18 @@ class Patient extends Person {
   List<Doctor> _favoriteDoctors;
   Insurance _insurance;
 
-  Patient(
-    String token, {
-    @required String firstName,
-    @required String lastName,
+  Patient({
+    String token = "none",
     @required String email,
     @required String password,
-  }) : super(token, firstName, lastName, email, password) {
+  }) : super(token, email, password) {
     this._favoriteDoctors = [];
     this._visits = [];
     this._notifications = [];
     this._insurance =
         Insurance(code: "654", expiredDate: DateTime.now(), title: "Iran");
   }
+
 
   factory Patient.fromJson(Map<String, dynamic> json) =>
       _$PatientFromJson(json);
@@ -61,9 +60,7 @@ Map<String, dynamic> _$PatientToJson(Patient patient) {
 
 Patient _$PatientFromJson(Map<String, dynamic> json) {
   return Patient(
-    json["token"],
-    firstName: json["firstName"],
-    lastName: json["lastName"],
+    token: json["token"],
     email: json["email"],
     password: json["password"],
   );

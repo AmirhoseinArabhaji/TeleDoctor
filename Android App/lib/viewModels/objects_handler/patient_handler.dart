@@ -25,10 +25,12 @@ class PatientHandler implements ISubject {
   @override
   void registerObserver(IObserver o) {
     _observers.add(o);
+    notifyObservers();
   }
 
   @override
   void removeObserver(IObserver o) {
     _observers.remove(o);
+    notifyObservers();
   }
 }

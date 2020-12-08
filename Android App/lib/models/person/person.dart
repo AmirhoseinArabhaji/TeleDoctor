@@ -12,15 +12,17 @@ class Person {
   Gender _gender;
   int _age;
 
-  Person(String token, String firstName, String lastName, String email,
+  Person(String token, String email,
       String password)
       : this._token = token,
-        this._firstName = firstName,
-        this._lastName = lastName,
         this._password = password,
         this._email = email {
     socialID = "";
     phoneNumber = "";
+    firstName = "";
+    lastName = "";
+    _gender = Gender.None;
+    _phoneNumber = "";
     this._birthDay = DateTime.now();
   }
 
@@ -63,6 +65,9 @@ class Person {
   set age(int age) => this._age = age;
 
   set gender(Gender gender) => this._gender = gender;
+
+
+
 
   String get _birthDayString =>
       this.birthDay.year.toString() + "/" + this.birthDay.month.toString() +

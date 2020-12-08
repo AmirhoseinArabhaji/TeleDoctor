@@ -21,11 +21,5 @@ class Doctor extends Person {
     String university,
     String currentHospital,
     Status status,
-  }) : super(
-          token,
-          firstName,
-          lastName,
-          email,
-          password,
-        );
+  }) : super(token, email, password);
 }

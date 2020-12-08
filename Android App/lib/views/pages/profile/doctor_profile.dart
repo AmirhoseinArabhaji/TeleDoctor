@@ -107,7 +107,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         DoctorLabelTag(
                           title: "University of Baltimore",
                           icon: Icon(
-                            Icons.school_sharp,
+                            Icons.add,
                             size: 25,
                             color: Colors.black,
                           ),
@@ -116,7 +116,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           padding: const EdgeInsets.only(top: 30),
                           child: DoctorLabelTag(
                             title: "John Hopkins Hospital",
-                            icon: Icon(Icons.local_hospital_outlined,
+                            icon: Icon(Icons.add,
                                 color: Colors.red),
                           ),
                         ),
