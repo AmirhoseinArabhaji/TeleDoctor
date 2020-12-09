@@ -55,6 +55,7 @@ def user_registration_view(request):
             data['response'] = 'successfully registered.'
             token = Token.objects.get(user=user).key
             data['token'] = token
+            data.update(serializer.data)
         else:
             data = serializer.errors
         return Response(data)
@@ -71,6 +72,7 @@ def doctor_registration_view(request):
             data['response'] = 'successfully registered.'
             token = Token.objects.get(user=doctor.user).key
             data['token'] = token
+            data.update(serializer.data)
         else:
             data = serializer.errors
         return Response(data)
@@ -87,6 +89,7 @@ def patient_registration_view(request):
             data['response'] = 'successfully registered.'
             token = Token.objects.get(user=patient.user).key
             data['token'] = token
+            data.update(serializer.data)
         else:
             data = serializer.errors
         return Response(data)
@@ -123,18 +126,18 @@ class ChangePasswordView(generics.UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT', ])
-@permission_classes((IsAuthenticated,))
-def user_update_view(request):
-    if request.method == 'PUT':
-        serializer = UserUpdateSerializer(data=request.data)
-        data = {}
-        if serializer.is_valid():
-            Patient = serializer.save()
-            data['response'] = 'successfully updated'
-        else:
-            data = serializer.errors
-        return Response(data)
+# @api_view(['PUT', ])
+# @permission_classes((IsAuthenticated,))
+# def user_update_view(request):
+#     if request.method == 'PUT':
+#         serializer = UserUpdateSerializer(data=request.data)
+#         data = {}
+#         if serializer.is_valid():
+#             Patient = serializer.save()
+#             data['response'] = 'successfully updated'
+#         else:
+#             data = serializer.errors
+#         return Response(data)
 
 
 class ApiDoctorListView(ListAPIView):
@@ -199,7 +202,7 @@ def doctor_update_view(request):
         data = {}
         if serializer.is_valid():
             serializer.save()
-            data['response'] = 'update successfull.'
+            data['response'] = 'update successful.'
         else:
             data = serializer.errors
         return Response(data=data, status=status.HTTP_200_OK)
@@ -214,7 +217,7 @@ def patient_update_view(request):
         data = {}
         if serializer.is_valid():
             serializer.save()
-            data['response'] = 'update successfull.'
+            data['response'] = 'update successful.'
         else:
             data = serializer.errors
         return Response(data=data, status=status.HTTP_200_OK)
@@ -226,8 +229,8 @@ def get_visits_from_now_for_patient(request):
     patient_pk = Token.objects.get(key=request.auth.key).user.patient.pk
     today = datetime.today()
     visits = Visit.objects.filter(patient__pk=patient_pk).filter(date__gte=today)
-    seriaizer = PatientVisitSerializer(visits, many=True)
-    return Response(data=seriaizer.data)
+    serializer = PatientVisitSerializer(visits, many=True)
+    return Response(data=serializer.data)
 
 
 @api_view(['GET', ])
@@ -238,3 +241,10 @@ def get_visits_from_now_for_doctor(request):
     visits = Visit.objects.filter(doctor__pk=doctor_pk).filter(date__gte=today)
     serializer = PatientVisitSerializer(visits, many=True)
     return Response(data=serializer.data)
+
+#
+# class VisitListView(ListAPIView):
+#     queryset = Visit.objects.all()
+#
+#     def get_queryset(self):
+#         pass

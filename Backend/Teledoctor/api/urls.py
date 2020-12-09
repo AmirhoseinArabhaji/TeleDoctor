@@ -8,7 +8,7 @@ from .views import (
 
     ChangePasswordView,
 
-    user_update_view,
+    # user_update_view,
     doctor_update_view,
     patient_update_view,
 
@@ -35,7 +35,7 @@ urlpatterns = [
     path('register/doctor', doctor_registration_view, name='register-doctor'),
     path('register/patient', patient_registration_view, name='register-patient'),
 
-    path('update/user', user_update_view, name='update-user'),
+    # path('update/user', user_update_view, name='update-user'),
     path('update/doctor', doctor_update_view, name='update-doctor'),
     path('update/patient', patient_update_view, name='update-patient'),
 

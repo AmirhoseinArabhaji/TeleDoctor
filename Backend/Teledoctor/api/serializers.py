@@ -15,7 +15,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         # fields = ['email', 'first_name', 'last_name', 'phone_number', 'social_id', 'password', 'password2', 'gender']
-        fields = ['email', 'password']
+        fields = ['email', 'password', 'id']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -46,7 +46,7 @@ class DoctorRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
         # fields = ['user', 'mc_code', ]
-        fields = ['user', ]
+        fields = ['user', 'id']
 
     def create(self, validated_data):
 
@@ -70,7 +70,7 @@ class PatientRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Patient
-        fields = ['user', ]
+        fields = ['user', 'id']
 
     def create(self, validated_data):
 
