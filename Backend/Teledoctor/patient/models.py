@@ -5,6 +5,10 @@ from doctor.models import Doctor
 
 class Patient(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='patient')
+    insurance_id = models.CharField(max_length=15, null=True, blank=False)
+    insurance_organ = models.CharField(max_length=30, null=True, blank=False)
+    booklet_expire_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=False)
+    booklet_code = models.CharField(max_length=15, null=True, blank=False)
     favorite = models.ManyToManyField(Doctor, related_name='favorite', symmetrical=False, blank=True)
 
     def __str__(self):
