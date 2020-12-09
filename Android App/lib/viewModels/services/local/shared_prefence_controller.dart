@@ -32,7 +32,6 @@ class SPController {
 
   ///get instance of shared preference and save all ep's data in it
   save(EnterProperties ep) async {
-    print(ep.firstAppearance);
     _sp = await SharedPreferences.getInstance();
     await _sp.setString("token", ep.token);
     await _sp.setBool("logout", ep.logout);

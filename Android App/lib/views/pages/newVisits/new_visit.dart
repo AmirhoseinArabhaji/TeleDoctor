@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/models/utilities/colors.dart';
-import 'package:tele_doctor/views/start_page.dart';
 import 'package:http/http.dart' as http;
 
 class AddPage extends StatefulWidget {

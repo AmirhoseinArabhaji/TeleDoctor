@@ -7,6 +7,8 @@ import 'package:tele_doctor/views/pages/newVisits/new_visit.dart';
 import 'package:tele_doctor/views/pages/notifications/notifications.dart';
 import 'package:tele_doctor/views/pages/profile/patient_profile.dart';
 
+import '../my_drawer.dart';
+
 class MainPage extends StatefulWidget {
   PatientHandler patientHandler;
   int index;
@@ -21,6 +23,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   ///helps to switch between pages in CurvedNavigationBar
   PatientHandler patientHandler;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   _MainPageState(this.patientHandler, int index) {
     this._page = index;
@@ -40,6 +43,15 @@ class _MainPageState extends State<MainPage> {
     /** fill device object and get physical Device's informations */
     device = Device(MediaQuery.of(context).size);
     return Scaffold(
+      drawer: MyDrawer(),
+      key: _scaffoldKey,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.settings),
+          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+        ),
+        backgroundColor: Colors.amber,
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         onTap: (index) {

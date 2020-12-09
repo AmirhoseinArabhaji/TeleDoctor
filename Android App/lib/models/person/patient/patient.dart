@@ -19,7 +19,7 @@ class Patient extends Person {
     this._visits = [];
     this._notifications = [];
     this._insurance =
-        Insurance(code: "654", expiredDate: DateTime.now(), title: "Iran");
+        Insurance();
   }
 
 

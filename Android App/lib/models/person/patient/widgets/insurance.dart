@@ -5,11 +5,8 @@ class Insurance {
   DateTime _expiredDate;
   String _title;
 
-  Insurance({
-    @required String code,
-    @required DateTime expiredDate,
-    @required String title,
-  })  : this._expiredDate = expiredDate,
+  Insurance({String code = "", String title = ""})
+      : this._expiredDate = DateTime.now(),
         this._code = code,
         this._title = title;
 
@@ -40,10 +37,7 @@ Map<String, dynamic> _$InsuranceToJson(Insurance insurance) {
 }
 
 Insurance _$InsuranceFromJson(Map<String, dynamic> json) {
-  return Insurance(
-      code: json['code'],
-      expiredDate: _convertJsonToDateTime(json['expiredDate']),
-      title: json['string']);
+  return Insurance(code: json['code'], title: json['string']);
 }
 
 Map<String, dynamic> _convertDateTimeToJson(DateTime dateTime) {

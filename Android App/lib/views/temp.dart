@@ -21,7 +21,6 @@ class _TemplateState extends State<Template> {
     if(sp.get("firstName") == null && sp.get("lastName") == null ) return;
     String firstName = sp.get("firstName");
     String lastName = sp.get("lastName");
-    print(firstName + " " + lastName);
   }
 
   @override

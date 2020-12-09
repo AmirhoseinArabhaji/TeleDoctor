@@ -20,7 +20,6 @@ class SignUpController {
     this.ep.patient = Patient(email: email.text, password: password.text, token: token);
     this.ep.logout = false;
     this.ep.token = token;
-    print(token);
   }
 
   Future<http.Response> sendToAPI() async {

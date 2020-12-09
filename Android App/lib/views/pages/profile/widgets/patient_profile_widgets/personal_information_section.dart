@@ -51,6 +51,5 @@ class PersonalInformation extends StatelessWidget implements IObserver {
   @override
   void update(Object o) {
     this._patient = o as Patient;
-    print(_patient.socialID);
   }
 }

@@ -35,6 +35,5 @@ class InsuranceInformation extends StatelessWidget implements IObserver {
   @override
   void update(Object o) {
     this._patient = o as Patient;
-    print(this._patient.insurance);
   }
 }

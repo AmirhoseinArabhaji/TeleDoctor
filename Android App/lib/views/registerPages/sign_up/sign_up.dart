@@ -24,7 +24,6 @@ class _SignUpState extends State<SignUp> {
   @override
   void dispose(){
     super.dispose();
-    print("Dispose");
   }
 
   @override
@@ -111,7 +110,6 @@ class _SignUpState extends State<SignUp> {
                                 jsonDecode(response.body);
                             try {
                               String token = json["token"];
-                              print(response.body);
                               controller.fillEnterProperties(token);
                               PatientHandler patientHandler =
                                   PatientHandler(controller.ep.patient);
@@ -122,7 +120,6 @@ class _SignUpState extends State<SignUp> {
                                   token: token);
                               SPController spController = SPController();
                               spController.save(ep);
-                              print(response.statusCode);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
