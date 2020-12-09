@@ -26,6 +26,10 @@ dependencies:
   flutter_datetime_picker: ^1.4.0
   font_awesome_flutter: ^8.10.0
   shared_preferences: ^0.5.12+4
+  flutter_localizations:
+    sdk: flutter
+
+
 
 dev_dependencies:
   flutter_test:
