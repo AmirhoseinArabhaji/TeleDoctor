@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/utilities/strings/patient_profile_strings.dart';
 import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/views/pages/profile/widgets/patient_profile_widgets/insurance_information_section.dart';
 import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/views/pages/profile/widgets/patient_profile_widgets/personal_information_section.dart';
@@ -14,7 +15,7 @@ Widget tabHandler(BuildContext context, PatientHandler patientHandler) {
             tabs: [
               Tab(
                 child: Text(
-                  patientStrings["tabs"]["personal"],
+                  AppLocalizations.of(context).translate("personal"),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -23,7 +24,7 @@ Widget tabHandler(BuildContext context, PatientHandler patientHandler) {
               ),
               Tab(
                 child: Text(
-                  patientStrings["tabs"]["insurance"],
+                  AppLocalizations.of(context).translate("insurance"),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,

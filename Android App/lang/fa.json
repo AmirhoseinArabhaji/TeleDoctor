@@ -1,8 +1,9 @@
 {
   "edit": "ویرایش",
+  "editInformation": "ویرایش اطلاعات",
   "information": "اطلاعات",
   "personal": "فردی",
-  "Insurance": "بیمه",
+  "insurance": "بیمه",
   "firstName": "نام",
   "lastName": "نام خانوادگی",
   "email": "ایمیل",
@@ -12,6 +13,7 @@
   "insuranceInfoTag": "اطلاعات بیمه",
   "insuranceCode": "کد بیمه",
   "insuranceTitle": "نام شرکت بیمه",
+  "changeBirthDate" : "تغییر تاریخ تولد",
   "changeExpiredDateButton": "تغییر تاریخ ابطال بیمه",
   "submit": "ثبت",
   "logOut": "خروج"

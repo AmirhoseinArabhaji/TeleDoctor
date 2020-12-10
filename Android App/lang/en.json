@@ -1,8 +1,9 @@
 {
   "edit": "Edit",
+  "editInformation": "Edit Profile",
   "information": "Information",
   "personal": "Personal",
-  "Insurance": "Insurance",
+  "insurance": "Insurance",
   "firstName": "First Name",
   "lastName": "Last Name",
   "email": "Email",

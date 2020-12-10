@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/models/utilities/strings/patient_profile_strings.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
@@ -48,11 +49,11 @@ class _PatientProfileState extends State<PatientProfile> implements IObserver {
                                 EditProfile(patientHandler)));
                   });
                 },
-                title: patientStrings["editProfileButton"]),
+                title: AppLocalizations.of(context).translate("edit")),
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Text(
-                patientStrings["informationTag"],
+                AppLocalizations.of(context).translate("information"),
                 style: TextStyle(fontSize: 28),
               ),
             ),

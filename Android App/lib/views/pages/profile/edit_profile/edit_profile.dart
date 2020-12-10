@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/viewModels/observers_interfaces/observers/observer.dart';
@@ -32,7 +33,6 @@ class _EditProfileState extends State<EditProfile> implements IObserver {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
-
             Navigator.pop(context);
           },
           icon: Icon(
@@ -42,7 +42,7 @@ class _EditProfileState extends State<EditProfile> implements IObserver {
         ),
         centerTitle: true,
         title: Text(
-          "Edit Profile",
+          AppLocalizations.of(context).translate("editInformation"),
           style: GoogleFonts.lato(color: Colors.black),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/models/utilities/strings/edit_profile_strings.dart';
 import 'package:tele_doctor/viewModels/controllers/edit/edit_profile.dart';
@@ -72,7 +73,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: LabelText(
-                      title: editProfileStrings["profileInfo"],
+                      title: AppLocalizations.of(context).translate("profileInfoTag"),
                     ),
                   ),
                   Padding(
@@ -80,7 +81,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: EditTextField(
                       controller: _firstName,
                       title: _editor.titleValidation(
-                          _patient.firstName, editProfileStrings["firstName"]),
+                          _patient.firstName, AppLocalizations.of(context).translate("firstName")),
                       isNumber: false,
                     ),
                   ),
@@ -89,7 +90,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: EditTextField(
                         controller: _lastName,
                         title: _editor.titleValidation(
-                            _patient.lastName, editProfileStrings["lastName"]),
+                            _patient.lastName, AppLocalizations.of(context).translate("lastName")),
                         isNumber: false),
                   ),
                   Padding(
@@ -97,7 +98,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: EditTextField(
                         controller: _email,
                         title: _editor.titleValidation(
-                            _patient.email, editProfileStrings["email"]),
+                            _patient.email, AppLocalizations.of(context).translate("email")),
                         isNumber: false),
                   ),
                   Padding(
@@ -105,7 +106,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: EditTextField(
                         controller: _phoneNumber,
                         title: _editor.titleValidation(_patient.phoneNumber,
-                            editProfileStrings["phoneNumber"]),
+                            AppLocalizations.of(context).translate("phoneNumber")),
                         isNumber: true),
                   ),
                   Padding(
@@ -113,7 +114,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: EditTextField(
                         controller: _socialID,
                         title: _editor.titleValidation(
-                            _patient.socialID, editProfileStrings["socialID"]),
+                            _patient.socialID, AppLocalizations.of(context).translate("socialID")),
                         isNumber: true),
                   ),
                   Padding(
@@ -121,7 +122,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: ChangeDateButton(
                       onTap: () {},
                       title: _editor.titleValidation(_patient.birthDayString,
-                          editProfileStrings["changeBirthDay"]),
+                          AppLocalizations.of(context).translate("changeBirthDate")),
                     ),
                   ),
                 ],
@@ -131,14 +132,14 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child:
-                        LabelText(title: editProfileStrings["insuranceInfo"]),
+                        LabelText(title: AppLocalizations.of(context).translate("insuranceInfoTag")),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
                         controller: _insuranceCode,
                         title: _editor.titleValidation(_patient.insurance.code,
-                            editProfileStrings["insuranceCode"]),
+                            AppLocalizations.of(context).translate("insuranceCode")),
                         isNumber: true),
                   ),
                   Padding(
@@ -146,7 +147,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: EditTextField(
                         controller: _insuranceTitle,
                         title: _editor.titleValidation(_patient.insurance.title,
-                            editProfileStrings["insuranceTitle"]),
+                            AppLocalizations.of(context).translate("insuranceTitle")),
                         isNumber: false),
                   ),
                   Padding(
@@ -154,7 +155,7 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                         horizontal: 0.0, vertical: 20),
                     child: ChangeDateButton(
                         onTap: () {},
-                        title: editProfileStrings["changeExpiredDate"]),
+                        title: AppLocalizations.of(context).translate("changeExpiredDateButton")),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -241,7 +242,7 @@ class EditSubmit extends StatelessWidget {
           splashColor: Color(0xFFD3E59D),
           child: Center(
             child: Text(
-              editProfileStrings["submit"],
+              AppLocalizations.of(context).translate("submit"),
               style: GoogleFonts.notoSerif(
                 color: Colors.black,
                 fontSize: 20,
