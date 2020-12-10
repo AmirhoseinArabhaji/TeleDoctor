@@ -1,4 +1,18 @@
 {
-  "appBar" : "سلام",
-  "mainTitle" : "متن اصلی"
+  "edit": "ویرایش",
+  "information": "اطلاعات",
+  "personal": "فردی",
+  "Insurance": "بیمه",
+  "firstName": "نام",
+  "lastName": "نام خانوادگی",
+  "email": "ایمیل",
+  "phoneNumber": "شماره تلفن همراه",
+  "socialID": "کد ملی",
+  "profileInfoTag": "اطلاعات شخصی",
+  "insuranceInfoTag": "اطلاعات بیمه",
+  "insuranceCode": "کد بیمه",
+  "insuranceTitle": "نام شرکت بیمه",
+  "changeExpiredDateButton": "تغییر تاریخ ابطال بیمه",
+  "submit": "ثبت",
+  "logOut": "خروج"
 }

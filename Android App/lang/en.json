@@ -1,4 +1,18 @@
 {
-  "appBar" : "Hello",
-  "mainTitle" : "Main Page"
+  "edit": "Edit",
+  "information": "Information",
+  "personal": "Personal",
+  "Insurance": "Insurance",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "Email",
+  "phoneNumber": "Phone Number",
+  "socialID": "SocialID",
+  "profileInfoTag": "Profile Information",
+  "insuranceInfoTag": "Insurance Information",
+  "insuranceCode": "Insurance Code",
+  "insuranceTitle": "Insurance Code",
+  "changeExpiredDateButton": "Change Expired Date",
+  "submit": "Submit",
+  "logOut": "Log Out"
 }
