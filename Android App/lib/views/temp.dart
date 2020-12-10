@@ -1,64 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tele_doctor/models/localization/app_localization.dart';
+void main() => runApp(MyApp());
 
-class Template extends StatefulWidget {
-  @override
-  _TemplateState createState() => _TemplateState();
-}
-
-class _TemplateState extends State<Template> {
-  TextEditingController fnController = TextEditingController();
-  TextEditingController lnController = TextEditingController();
-
-  _submit() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    sp.setString("firstName", fnController.text);
-    sp.setString("lastName", lnController.text);
-  }
-
-  _fetch() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    if(sp.get("firstName") == null && sp.get("lastName") == null ) return;
-    String firstName = sp.get("firstName");
-    String lastName = sp.get("lastName");
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _fetch();
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // List all of the app's supported locales here
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('fa', 'IR'),
+      ],
+      // These delegates make sure that the localization data for the proper language is loaded
+      localizationsDelegates: [
+        // A class which loads the translations from JSON files
+        AppLocalizations.delegate,
+        // Built-in localization of basic text for Material widgets
+        GlobalMaterialLocalizations.delegate,
+        // Built-in localization for text direction LTR/RTL
+        // GlobalWidgetsLocalizations.delegate,
+      ],
+      // Returns a locale which will be used by the app
+      localeResolutionCallback: (locale, supportedLocales) {
+        // Check if the current device locale is supported
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode &&
+              supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+        }
+        // If the locale of the device is not supported, use the first one
+        // from the list (English, in this case).
+        return supportedLocales.first;
+      },
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 100),
-        child: Center(
-          child: Container(
-            child: Column(
-              children: [
-                Container(
-                  width: 200,
-                  height: 100,
-                  child: TextField(
-                    controller: fnController,
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  width: 200,
-                  height: 100,
-                  child: TextField(
-                    controller: lnController,
-                  ),
-                ),
-                Container(
-                    width: 200,
-                    height: 50,
-                    child: RaisedButton(
-                      onPressed: _submit,
-                      child: Text("Submit"),
-                    )),
-              ],
-            ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                AppLocalizations.of(context).translate('appBar'),
+                style: TextStyle(fontSize: 25),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 10),
+              Text(
+                AppLocalizations.of(context).translate('mainTitle'),
+                style: TextStyle(fontSize: 25),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 10),
+              Text(
+                'This will not be translated.',
+                style: TextStyle(fontSize: 25),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
       ),

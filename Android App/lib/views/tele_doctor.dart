@@ -33,7 +33,7 @@ class _TeleDoctorState extends State<TeleDoctor> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: "/",
       routes: {
         '/': (context) => FutureBuilder<Widget>(
               future: controller.fetch(),
