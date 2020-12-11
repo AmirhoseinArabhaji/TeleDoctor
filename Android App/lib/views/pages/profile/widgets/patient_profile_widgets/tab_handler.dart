@@ -17,8 +17,9 @@ Widget tabHandler(BuildContext context, PatientHandler patientHandler) {
                 child: Text(
                   AppLocalizations.of(context).translate("personal"),
                   style: TextStyle(
+                    fontFamily: "IRANSansMobile",
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 25,
                   ),
                 ),
               ),
@@ -26,8 +27,9 @@ Widget tabHandler(BuildContext context, PatientHandler patientHandler) {
                 child: Text(
                   AppLocalizations.of(context).translate("insurance"),
                   style: TextStyle(
+                    fontFamily: "IRANSansMobile",
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 25,
                   ),
                 ),
               ),

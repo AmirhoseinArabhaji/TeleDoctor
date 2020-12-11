@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tele_doctor/models/utilities/fonts.dart';
 
 class ProfileEditButton extends StatelessWidget {
   final Function onTap;
@@ -32,7 +33,7 @@ class ProfileEditButton extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(10.0),
         child: Center(
-          child: Text(title, style: TextStyle(fontSize: 20)),
+          child: Text(title, style: mainFont),
         ),
       ),
     );

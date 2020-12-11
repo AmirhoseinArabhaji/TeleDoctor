@@ -41,6 +41,7 @@ flutter:
   assets:
     - assets/
     - assets/json_files/enter_properties/enter_properties.json
+    - assets/fonts/IRANSansMobile.ttf
     - lang/fa.json
     - lang/en.json
   uses-material-design: true

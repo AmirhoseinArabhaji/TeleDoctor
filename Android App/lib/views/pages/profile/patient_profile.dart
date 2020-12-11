@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
+import 'package:tele_doctor/models/utilities/fonts.dart';
 import 'package:tele_doctor/models/utilities/strings/patient_profile_strings.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/viewModels/observers_interfaces/observers/observer.dart';
@@ -40,21 +41,21 @@ class _PatientProfileState extends State<PatientProfile> implements IObserver {
           children: [
             ProfileImage(imageURL: 'assets/person.jpg'),
             ProfileEditButton(
-                onTap: () {
-                  setState(() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                EditProfile(patientHandler)));
-                  });
-                },
-                title: AppLocalizations.of(context).translate("edit")),
+              onTap: () {
+                setState(() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditProfile(patientHandler)));
+                });
+              },
+              title: AppLocalizations.of(context).translate("edit"),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Text(
                 AppLocalizations.of(context).translate("information"),
-                style: TextStyle(fontSize: 28),
+                style: TextStyle(fontFamily: "IRANSansMobile", fontSize: 22,fontWeight: FontWeight.bold),
               ),
             ),
             tabHandler(context, patientHandler),

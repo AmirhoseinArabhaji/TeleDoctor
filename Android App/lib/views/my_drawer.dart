@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/models/localization/app_localization.dart';
+import 'package:tele_doctor/models/utilities/fonts.dart';
+import 'package:tele_doctor/viewModels/controllers/drawer_controller.dart';
 
-import 'models/utilities/device_essentials.dart';
+import '../models/utilities/device_essentials.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({
+  final MyDrawerController controller = MyDrawerController();
+
+  MyDrawer({
     Key key,
   }) : super(key: key);
 
@@ -22,12 +26,17 @@ class MyDrawer extends StatelessWidget {
             ),
             SizedBox(height: device.height / 10),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                controller.logOut(context);
+              },
               child: Container(
                 width: (device.width / 1.5) / 1.5,
                 height: device.height / 15,
                 child: Center(
-                  child: Text(AppLocalizations.of(context).translate("logOut")),
+                  child: Text(
+                    AppLocalizations.of(context).translate("logOut"),
+                    style: mainFont,
+                  ),
                 ),
               ),
             ),
