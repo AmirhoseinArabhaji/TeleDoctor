@@ -9,3 +9,9 @@ const Color kFirstColorButton = Color(0xFF11A4FF);
 const Color kSecondColorButton = Color(0xFFB8E4FF);
 const Color kRegisterBoxColor = Color(0xFFFDF9FC);
 const Color kTextFieldColor = Color(0xFFFFF3E4);
+
+///Color Pallette
+const Color kAppBar = Color(0xFF96FFDC);
+const Color kNavBarBorrom = Color(0xFF00BBFF);
+
+

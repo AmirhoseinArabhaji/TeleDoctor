@@ -1,5 +1,7 @@
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tele_doctor/viewModels/services/api/links.dart';
+import 'package:tele_doctor/viewModels/services/api/responses/response_login.dart';
 
 @JsonSerializable(nullable: false)
 class EnterProperties {
@@ -54,6 +56,8 @@ EnterProperties _$EPFromJson(Map<String, dynamic> json) {
     token: json['token'] as String,
   );
 }
+
+
 
 Map<String, dynamic> _$EPToJson(EnterProperties enterProperties) {
   return {

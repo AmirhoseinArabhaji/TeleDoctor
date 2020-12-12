@@ -33,7 +33,6 @@ class TeleDoctorController {
   TeleDoctorController() {
     ep = EnterProperties();
     sp = SPController();
-    fetch();
   }
 
   Future<void> dispose() async {

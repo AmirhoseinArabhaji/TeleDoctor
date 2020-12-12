@@ -36,6 +36,8 @@ class Response {
   set response(String value) {
     _response = value;
   }
+
+  Map<String, dynamic> toJson(Response response) => _$UserToJson(response);
 }
 
 Map<String, dynamic> _$UserToJson(Response response) {
@@ -55,7 +57,7 @@ Response _$ResponseFromJson(Map<String, dynamic> json) {
     json["response"],
     json["token"],
     json["user"]["email"],
-    json["user"]["id"],
-    json["id"],
+    json["id"].toString(),
+    json["id"].toString(),
   );
 }

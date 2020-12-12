@@ -43,7 +43,7 @@ class _MainPageState extends State<MainPage> {
     /** fill device object and get physical Device's informations */
     device = Device(MediaQuery.of(context).size);
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: MyDrawer(ph: patientHandler,),
       key: _scaffoldKey,
       appBar: AppBar(
         leading: IconButton(

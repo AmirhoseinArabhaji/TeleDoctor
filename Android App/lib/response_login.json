@@ -1,0 +1,19 @@
+{
+  "token": "asdsad",
+  "id": 12,
+  "email": "asdasd@gmail.com",
+  "first_name": "asdasd",
+  "last_name": "sadsad",
+  "phone_number": "0225552",
+  "profile_pic": "/asd/asd.jpeg",
+  "gender": "Gender.male",
+  "social_id": null,
+  "date_of_birth": "yyyy-mm-dd",
+  "patient": {
+    "id": 123,
+    "insurance_id": "123",
+    "insurance_organ": "iran",
+    "booklet_expired_date": "asd",
+    "booklet_code": "asd"
+  }
+}

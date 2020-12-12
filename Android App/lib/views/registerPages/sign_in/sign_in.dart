@@ -86,7 +86,6 @@ class _SignInState extends State<SignIn> {
                           onTap: () async {
                             try {
                               _ph = await signInController.send(_ph);
-
                               if(_ph.patient.token != "none") {
                                 Navigator.push(
                                   context,

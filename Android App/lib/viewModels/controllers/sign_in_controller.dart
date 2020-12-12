@@ -7,6 +7,7 @@ import 'package:tele_doctor/models/exceptions/user_not_found_exception.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/viewModels/services/api/connector.dart' as API;
+import 'package:tele_doctor/viewModels/services/api/responses/response_login.dart';
 import 'package:tele_doctor/viewModels/services/local/shared_prefence_controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,14 +43,19 @@ class SignInController {
 
   Future<PatientHandler> send(PatientHandler _patientHandler) async {
     http.Response response = await _sendToApi();
+    print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      String token = jsonDecode(response.body)["token"];
-      if (_ep.patient.token == token) {
+      LoginResponse loginResponse = await jsonDecode(response.body);
+      if (_ep.token == loginResponse.token) {
+        loginResponse.password = password.text;
+        _ep.patient = Patient.fromLoginResponse(loginResponse);
         _patientHandler = PatientHandler(_ep.patient);
         return _patientHandler;
-        //Todo Add Exceptions here!
-      }else throw UserNotFound();
-    }else throw ConnectionFailed();
+      } else
+        throw UserNotFound();
+    } else
+      throw ConnectionFailed();
   }
 
   //Setters and Getters

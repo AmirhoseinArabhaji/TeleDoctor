@@ -22,7 +22,7 @@ class _SignUpState extends State<SignUp> {
   bool userAlreadyExist = false;
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
   }
 
@@ -104,30 +104,14 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.white,
                           ),
                           onPressed: () async {
-                            http.Response response =
-                                await controller.sendToAPI();
-                            Map<String, dynamic> json =
-                                jsonDecode(response.body);
-                            try {
-                              String token = json["token"];
-                              controller.fillEnterProperties(token);
-                              PatientHandler patientHandler =
-                                  PatientHandler(controller.ep.patient);
-                              EnterProperties ep = EnterProperties(
-                                  patient: controller.ep.patient,
-                                  logout: false,
-                                  firstAppearance: false,
-                                  token: token);
-                              SPController spController = SPController();
-                              spController.save(ep);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      MainPage(patientHandler, 0),
-                                ),
-                              );
-                            } catch (_) {}
+                            PatientHandler ph;
+                            ph = await controller.send(ph);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MainPage(ph, 0),
+                              ),
+                            );
                           },
                         ),
                       ),

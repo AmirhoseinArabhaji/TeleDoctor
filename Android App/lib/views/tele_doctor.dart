@@ -26,7 +26,7 @@ class _TeleDoctorState extends State<TeleDoctor> {
   }
 
   @override
-  void dispose() async{
+  void dispose() async {
     super.dispose();
     await controller.dispose();
   }
@@ -66,13 +66,16 @@ class _TeleDoctorState extends State<TeleDoctor> {
         '/': (context) => FutureBuilder<Widget>(
               future: controller.fetch(),
               builder: (context, snapshot) {
+                //Todo Debug fetch function!!!!!
                 if (snapshot.hasData)
                   return snapshot.data;
                 else if (snapshot.hasError)
                   return SignUp();
                 else
                   return Container(
-                      child: Center(child: CircularProgressIndicator()));
+                      child: Container(
+                          color: Colors.white,
+                          child: Center(child: (CircularProgressIndicator()))));
               },
             ),
         'signUp': (context) => SignUp(),

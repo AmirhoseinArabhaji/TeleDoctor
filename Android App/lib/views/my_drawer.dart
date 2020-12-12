@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/utilities/fonts.dart';
 import 'package:tele_doctor/viewModels/controllers/drawer_controller.dart';
+import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 
 import '../models/utilities/device_essentials.dart';
 
 class MyDrawer extends StatelessWidget {
   final MyDrawerController controller = MyDrawerController();
-
+  PatientHandler ph;
   MyDrawer({
     Key key,
-  }) : super(key: key);
+    PatientHandler ph,
+  }) : super(key: key){
+   this.ph = ph;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class MyDrawer extends StatelessWidget {
             SizedBox(height: device.height / 10),
             RaisedButton(
               onPressed: () {
-                controller.logOut(context);
+                controller.logOut(context, ph);
               },
               child: Container(
                 width: (device.width / 1.5) / 1.5,
