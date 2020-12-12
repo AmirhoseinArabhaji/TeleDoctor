@@ -110,7 +110,7 @@ class DoctorUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.M
 
     class Meta:
         model = Doctor
-        fields = ['id', 'user', 'mc_code', ]
+        fields = ['id', 'user', 'mc_code', 'specialty']
 
 
 class PatientUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
@@ -118,29 +118,35 @@ class PatientUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.
 
     class Meta:
         model = Patient
-        fields = ['id', 'user', ]
+        fields = ['id', 'user', 'insurance_id', 'insurance_organ', 'booklet_expire_date', 'booklet_code']
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserDoctorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'first_name', 'last_name', 'gender', 'profile_pic']
 
 
-class DoctorSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+class DoctorListSerializer(serializers.ModelSerializer):
+    user = UserDoctorListSerializer()
 
     class Meta:
         model = Doctor
-        fields = '__all__'
+        fields = ['id', 'specialty', 'user']
 
 
-class PatientSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+class UserDoctorProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name', 'gender', 'profile_pic']
+
+
+class DoctorProfileSerializer(serializers.ModelSerializer):
+    user = UserDoctorProfileSerializer()
 
     class Meta:
-        model = Patient
-        fields = '__all__'
+        model = Doctor
+        fields = ['id', 'specialty', 'user']
 
 
 class VisitSerializer(serializers.ModelSerializer):
@@ -157,3 +163,5 @@ class PatientVisitSerializer(serializers.ModelSerializer):
         model = Visit
         fields = '__all__'
         # depth = 2 # should make serializers for doctor and maybe patient
+
+

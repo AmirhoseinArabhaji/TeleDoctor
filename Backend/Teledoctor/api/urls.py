@@ -19,6 +19,8 @@ from .views import (
 
     get_visits_from_now_for_patient,
     get_visits_from_now_for_doctor,
+
+    CustomAuthToken,
 )
 
 from rest_framework.authtoken.views import obtain_auth_token
@@ -28,7 +30,8 @@ app_name = 'api'
 urlpatterns = [
     path('test/', test_api, name='test-api'),
 
-    path('login', obtain_auth_token, name='login'),
+    path('login2', obtain_auth_token, name='login2'),
+    path('login', CustomAuthToken.as_view(), name='login'),
     path('change-password', ChangePasswordView.as_view(), name='change-password'),
 
     path('register/user', user_registration_view, name='register-user'),

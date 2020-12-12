@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.generics import UpdateAPIView, ListAPIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
@@ -26,9 +27,9 @@ from .serializers import (
     DoctorUpdateSerializer,
     PatientUpdateSerializer,
 
-    UserSerializer,
-    DoctorSerializer,
-    PatientSerializer,
+    DoctorListSerializer,
+
+    DoctorProfileSerializer,
 
     VisitSerializer,
     PatientVisitSerializer,
@@ -126,23 +127,9 @@ class ChangePasswordView(generics.UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(['PUT', ])
-# @permission_classes((IsAuthenticated,))
-# def user_update_view(request):
-#     if request.method == 'PUT':
-#         serializer = UserUpdateSerializer(data=request.data)
-#         data = {}
-#         if serializer.is_valid():
-#             Patient = serializer.save()
-#             data['response'] = 'successfully updated'
-#         else:
-#             data = serializer.errors
-#         return Response(data)
-
-
 class ApiDoctorListView(ListAPIView):
     queryset = Doctor.objects.all()
-    serializer_class = DoctorSerializer
+    serializer_class = DoctorListSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
@@ -159,7 +146,7 @@ def doctor_profile_view(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = DoctorSerializer(doctor)
+        serializer = DoctorProfileSerializer(doctor)
         return Response(serializer.data)
 
 
@@ -191,6 +178,20 @@ def add_visit_view(request, doctor_pk):
         data = serializer.errors
 
     return Response(data)
+
+
+# @api_view(['PUT', ])
+# @permission_classes((IsAuthenticated,))
+# def user_update_view(request):
+#     if request.method == 'PUT':
+#         serializer = UserUpdateSerializer(data=request.data)
+#         data = {}
+#         if serializer.is_valid():
+#             Patient = serializer.save()
+#             data['response'] = 'successfully updated'
+#         else:
+#             data = serializer.errors
+#         return Response(data)
 
 
 @api_view(['PUT', ])
@@ -242,9 +243,51 @@ def get_visits_from_now_for_doctor(request):
     serializer = PatientVisitSerializer(visits, many=True)
     return Response(data=serializer.data)
 
+
 #
 # class VisitListView(ListAPIView):
 #     queryset = Visit.objects.all()
 #
 #     def get_queryset(self):
 #         pass
+
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        data = {'token': token.key,
+                'id': user.id,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'phone_number': user.phone_number,
+                'profile_pic': user.profile_pic.url,
+                'gender': user.gender,
+                'social_id': user.social_id,
+                'date_of_birth': user.date_of_birth,
+                }
+
+        if hasattr(user, 'patient'):
+            patient = {'patient': {
+                'id': user.patient.id,
+                'insurance_id': user.patient.insurance_id,
+                'insurance_organ': user.patient.insurance_organ,
+                'booklet_expire_date': user.patient.booklet_expire_date,
+                'booklet_code': user.patient.booklet_code
+            }
+            }
+            data.update(patient)
+
+        if hasattr(user, 'doctor'):
+            doctor = {'doctor': {
+                'id': user.doctor.id,
+                'mc_code': user.doctor.mc_code,
+                'specialty': user.doctor.specialty
+            }
+            }
+            data.update(doctor)
+
+        return Response(data=data)
