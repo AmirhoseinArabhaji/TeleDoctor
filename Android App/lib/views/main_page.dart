@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/models/utilities/device_essentials.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
@@ -46,13 +47,17 @@ class _MainPageState extends State<MainPage> {
       drawer: MyDrawer(ph: patientHandler,),
       key: _scaffoldKey,
       appBar: AppBar(
+        elevation: 20,
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.settings),
           onPressed: () => _scaffoldKey.currentState.openDrawer(),
         ),
-        backgroundColor: Colors.amber,
+        backgroundColor: kAppBar,
       ),
       bottomNavigationBar: CurvedNavigationBar(
+
+        height: device.height/16,
         key: _bottomNavigationKey,
         onTap: (index) {
           setState(
@@ -61,9 +66,9 @@ class _MainPageState extends State<MainPage> {
             },
           );
         },
-        color: kNavBarColor,
+        color: kNavBarBottom,
         buttonBackgroundColor: kMainColor,
-        backgroundColor: Color(0x00000000),
+        backgroundColor: kMainColor,
         items: [
           Icon(Icons.notifications_active, size: 30, color: kButtonNavBarColor),
           Icon(Icons.add, size: 30, color: kButtonNavBarColor),

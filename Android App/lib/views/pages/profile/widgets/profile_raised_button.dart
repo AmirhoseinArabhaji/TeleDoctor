@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/models/utilities/fonts.dart';
 
 class ProfileEditButton extends StatelessWidget {
@@ -17,17 +18,23 @@ class ProfileEditButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+        side: BorderSide(color: kButtonBorder),
+      ),
+      elevation: 20,
       onPressed: onTap,
-      textColor: Colors.white,
+      textColor: kButtonEdit,
       padding: const EdgeInsets.all(0.0),
       child: Container(
         width: width / 2,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
             colors: <Color>[
-              Color(0xFF2FCA8E),
-              Color(0xFF238A62),
-              Color(0xFF095135),
+              kGradientFirst,
+              kGradientSecond,
+              kGradientThird
             ],
           ),
         ),
