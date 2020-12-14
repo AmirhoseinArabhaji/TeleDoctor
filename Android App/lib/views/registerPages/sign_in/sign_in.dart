@@ -71,7 +71,7 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.all(18.0),
                       child: Center(
                         child: Text(
-                          stringsSignIn["lowerText"],
+                            AppLocalizations.of(context).translate("forgotPassword"),
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.blueAccent,
@@ -83,7 +83,7 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: 13),
                     Center(
                       child: RegisterBlueButton(
-                          title: stringsSignIn["submit"],
+                          title: AppLocalizations.of(context).translate("signIn"),
                           onTap: () async {
                             try {
                               _ph = await signInController.send(_ph);
@@ -110,7 +110,7 @@ class _SignInState extends State<SignIn> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          stringsSignIn["signUpText"],
+                          AppLocalizations.of(context).translate("lowerText_signIn"),
                           style: TextStyle(fontSize: 16),
                         ),
                         SizedBox(
@@ -121,7 +121,7 @@ class _SignInState extends State<SignIn> {
                             Navigator.pushNamed(context, "signUp");
                           },
                           child: Text(
-                            stringsSignIn["signUp"],
+                            AppLocalizations.of(context).translate("signUp"),
                             style: TextStyle(
                                 fontSize: 16,
                                 decoration: TextDecoration.underline,

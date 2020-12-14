@@ -19,9 +19,7 @@
   "welcome" : "Welcome Back!",
   "password" : "Password",
   "forgotPassword" : "Forgot Password",
-  "sigIn" : "Sign In",
+  "signIn" : "Sign In",
   "lowerText_signIn" : "New to Tele Doctor? ",
-  "signUp" : "Sign Up",
-
-
+  "signUp" : "Sign Up"
 }
