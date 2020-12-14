@@ -35,7 +35,7 @@ class MyDrawer extends StatelessWidget {
             SizedBox(height: device.height / 10),
             LogoutButton(
                 onTap: () {
-                  // controller.logOut(context, ph);
+                  controller.onLoading(context, ph);
                 },
                 title: "Logout"),
           ],

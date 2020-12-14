@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/models/utilities/device_essentials.dart';
 import 'package:tele_doctor/models/utilities/fonts.dart';
 import 'package:tele_doctor/models/utilities/strings/patient_profile_strings.dart';
@@ -36,6 +37,7 @@ class _PatientProfileState extends State<PatientProfile> implements IObserver {
       child: Container(
         width: width,
         height: height,
+        color: kMainColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,14 +47,18 @@ class _PatientProfileState extends State<PatientProfile> implements IObserver {
               onTap: () {
                 setState(() {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditProfile(patientHandler)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditProfile(patientHandler),
+                    ),
+                  );
                 });
               },
               title: AppLocalizations.of(context).translate("edit"),
             ),
-            SizedBox(height: device.height/17,),
+            SizedBox(
+              height: device.height / 17,
+            ),
             /*Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Text(

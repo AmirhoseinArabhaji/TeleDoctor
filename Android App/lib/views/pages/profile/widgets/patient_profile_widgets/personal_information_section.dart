@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/views/pages/profile/widgets/patient_profile_widgets/information_tag.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/models/utilities/strings/patient_profile_strings.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/viewModels/observers_interfaces/observers/observer.dart';

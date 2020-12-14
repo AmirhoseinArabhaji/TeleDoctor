@@ -21,6 +21,34 @@ class _SignUpState extends State<SignUp> {
   SignUpController controller;
   bool userAlreadyExist = false;
 
+  void _onLoading(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: new Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              new CircularProgressIndicator(),
+              new Text("Loading"),
+            ],
+          ),
+        );
+      },
+    );
+    new Future.delayed(new Duration(seconds: 1), () async {
+      PatientHandler ph;
+      ph = await controller.send(ph);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainPage(ph, 0),
+        ),
+      );
+    });
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -104,14 +132,7 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.white,
                           ),
                           onPressed: () async {
-                            PatientHandler ph;
-                            ph = await controller.send(ph);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MainPage(ph, 0),
-                              ),
-                            );
+                            _onLoading(context);
                           },
                         ),
                       ),

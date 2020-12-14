@@ -15,5 +15,13 @@
   "insuranceTitle": "Insurance Code",
   "changeExpiredDateButton": "Change Expired Date",
   "submit": "Submit",
-  "logOut": "Log Out"
+  "logOut": "Log Out",
+  "welcome" : "Welcome Back!",
+  "password" : "Password",
+  "forgotPassword" : "Forgot Password",
+  "sigIn" : "Sign In",
+  "lowerText_signIn" : "New to Tele Doctor? ",
+  "signUp" : "Sign Up",
+
+
 }

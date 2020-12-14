@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/models/exceptions/connection_failed.dart';
 import 'package:tele_doctor/models/exceptions/user_not_found_exception.dart';
+import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/models/utilities/strings/sign_in_strings.dart';
 import 'package:tele_doctor/viewModels/controllers/sign_in_controller.dart';
@@ -62,10 +63,10 @@ class _SignInState extends State<SignIn> {
                       child: buildWelcomText(),
                     ),
                     RegisterTextField(signInController.email,
-                        title: stringsSignIn["email"], obscure: false),
+                        title: AppLocalizations.of(context).translate("email"), obscure: false),
                     SizedBox(height: 12),
                     RegisterTextField(signInController.password,
-                        title: stringsSignIn["password"], obscure: true),
+                        title:AppLocalizations.of(context).translate("password"), obscure: true),
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Center(
