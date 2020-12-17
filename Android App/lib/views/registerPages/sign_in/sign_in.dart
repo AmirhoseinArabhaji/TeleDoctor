@@ -70,12 +70,17 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Center(
-                        child: Text(
-                            AppLocalizations.of(context).translate("forgotPassword"),
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.blueAccent,
-                            decoration: TextDecoration.underline,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, "changePassword");
+                          },
+                          child: Text(
+                              AppLocalizations.of(context).translate("forgotPassword"),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.blueAccent,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
                       ),

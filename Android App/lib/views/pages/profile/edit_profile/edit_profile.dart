@@ -42,7 +42,7 @@ class _EditProfileState extends State<EditProfile> implements IObserver {
         ),
         centerTitle: true,
         title: Text(
-          AppLocalizations.of(context).translate("editInformation"),
+          AppLocalizations.of(context).translate("changePasswordTitle"),
           style: GoogleFonts.lato(color: Colors.black),
         ),
       ),

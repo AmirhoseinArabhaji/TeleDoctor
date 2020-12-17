@@ -5,7 +5,7 @@ import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/viewModels/controllers/tele_doctor_controller.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
-import 'package:tele_doctor/views/change_password.dart';
+import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/views/pages/change_password/change_password.dart';
 import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/viewModels/services/local/shared_prefence_controller.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/edit_profile.dart';

@@ -21,5 +21,10 @@
   "forgotPassword" : "Forgot Password",
   "signIn" : "Sign In",
   "lowerText_signIn" : "New to Tele Doctor? ",
-  "signUp" : "Sign Up"
+  "signUp" : "Sign Up",
+  "changePasswordTitle" : "Reset Password",
+  "newPassword" : "New Password",
+  "confirmPassword" : "Confirm Password",
+  "reset" : "Reset",
+  "upperTextChangePassword" : "Enter your New Password"
 }

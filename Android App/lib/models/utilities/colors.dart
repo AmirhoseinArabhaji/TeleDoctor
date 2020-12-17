@@ -25,5 +25,8 @@ const Color kLogoutGradientSecond = Color(0xFFBD1A25);
 const Color kLogoutGradientThird = Color(0xFF960811);
 const Color kLogoutText = Color(0xFFFFF5F5);
 const Color kLogoutSplashColor = Color(0xFFFFE2E2);
+//change password
+const Color kChangePasswordDisableBorder = Color(0xFF59FBFE);
+const Color kChangePasswordFocusBorder = Color(0xFF00BADF);
 
 
