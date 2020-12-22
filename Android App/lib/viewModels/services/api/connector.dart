@@ -18,3 +18,12 @@ Future<http.Response> login(Map<String, dynamic> body) async {
     body: jsonEncode(body),
   );
 }
+
+Future<http.Response> changePassword(
+    String token, Map<String, dynamic> json) async {
+  return await http.post(
+    "http://amirhoseinar.pythonanywhere.com/api/login",
+    headers: <String, String>{'Authorization': "Token $token"},
+    body: jsonEncode(json),
+  );
+}

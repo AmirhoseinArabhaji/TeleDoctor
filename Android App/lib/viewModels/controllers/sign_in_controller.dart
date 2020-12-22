@@ -22,7 +22,6 @@ class SignInController {
     _password = TextEditingController();
     _ep = EnterProperties();
     _spController = SPController();
-    _fetchData();
   }
 
   //Methods
@@ -30,12 +29,19 @@ class SignInController {
     _ep = await _spController.fetch(_ep);
   }
 
+  Future<PatientHandler> getPH() async{
+    await _fetchData();
+    return PatientHandler(_ep.patient);
+  }
+
+  bool firstAppearance() => _ep.firstAppearance;
+
   Future<http.Response> _sendToApi() async {
     String email = _email.text;
     String password = _password.text;
     Map<String, dynamic> _body = {
-        "username": email,
-        "password": password,
+      "username": email,
+      "password": password,
     };
     http.Response response = await API.login(_body);
     return response;

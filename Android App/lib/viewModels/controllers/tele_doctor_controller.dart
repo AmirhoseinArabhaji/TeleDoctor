@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tele_doctor/models/enter_properties/enter_properties.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
-import 'package:tele_doctor/viewModels/services/api/links.dart';
 import 'package:tele_doctor/viewModels/services/local/shared_prefence_controller.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';

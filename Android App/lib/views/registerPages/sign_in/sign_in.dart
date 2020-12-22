@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/models/exceptions/connection_failed.dart';
 import 'package:tele_doctor/models/exceptions/user_not_found_exception.dart';
@@ -10,9 +7,9 @@ import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/models/utilities/strings/sign_in_strings.dart';
 import 'package:tele_doctor/viewModels/controllers/sign_in_controller.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
+import 'package:tele_doctor/views/pages/change_password/change_password.dart';
 import 'package:tele_doctor/views/registerPages/widgets/blue_button.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
-import 'package:http/http.dart' as http;
 
 import '../../main_page.dart';
 
@@ -24,8 +21,6 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   SignInController signInController;
   PatientHandler _ph;
-
-  void onTap() async {}
 
   @override
   void initState() {
@@ -63,19 +58,30 @@ class _SignInState extends State<SignIn> {
                       child: buildWelcomText(),
                     ),
                     RegisterTextField(signInController.email,
-                        title: AppLocalizations.of(context).translate("email"), obscure: false),
+                        title: AppLocalizations.of(context).translate("email"),
+                        obscure: false),
                     SizedBox(height: 12),
                     RegisterTextField(signInController.password,
-                        title:AppLocalizations.of(context).translate("password"), obscure: true),
+                        title:
+                            AppLocalizations.of(context).translate("password"),
+                        obscure: true),
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Center(
                         child: GestureDetector(
-                          onTap: (){
-                            Navigator.pushNamed(context, "changePassword");
+                          onTap: () async {
+                            if (signInController.firstAppearance())
+                              _ph = await signInController.getPH();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChangePassword(_ph),
+                              ),
+                            );
                           },
                           child: Text(
-                              AppLocalizations.of(context).translate("forgotPassword"),
+                            AppLocalizations.of(context)
+                                .translate("forgotPassword"),
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.blueAccent,
@@ -88,16 +94,16 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: 13),
                     Center(
                       child: RegisterBlueButton(
-                          title: AppLocalizations.of(context).translate("signIn"),
+                          title:
+                              AppLocalizations.of(context).translate("signIn"),
                           onTap: () async {
                             try {
                               _ph = await signInController.send(_ph);
-                              if(_ph.patient.token != "none") {
+                              if (_ph.patient.token != "none") {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        MainPage(_ph, 0),
+                                    builder: (context) => MainPage(_ph, 0),
                                   ),
                                 );
                               }
@@ -115,7 +121,8 @@ class _SignInState extends State<SignIn> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppLocalizations.of(context).translate("lowerText_signIn"),
+                          AppLocalizations.of(context)
+                              .translate("lowerText_signIn"),
                           style: TextStyle(fontSize: 16),
                         ),
                         SizedBox(

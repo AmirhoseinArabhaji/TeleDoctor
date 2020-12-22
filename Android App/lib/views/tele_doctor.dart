@@ -83,7 +83,7 @@ class _TeleDoctorState extends State<TeleDoctor> {
         'signIn': (context) => SignIn(),
         'mainPage': (context) => MainPage(null, 0),
         'editProfile': (context) => EditProfile(null),
-        'changePassword': (context) => ChangePassword(),
+        'changePassword': (context) => ChangePassword(null),
       },
     );
   }
