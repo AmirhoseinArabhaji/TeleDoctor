@@ -23,10 +23,10 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
 
   void confirmPasswordFunction() {
     setState(() {
-      _controller.newPasswordShow = !_controller.newPasswordShow;
+      _controller.confirmPasswordShow = !_controller.confirmPasswordShow;
       Future.delayed(Duration(seconds: 2), () {
         setState(() {
-          _controller.confirmPasswordShow = !_controller.confirmPasswordShow;
+          _controller.confirmPasswordShow = true;
         });
       });
     });
@@ -34,10 +34,10 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
 
   void newPasswordFunction() {
     setState(() {
-      _controller.confirmPasswordShow = !_controller.confirmPasswordShow;
+      _controller.newPasswordShow = !_controller.newPasswordShow;
       Future.delayed(Duration(seconds: 2), () {
         setState(() {
-          _controller.newPasswordShow = !_controller.newPasswordShow;
+          _controller.newPasswordShow = true;
         });
       });
     });
@@ -45,18 +45,36 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
 
   void oldPasswordFunction() {
     setState(() {
-      _controller.confirmPasswordShow = !_controller.confirmPasswordShow;
+      _controller.oldPasswordShow = !_controller.oldPasswordShow;
       Future.delayed(Duration(seconds: 2), () {
         setState(() {
-          _controller.oldPasswordShow = !_controller.oldPasswordShow;
+          _controller.oldPasswordShow = true;
         });
       });
     });
   }
 
+  void check() {
+    setState(() {
+      if (this._controller.oldPassword.text != ph.patient.password)
+        this._controller.oldPasswordValidate = false;
+    });
+  }
+
+  void checkOldPasswordValidate() {
+    setState(() {
+      _controller.checkOldPassword(ph.patient.password);
+    });
+  }
+
+  void checkPasswordConfirmation() {
+    setState(() {
+      _controller.checkNewPasswords();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(ph.patient.token);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -76,6 +94,8 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
               height: height / 15,
             ),
             ChangePasswordTextField(
+              onComplete: checkOldPasswordValidate,
+              validate: this._controller.oldPasswordValidate,
               width: width,
               height: height,
               obscure: _controller.oldPasswordShow,
@@ -87,6 +107,8 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
               height: height / 20,
             ),
             ChangePasswordTextField(
+              onComplete: () {},
+              validate: _controller.newPasswordValidate,
               controller: _controller.newPassword,
               labelText: AppLocalizations.of(context).translate("newPassword"),
               height: height,
@@ -98,6 +120,8 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
               height: height / 20,
             ),
             ChangePasswordTextField(
+              onComplete: checkPasswordConfirmation,
+              validate: _controller.confirmPasswordValidate,
               controller: _controller.confirmPassword,
               labelText:
                   AppLocalizations.of(context).translate("confirmPassword"),

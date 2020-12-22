@@ -28,5 +28,4 @@ const Color kLogoutSplashColor = Color(0xFFFFE2E2);
 //change password
 const Color kChangePasswordDisableBorder = Color(0xFF59FBFE);
 const Color kChangePasswordFocusBorder = Color(0xFF00BADF);
-
-
+const Color kOldPasswordError = Color(0xFFFD1947);

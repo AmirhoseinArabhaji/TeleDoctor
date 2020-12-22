@@ -16,6 +16,18 @@ class ChangePasswordController {
   bool confirmPasswordShow = true;
   bool oldPasswordShow = true;
   bool ok = true;
+  bool oldPasswordValidate = true;
+  bool confirmPasswordValidate = true;
+  bool newPasswordValidate = true;
+
+  void checkOldPassword(String text) {
+    oldPasswordValidate = text == this.oldPassword.text;
+  }
+
+  void checkNewPasswords() {
+    confirmPasswordValidate = newPassword.text == confirmPassword.text;
+    newPasswordValidate = confirmPasswordValidate;
+  }
 
   Future<bool> _oldPasswordMatches() async {
     EnterProperties ep;
@@ -52,5 +64,6 @@ class ChangePasswordController {
       } else
         throw ConnectionFailed();
     }
+    return null;
   }
 }

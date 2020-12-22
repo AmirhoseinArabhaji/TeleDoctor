@@ -27,5 +27,6 @@
   "confirmPassword": "Confirm Password",
   "reset": "Reset",
   "upperTextChangePassword": "Enter your New Password",
-  "oldPassword": "Old Password"
+  "oldPassword": "Old Password",
+  "oldPasswordErrorMessage" : "Old Password not Match"
 }
