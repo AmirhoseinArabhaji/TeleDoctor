@@ -70,8 +70,12 @@ class _SignInState extends State<SignIn> {
                       child: Center(
                         child: GestureDetector(
                           onTap: () async {
-                            if (signInController.firstAppearance())
+                            //Todo Check this little shit
+                            print(signInController.firstAppearance());
+                            if (signInController.firstAppearance()) {
                               _ph = await signInController.getPH();
+                              print(_ph.patient.password);
+                            }
                             Navigator.push(
                               context,
                               MaterialPageRoute(

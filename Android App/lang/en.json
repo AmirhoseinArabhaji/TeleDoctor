@@ -12,7 +12,7 @@
   "profileInfoTag": "Profile Information",
   "insuranceInfoTag": "Insurance Information",
   "insuranceCode": "Insurance Code",
-  "insuranceTitle": "Insurance Code",
+  "insuranceTitle": "Insurance Title",
   "changeExpiredDateButton": "Change Expired Date",
   "submit": "Submit",
   "logOut": "Log Out",
@@ -28,5 +28,6 @@
   "reset": "Reset",
   "upperTextChangePassword": "Enter your New Password",
   "oldPassword": "Old Password",
-  "oldPasswordErrorMessage" : "Old Password not Match"
+  "oldPasswordErrorMessage": "Old Password not Match",
+  "changeBirthDate": "Change Birth Date"
 }

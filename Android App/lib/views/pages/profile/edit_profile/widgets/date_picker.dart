@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:tele_doctor/models/utilities/colors.dart';
 
 class ChangeDateButton extends StatelessWidget {
   final String title;
@@ -14,40 +15,29 @@ class ChangeDateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    return RaisedButton(
-      onPressed: onTap,
-      textColor: Colors.white,
-      padding: const EdgeInsets.all(0.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(32),
-      ),
-      child: Container(
-        width: width - 120,
+    var height = MediaQuery.of(context).size.height;
+    return Container(
+        width: width / 1.5,
+        height: height / 18,
         decoration: BoxDecoration(
+          border: Border.all(color: kChangePasswordDisableBorder),
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(32),
-          gradient: LinearGradient(
-            colors: <Color>[
-              Color(0xffC0D3DC),
-              Color(0xff76A6BC),
-              Color(0xff2F7697)
+        ),
+        child: GestureDetector(
+          onTap: onTap,
+          child: Row(
+            children: [
+              SizedBox(
+                width: width / 40,
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.5), fontSize: 18),
+              ),
             ],
           ),
-        ),
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black87,
-            ),
-          ),
-        ),
-      ),
-    );
+        ));
   }
-}
-
-void displayBottomSheet(BuildContext context) {
-  DatePicker.showPicker(context, showTitleActions: true, onChanged: (date) {});
 }

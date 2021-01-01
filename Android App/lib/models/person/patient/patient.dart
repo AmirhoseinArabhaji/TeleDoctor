@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:tele_doctor/models/person/doctor/doctor.dart';
 import 'package:tele_doctor/models/person/patient/widgets/insurance.dart';
 import 'package:tele_doctor/models/person/person.dart';
+import 'package:tele_doctor/models/person/widgets/gender.dart';
 import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/models/person/widgets/visit.dart';
 import 'package:tele_doctor/viewModels/services/api/responses/response_login.dart';
 
@@ -12,6 +13,39 @@ class Patient extends Person {
   Insurance _insurance;
   int _id;
   int _userID;
+
+  //Todo GENDER!!!!!! create it
+  Patient.fromEdit({
+    @required String token,
+    @required String email,
+    @required String password,
+    @required int userId,
+    @required int id,
+    String firstName = "",
+    String lastName = "",
+    String phoneNumber = "",
+    String socialID = "",
+    DateTime birthDay,
+    String insuranceCode = "",
+    String insuranceOrgan = "",
+    String insuranceID = "124",
+    DateTime expiredDate,
+  }) : super(token, email, password) {
+    this.userID = userId;
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    //Todo Delete thsi line this is for test
+    this.insurance = Insurance(
+        organ: insuranceOrgan,
+        code: insuranceCode,
+        id: "1245",
+        expireDate: expiredDate);
+    this.insurance.expiredDate = expiredDate;
+    this.birthDay = birthDay;
+    this.phoneNumber = phoneNumber;
+    this.socialID = socialID;
+  }
 
   Patient({
     String token = "none",
@@ -57,6 +91,24 @@ class Patient extends Person {
   set userID(int value) {
     _userID = value;
   }
+
+  Map<String, dynamic> edit() => {
+        "id": this.id,
+        "insurance_id": this.insurance.insuranceID,
+        "insurance_organ": this.insurance.insuranceOrgan,
+        "booklet_expire_date": this.insurance.expiredDate,
+        "booklet_code": this.insurance.code,
+        "user": {
+          "id": this.userID,
+          "phone_number": phoneNumber,
+          "email": email,
+          "social_id": socialID,
+          "first_name": firstName,
+          "last_name": lastName,
+          "date_of_birth": birthDay,
+          "gender": convertGenderToString(gender),
+        }
+      };
 }
 
 Map<String, dynamic> _$PatientToJson(Patient patient) {

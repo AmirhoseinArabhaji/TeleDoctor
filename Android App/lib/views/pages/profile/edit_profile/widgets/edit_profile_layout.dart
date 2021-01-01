@@ -1,18 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tele_doctor/models/enter_properties/enter_properties.dart';
 import 'package:tele_doctor/models/localization/app_localization.dart';
 import 'package:tele_doctor/models/person/patient/patient.dart';
-import 'package:tele_doctor/models/utilities/strings/edit_profile_strings.dart';
 import 'package:tele_doctor/viewModels/controllers/edit/edit_profile.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/viewModels/observers_interfaces/observers/observer.dart';
+import 'package:tele_doctor/viewModels/services/local/shared_prefence_controller.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/date_picker.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/edit_profile_photo.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/edit_textfield.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/widgets/label_text.dart';
-import 'package:tele_doctor/views/pages/profile/patient_profile.dart';
-
-import '../../../../main_page.dart';
 
 class EditProfileLayout extends StatefulWidget {
   PatientHandler patientHandler;
@@ -31,27 +30,23 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
   PatientHandler patientHandler;
   Patient _patient;
   ProfileEditor _editor;
-  TextEditingController _firstName;
-  TextEditingController _lastName;
-  TextEditingController _email;
-  TextEditingController _password;
-  TextEditingController _phoneNumber;
-  TextEditingController _socialID;
-  TextEditingController _insuranceCode;
-  TextEditingController _insuranceTitle;
 
   _EditProfileLayoutState(this.patientHandler) {
     this.patientHandler.registerObserver(this);
     this.patientHandler.notifyObservers();
     _editor = ProfileEditor();
-    this._firstName = TextEditingController();
-    this._lastName = TextEditingController();
-    this._email = TextEditingController();
-    this._socialID = TextEditingController();
-    this._insuranceCode = TextEditingController();
-    this._insuranceTitle = TextEditingController();
-    this._password = TextEditingController();
-    this._phoneNumber = TextEditingController();
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    SPController controller = SPController();
+    EnterProperties ep = EnterProperties(
+        token: patientHandler.patient.token,
+        firstAppearance: false,
+        logout: false,
+        patient: patientHandler.patient);
+    await controller.save(ep);
   }
 
   @override
@@ -73,56 +68,63 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: LabelText(
-                      title: AppLocalizations.of(context).translate("profileInfoTag"),
+                      title: AppLocalizations.of(context)
+                          .translate("profileInfoTag"),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                      controller: _firstName,
-                      title: _editor.titleValidation(
-                          _patient.firstName, AppLocalizations.of(context).translate("firstName")),
+                      controller: _editor.firstName,
+                      title: _editor.titleValidation(_patient.firstName,
+                          AppLocalizations.of(context).translate("firstName")),
                       isNumber: false,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        controller: _lastName,
-                        title: _editor.titleValidation(
-                            _patient.lastName, AppLocalizations.of(context).translate("lastName")),
+                        controller: _editor.lastName,
+                        title: _editor.titleValidation(_patient.lastName,
+                            AppLocalizations.of(context).translate("lastName")),
                         isNumber: false),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        controller: _email,
-                        title: _editor.titleValidation(
-                            _patient.email, AppLocalizations.of(context).translate("email")),
+                        controller: _editor.email,
+                        title: _editor.titleValidation(_patient.email,
+                            AppLocalizations.of(context).translate("email")),
                         isNumber: false),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        controller: _phoneNumber,
-                        title: _editor.titleValidation(_patient.phoneNumber,
-                            AppLocalizations.of(context).translate("phoneNumber")),
+                        controller: _editor.phoneNumber,
+                        title: _editor.titleValidation(
+                            _patient.phoneNumber,
+                            AppLocalizations.of(context)
+                                .translate("phoneNumber")),
                         isNumber: true),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        controller: _socialID,
-                        title: _editor.titleValidation(
-                            _patient.socialID, AppLocalizations.of(context).translate("socialID")),
+                        controller: _editor.socialID,
+                        title: _editor.titleValidation(_patient.socialID,
+                            AppLocalizations.of(context).translate("socialID")),
                         isNumber: true),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: ChangeDateButton(
-                      onTap: () {},
-                      title: _editor.titleValidation(_patient.birthDayString,
-                          AppLocalizations.of(context).translate("changeBirthDate")),
+                      onTap: () async {
+                        DateTime time = await _editor.changeBirthDate(
+                            context, _patient.birthDay);
+                        print(time);
+                      },
+                      title: AppLocalizations.of(context)
+                          .translate("changeBirthDate"),
                     ),
                   ),
                 ],
@@ -131,69 +133,51 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child:
-                        LabelText(title: AppLocalizations.of(context).translate("insuranceInfoTag")),
+                    child: LabelText(
+                        title: AppLocalizations.of(context)
+                            .translate("insuranceInfoTag")),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        controller: _insuranceCode,
-                        title: _editor.titleValidation(_patient.insurance.code,
-                            AppLocalizations.of(context).translate("insuranceCode")),
+                        controller: _editor.insuranceCode,
+                        title: _editor.titleValidation(
+                            _patient.insurance.code,
+                            AppLocalizations.of(context)
+                                .translate("insuranceCode")),
                         isNumber: true),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: EditTextField(
-                        controller: _insuranceTitle,
-                        title: _editor.titleValidation(_patient.insurance.title,
-                            AppLocalizations.of(context).translate("insuranceTitle")),
+                        controller: _editor.insuranceOrgan,
+                        title: _editor.titleValidation(
+                            _patient.insurance.insuranceOrgan,
+                            AppLocalizations.of(context)
+                                .translate("insuranceTitle")),
                         isNumber: false),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 0.0, vertical: 20),
                     child: ChangeDateButton(
-                        onTap: () {},
-                        title: AppLocalizations.of(context).translate("changeExpiredDateButton")),
+                      title: AppLocalizations.of(context)
+                          .translate("changeExpiredDateButton"),
+                      onTap: () {
+                        _editor.changeExpireDate(
+                          context,
+                          _patient.insurance.expiredDate,
+                        );
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 0.0, vertical: 20),
                     child: EditSubmit(
-                      onTap: () {
-                        setState(() {
-                          this._patient.firstName =
-                              _editor.controllerTextValidation(
-                                  _firstName.text, _patient.firstName);
-                          this._patient.lastName =
-                              _editor.controllerTextValidation(
-                                  _lastName.text, _patient.lastName);
-                          this._patient.email =
-                              _editor.controllerTextValidation(
-                                  _email.text, _patient.email);
-                          this._patient.phoneNumber =
-                              _editor.controllerTextValidation(
-                                  _phoneNumber.text, _patient.phoneNumber);
-                          this._patient.socialID =
-                              _editor.controllerTextValidation(
-                                  _socialID.text, _patient.socialID);
-//                        this._patient.birthDay
-                          this._patient.insurance.title =
-                              _editor.controllerTextValidation(
-                                  _insuranceTitle.text,
-                                  _patient.insurance.title);
-                          this._patient.insurance.code =
-                              _editor.controllerTextValidation(
-                                  _insuranceCode.text, _patient.insurance.code);
-                          patientHandler.changePatient(_patient);
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) =>
-                                    MainPage(patientHandler, 2)),
-                          );
-                        });
+                      onTap: () async {
+                        //Todo submit submit!
+                        await _editor.edit(patientHandler);
                       },
                       width: width,
                       height: height,

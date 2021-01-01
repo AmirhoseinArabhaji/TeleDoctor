@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/models/localization/app_localization.dart';
-import 'package:tele_doctor/models/utilities/colors.dart';
-import 'package:tele_doctor/models/utilities/device_essentials.dart';
-import 'package:tele_doctor/viewModels/controllers/change_password_controller.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/views/pages/change_password/change_password_layout.dart';
-import 'package:tele_doctor/views/pages/change_password/change_password_textfield.dart';
 
 class ChangePassword extends StatefulWidget {
   final PatientHandler ph;

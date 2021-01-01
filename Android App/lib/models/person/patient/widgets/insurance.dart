@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 class Insurance {
   String _code;
   DateTime _expiredDate;
-  String _title;
+  String _organ;
+  String _id;
 
-  Insurance({String code = "", String title = ""})
-      : this._expiredDate = DateTime.now(),
+  Insurance(
+      {String code = "",
+      String organ = "",
+      String id = "",
+      DateTime expireDate})
+      : this._expiredDate = expireDate,
         this._code = code,
-        this._title = title;
+        this._organ = organ,
+        this._id = id;
 
   factory Insurance.fromJson(Map<String, dynamic> json) =>
       _$InsuranceFromJson(json);
-
-  set title(String title) => this._title = title;
-
-  String get title => this._title;
 
   String get code => this._code;
 
@@ -25,19 +27,36 @@ class Insurance {
 
   DateTime get expiredDate => this._expiredDate;
 
+  String get insuranceOrgan => _organ;
+
+  set insuranceOrgan(String value) {
+    _organ = value;
+  }
+
   Map<String, dynamic> toJson() => _$InsuranceToJson(this);
+
+  String get insuranceID => _id;
+
+  set insuranceID(String value) {
+    _id = value;
+  }
 }
 
 Map<String, dynamic> _$InsuranceToJson(Insurance insurance) {
   return {
-    "code": insurance.code,
-    "expiredDate": _convertDateTimeToJson(insurance.expiredDate),
-    "title": insurance.title,
+    "insurance_id": insurance.insuranceID,
+    "booklet_code": insurance.code,
+    "booklet_expire_date": _convertDateTimeToJson(insurance.expiredDate),
+    "insurance_organ": insurance.insuranceOrgan,
   };
 }
 
 Insurance _$InsuranceFromJson(Map<String, dynamic> json) {
-  return Insurance(code: json['code'], title: json['string']);
+  return Insurance(
+      code: json['code'],
+      id: json["insurance_id"],
+      expireDate: json["booklet_expire_date"],
+      organ: json["insurance_organ"]);
 }
 
 Map<String, dynamic> _convertDateTimeToJson(DateTime dateTime) {

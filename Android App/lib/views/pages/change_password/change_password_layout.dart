@@ -21,6 +21,48 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
 
   _ChangePasswordLayoutState(this.ph);
 
+  void _onLoading(BuildContext context, double width, double height) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+            ),
+            width: width / 5,
+            height: height / 5,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  new CircularProgressIndicator(),
+                  SizedBox(
+                    width: width,
+                    height: 60,
+                    child: Divider(
+                      color: Colors.black,
+                      height: 10,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    new Future.delayed(new Duration(seconds: 1), () async {
+      ph = await _controller.changePassword(ph);
+      Navigator.pop(context);
+    });
+  }
+
   void confirmPasswordFunction() {
     setState(() {
       _controller.confirmPasswordShow = !_controller.confirmPasswordShow;
@@ -54,16 +96,9 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
     });
   }
 
-  void check() {
-    setState(() {
-      if (this._controller.oldPassword.text != ph.patient.password)
-        this._controller.oldPasswordValidate = false;
-    });
-  }
-
   void checkOldPasswordValidate() {
     setState(() {
-      _controller.checkOldPassword(ph.patient.password);
+      _controller.checkOldPassword(ph.patient.password, ph);
     });
   }
 
@@ -75,8 +110,14 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
     return SafeArea(
       child: Container(
         width: width,
@@ -124,7 +165,7 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
               validate: _controller.confirmPasswordValidate,
               controller: _controller.confirmPassword,
               labelText:
-                  AppLocalizations.of(context).translate("confirmPassword"),
+              AppLocalizations.of(context).translate("confirmPassword"),
               height: height,
               width: width,
               onPressed: () => confirmPasswordFunction(),
@@ -134,7 +175,12 @@ class _ChangePasswordLayoutState extends State<ChangePasswordLayout> {
               height: height / 12,
             ),
             ResetPassword(
-              onPressed: () => _controller.changePassword(ph),
+              onPressed: () {
+                print(ph.patient.email);
+                checkPasswordConfirmation();
+                checkOldPasswordValidate();
+                _onLoading(context, width, height);
+              },
             ),
           ],
         ),

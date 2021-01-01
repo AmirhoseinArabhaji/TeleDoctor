@@ -20,9 +20,9 @@ class InsuranceInformation extends StatelessWidget implements IObserver {
       children: [
         buildInformationTag(
             FontAwesomeIcons.building,
-            _patient.insurance.title == ""
+            _patient.insurance.insuranceOrgan == ""
                 ? "Company Name"
-                : _patient.insurance.title),
+                : _patient.insurance.insuranceOrgan),
         buildInformationTag(
             FontAwesomeIcons.idCard,
             _patient.insurance.code == ""

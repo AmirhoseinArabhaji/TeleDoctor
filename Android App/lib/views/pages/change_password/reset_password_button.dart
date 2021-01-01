@@ -31,7 +31,7 @@ class ResetPassword extends StatelessWidget {
         ),
         color: Colors.transparent,
         elevation: 20,
-        onPressed: () {},
+        onPressed: onPressed,
       ),
     );
   }

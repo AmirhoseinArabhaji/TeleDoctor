@@ -57,7 +57,7 @@ Response _$ResponseFromJson(Map<String, dynamic> json) {
     json["response"],
     json["token"],
     json["user"]["email"],
-    json["id"].toString(),
+    json["user"]["id"].toString(),
     json["id"].toString(),
   );
 }

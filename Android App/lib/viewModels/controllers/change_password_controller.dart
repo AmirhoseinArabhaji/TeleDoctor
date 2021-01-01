@@ -20,19 +20,23 @@ class ChangePasswordController {
   bool confirmPasswordValidate = true;
   bool newPasswordValidate = true;
 
-  void checkOldPassword(String text) {
+  bool checkOldPassword(String text, PatientHandler ph) {
+    if (text != this.oldPassword.text) {
+      oldPasswordValidate = false;
+      return false;
+    }
     oldPasswordValidate = text == this.oldPassword.text;
+    return true;
   }
 
-  void checkNewPasswords() {
+  bool checkNewPasswords() {
+    if (newPassword.text != confirmPassword.text) {
+      confirmPasswordValidate = false;
+      return false;
+    }
     confirmPasswordValidate = newPassword.text == confirmPassword.text;
     newPasswordValidate = confirmPasswordValidate;
-  }
-
-  Future<bool> _oldPasswordMatches() async {
-    EnterProperties ep;
-    ep = await sp.fetch(ep);
-    return ep.patient.password == oldPassword.text;
+    return true;
   }
 
   bool _fieldsEmpty() {
@@ -52,12 +56,12 @@ class ChangePasswordController {
   }
 
   Future<PatientHandler> changePassword(PatientHandler ph) async {
-    if (_match() && !_fieldsEmpty() && (await _oldPasswordMatches())) {
-      EnterProperties ep;
-      ep = await sp.fetch(ep);
-      String token = ep.token;
+    if (_match() && !_fieldsEmpty() && oldPasswordValidate) {
+      String token = ph.patient.token;
       http.Response response =
           await Connector.changePassword(token, _makeJson());
+      print(response.body);
+      print(response.statusCode);
       if (response.statusCode == 200) {
         ph.patient.password = newPassword.text;
         return ph;

@@ -21,9 +21,24 @@ Future<http.Response> login(Map<String, dynamic> body) async {
 
 Future<http.Response> changePassword(
     String token, Map<String, dynamic> json) async {
-  return await http.post(
-    "http://amirhoseinar.pythonanywhere.com/api/login",
-    headers: <String, String>{'Authorization': "Token $token"},
+  return await http.put(
+    "http://amirhoseinar.pythonanywhere.com/api/change-password",
+    headers: <String, String>{
+      'Authorization': "Token $token",
+      'Content-Type': 'application/json'
+    },
+    body: jsonEncode(json),
+  );
+}
+
+Future<http.Response> editProfile(
+    String token, Map<String, dynamic> json) async {
+  return await http.put(
+    "http://amirhoseinar.pythonanywhere.com/api/update/patient",
+    headers: <String, String>{
+      'Authorization': "Token $token",
+      'Content-Type': 'application/json'
+    },
     body: jsonEncode(json),
   );
 }
