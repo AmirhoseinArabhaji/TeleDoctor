@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Doctor
+from .models import Doctor, Plan, Day
 
 
 class DoctorAdmin(admin.ModelAdmin):
@@ -24,3 +24,5 @@ class DoctorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Doctor, DoctorAdmin)
+admin.site.register(Plan)
+admin.site.register(Day)

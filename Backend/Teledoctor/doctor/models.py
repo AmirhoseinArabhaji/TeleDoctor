@@ -9,3 +9,23 @@ class Doctor(models.Model):
 
     def __str__(self):
         return self.user.get_full_name()
+
+
+class Plan(models.Model):
+    doctor = models.OneToOneField('Doctor', on_delete=models.CASCADE, related_name='plan')
+
+    def __str__(self):
+        return self.doctor.get_full_name()
+
+
+class Day(models.Model):
+    plan = models.ForeignKey('Plan', on_delete=models.CASCADE)
+    count = models.PositiveIntegerField(null=True, blank=False, default=0)
+    reserved = models.PositiveIntegerField(null=True, blank=False, default=0)
+    date = models.DateField(auto_now_add=False, auto_now=False)
+
+    class Meta:
+        unique_together = ['date', 'plan']
+
+    def __str__(self):
+        return ''
