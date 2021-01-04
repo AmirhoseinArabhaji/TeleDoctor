@@ -5,16 +5,18 @@ class Insurance {
   DateTime _expiredDate;
   String _organ;
   String _id;
+  DateTime _defaultDateTime = DateTime(1970);
 
   Insurance(
       {String code = "",
       String organ = "",
       String id = "",
-      DateTime expireDate})
-      : this._expiredDate = expireDate,
-        this._code = code,
-        this._organ = organ,
-        this._id = id;
+      DateTime expireDate}) {
+    this._expiredDate = (expireDate == null ? _defaultDateTime : expiredDate);
+    this._code = code;
+    this._organ = organ;
+    this._id = id;
+  }
 
   factory Insurance.fromJson(Map<String, dynamic> json) =>
       _$InsuranceFromJson(json);

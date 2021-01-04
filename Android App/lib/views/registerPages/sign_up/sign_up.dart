@@ -3,14 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tele_doctor/models/enter_properties/enter_properties.dart';
 import 'package:tele_doctor/models/utilities/strings/sign_up_strings.dart';
 import 'package:tele_doctor/viewModels/controllers/sign_up_controller.dart';
 import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
-import 'package:tele_doctor/viewModels/services/local/shared_prefence_controller.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/registerPages/widgets/register_textfield.dart';
-import 'package:http/http.dart' as http;
 
 class SignUp extends StatefulWidget {
   @override

@@ -13,7 +13,7 @@ class Patient extends Person {
   Insurance _insurance;
   int _id;
   int _userID;
-
+  DateTime _defaultDateTime = DateTime(1970);
   //Todo GENDER!!!!!! create it
   Patient.fromEdit({
     @required String token,
@@ -28,7 +28,7 @@ class Patient extends Person {
     DateTime birthDay,
     String insuranceCode = "",
     String insuranceOrgan = "",
-    String insuranceID = "124",
+    String insuranceID = "",
     DateTime expiredDate,
   }) : super(token, email, password) {
     this.userID = userId;
@@ -39,7 +39,7 @@ class Patient extends Person {
     this.insurance = Insurance(
         organ: insuranceOrgan,
         code: insuranceCode,
-        id: "1245",
+        id: "",
         expireDate: expiredDate);
     this.insurance.expiredDate = expiredDate;
     this.birthDay = birthDay;
@@ -56,6 +56,7 @@ class Patient extends Person {
     this._visits = [];
     this._notifications = [];
     this._insurance = Insurance();
+    this.birthDay = _defaultDateTime;
     _id = 0;
     userID = 0;
   }

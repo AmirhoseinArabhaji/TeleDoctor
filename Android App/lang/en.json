@@ -18,7 +18,7 @@
   "logOut": "Log Out",
   "welcome": "Welcome Back!",
   "password": "Password",
-  "forgotPassword": "Forgot Password",
+  "forgotPassword": "Forgot Password?",
   "signIn": "Sign In",
   "lowerText_signIn": "New to Tele Doctor? ",
   "signUp": "Sign Up",
@@ -29,5 +29,6 @@
   "upperTextChangePassword": "Enter your New Password",
   "oldPassword": "Old Password",
   "oldPasswordErrorMessage": "Old Password not Match",
-  "changeBirthDate": "Change Birth Date"
+  "changeBirthDate": "Change Birth Date",
+  "signInToContinue" : "Sign In To Continue"
 }

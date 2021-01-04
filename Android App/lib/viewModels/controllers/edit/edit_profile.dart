@@ -25,20 +25,28 @@ class ProfileEditor {
     return controllerText == "" ? prevValue : controllerText;
   }
 
+  String checkEmptyFields(String field, currText) {
+    return field == "" ? currText : field;
+  }
+
   PatientHandler _setPatientData(PatientHandler ph) {
     Patient newPatient = Patient.fromEdit(
-        token: ph.patient.token,
-        email: email.text,
-        password: ph.patient.password,
-        userId: ph.patient.userID,
-        id: ph.patient.id,
-        firstName: firstName.text,
-        lastName: lastName.text,
-        insuranceCode: insuranceCode.text,
-        insuranceID: insuranceID.text,
-        insuranceOrgan: insuranceOrgan.text,
-        phoneNumber: phoneNumber.text,
-        socialID: socialID.text);
+      token: ph.patient.token,
+      email: checkEmptyFields(email.text, ph.patient.email),
+      password: ph.patient.password,
+      userId: ph.patient.userID,
+      id: ph.patient.id,
+      firstName: checkEmptyFields(firstName.text, ph.patient.firstName),
+      lastName: checkEmptyFields(lastName.text, ph.patient.lastName),
+      insuranceCode:
+          checkEmptyFields(insuranceCode.text, ph.patient.insurance.code),
+      insuranceID:
+          checkEmptyFields(insuranceID.text, ph.patient.insurance.insuranceID),
+      insuranceOrgan: checkEmptyFields(
+          insuranceOrgan.text, ph.patient.insurance.insuranceOrgan),
+      phoneNumber: checkEmptyFields(phoneNumber.text, ph.patient.phoneNumber),
+      socialID: checkEmptyFields(socialID.text, ph.patient.socialID),
+    );
     ph.changePatient(newPatient);
     return ph;
   }

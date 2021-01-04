@@ -43,7 +43,7 @@ class SignUpController {
     print(response.body);
     if (response.statusCode == 200) {
       Map<String, dynamic> json = await jsonDecode(response.body);
-      // print(json["user"]);
+      print(json["user"]);
       Response responseObject = Response.fromJson(json);
       _fillEnterProperties(responseObject.token);
       this.ep.patient.userID = int.parse(responseObject.userID);

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tele_doctor/models/enter_properties/enter_properties.dart';
 import 'package:tele_doctor/models/localization/app_localization.dart';
-import 'package:tele_doctor/models/person/patient/patient.dart';
 import 'package:tele_doctor/viewModels/controllers/tele_doctor_controller.dart';
-import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/views/pages/change_password/change_password.dart';
-import 'file:///E:/University%20Courses/Term%205/Project/project/tele_doctor_gitVersion/TeleDoctor/Android%20App/lib/viewModels/services/local/shared_prefence_controller.dart';
 import 'package:tele_doctor/views/main_page.dart';
 import 'package:tele_doctor/views/pages/profile/edit_profile/edit_profile.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/sign_in.dart';

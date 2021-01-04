@@ -119,9 +119,8 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     padding: const EdgeInsets.all(8),
                     child: ChangeDateButton(
                       onTap: () async {
-                        DateTime time = await _editor.changeBirthDate(
-                            context, _patient.birthDay);
-                        print(time);
+                        patientHandler.patient.birthDay = await _editor
+                            .changeBirthDate(context, _patient.birthDay);
                       },
                       title: AppLocalizations.of(context)
                           .translate("changeBirthDate"),
@@ -163,8 +162,9 @@ class _EditProfileLayoutState extends State<EditProfileLayout>
                     child: ChangeDateButton(
                       title: AppLocalizations.of(context)
                           .translate("changeExpiredDateButton"),
-                      onTap: () {
-                        _editor.changeExpireDate(
+                      onTap: () async {
+                        patientHandler.patient.insurance.expiredDate =
+                            await _editor.changeExpireDate(
                           context,
                           _patient.insurance.expiredDate,
                         );
