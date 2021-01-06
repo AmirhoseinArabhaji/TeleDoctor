@@ -18,7 +18,9 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (
-        'Personal info', {'fields': ('first_name', 'last_name', 'phone_number', 'social_id', 'gender', 'profile_pic')}),
+            'Personal info',
+            {'fields': ('first_name', 'last_name', 'phone_number', 'social_id', 'gender', 'date_of_birth',
+                        'profile_pic')}),
         # showing personal info in user page
         ('Permissions', {'fields': ('is_superuser', 'is_staff', 'is_active',)}),
     )
@@ -28,8 +30,8 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-            'email', 'password1', 'password2', 'first_name', 'last_name', 'phone_number', 'social_id', 'gender',
-            'profile_pic')}
+                'email', 'password1', 'password2', 'first_name', 'last_name', 'phone_number', 'social_id', 'gender',
+                'date_of_birth', 'profile_pic',)}
          ),
     )
     search_fields = ('email', 'last_name', 'phone_number', 'social_id',)

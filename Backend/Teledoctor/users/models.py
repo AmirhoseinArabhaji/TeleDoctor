@@ -8,28 +8,29 @@ class UserManager(BaseUserManager):
     def create_user(
             self,
             email,
-            first_name,
-            last_name,
-            phone_number,
-            social_id,
-            gender,
+            # first_name,
+            # last_name,
+            # phone_number,
+            # social_id,
+            # gender,
             password=None,
             is_staff=False,
             is_superuser=False,
             is_active=True):
 
-        if not email or not phone_number or not first_name or not last_name or not social_id:
+        # if not email or not phone_number or not first_name or not last_name or not social_id:
+        if not email:
             raise ValueError('fill all the fields')
         if not password:
             raise ValueError('must have pasword')
 
         user = self.model(
             email=self.normalize_email(email),
-            first_name=first_name,
-            last_name=last_name,
-            phone_number=phone_number,
-            social_id=social_id,
-            gender=gender,
+            # first_name=first_name,
+            # last_name=last_name,
+            # phone_number=phone_number,
+            # social_id=social_id,
+            # gender=gender,
         )
 
         user.set_password(password)
@@ -40,27 +41,41 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_staffuser(self, email, first_name, last_name, phone_number, social_id, gender, password=None):
+    def create_staffuser(self,
+                         email,
+                         # first_name,
+                         # last_name,
+                         # phone_number,
+                         # social_id,
+                         # gender,
+                         password=None):
         user = self.create_user(
             email,
-            first_name=first_name,
-            last_name=last_name,
-            phone_number=phone_number,
-            social_id=social_id,
-            gender=gender,
+            # first_name=first_name,
+            # last_name=last_name,
+            # phone_number=phone_number,
+            # social_id=social_id,
+            # gender=gender,
             password=password,
             is_staff=True,
         )
         return user
 
-    def create_superuser(self, email, first_name, last_name, phone_number, social_id, gender, password=None):
+    def create_superuser(self,
+                         email,
+                         # first_name,
+                         # last_name,
+                         # phone_number,
+                         # social_id,
+                         # gender,
+                         password=None):
         user = self.create_user(
             email,
-            first_name=first_name,
-            last_name=last_name,
-            phone_number=phone_number,
-            social_id=social_id,
-            gender=gender,
+            # first_name=first_name,
+            # last_name=last_name,
+            # phone_number=phone_number,
+            # social_id=social_id,
+            # gender=gender,
             password=password,
             is_staff=True,
             is_superuser=True,
