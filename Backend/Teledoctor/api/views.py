@@ -199,7 +199,7 @@ def add_visit_view(request, doctor_pk):
 def doctor_update_view(request):
     doctor = Token.objects.get(key=request.auth.key).user.doctor
     if request.method == 'PUT':
-        serializer = DoctorUpdateSerializer(data=request.data, instance=doctor)
+        serializer = DoctorUpdateSerializer(data=request.data, instance=doctor, partial=True)
         data = {}
         if serializer.is_valid():
             serializer.save()
@@ -214,7 +214,7 @@ def doctor_update_view(request):
 def patient_update_view(request):
     patient = Token.objects.get(key=request.auth.key).user.patient
     if request.method == 'PUT':
-        serializer = PatientUpdateSerializer(data=request.data, instance=patient)
+        serializer = PatientUpdateSerializer(data=request.data, instance=patient, partial=True)
         data = {}
         if serializer.is_valid():
             serializer.save()
@@ -252,6 +252,10 @@ def get_visits_from_now_for_doctor(request):
 #         pass
 
 class CustomAuthToken(ObtainAuthToken):
+
+    authentication_classes = []
+    permission_classes = []
+
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
