@@ -4,7 +4,7 @@ from .models import Doctor, Plan, Day
 
 
 class DoctorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'last_name', 'email', 'social_id', 'mc_code')
+    list_display = ('id', 'first_name', 'last_name', 'specialty', 'email', 'social_id', 'mc_code')
     search_fields = ('email', 'last_name', 'mc_code', 'social_id')
 
     def first_name(self, obj):

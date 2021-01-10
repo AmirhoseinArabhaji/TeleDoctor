@@ -134,7 +134,7 @@ class ApiDoctorListView(ListAPIView):
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('user__first_name', 'user__last_name',)
+    search_fields = ('user__first_name', 'user__last_name', 'specialty',)
 
 
 @api_view(['GET', ])
