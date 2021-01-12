@@ -42,3 +42,18 @@ Future<http.Response> editProfile(
     body: jsonEncode(json),
   );
 }
+
+Future<http.Response> search(
+  String token,
+  Map<String, dynamic> queryParameters,
+) async {
+  var uri = Uri.https('amirhoseinar.pythonanywhere.com',
+      '/api/list/doctors', queryParameters);
+  return await http.get(
+    uri,
+    headers: <String, String>{
+      'Authorization': "Token $token",
+      'Content-Type': 'application/json'
+    },
+  );
+}

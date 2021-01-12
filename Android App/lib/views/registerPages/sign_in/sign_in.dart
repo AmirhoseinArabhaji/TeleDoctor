@@ -6,6 +6,7 @@ import 'package:tele_doctor/viewModels/objects_handler/patient_handler.dart';
 import 'package:tele_doctor/views/pages/change_password/change_password.dart';
 import 'package:tele_doctor/views/pages/change_password/change_password_textfield.dart';
 import 'package:tele_doctor/views/registerPages/sign_in/widgets/sign_in_textfield.dart';
+import 'package:tele_doctor/views/tele_doctor_text.dart';
 
 import '../../main_page.dart';
 
@@ -239,20 +240,6 @@ class WelcomeText extends StatelessWidget {
   }
 }
 
-class TeleDoctorText extends StatelessWidget {
-  final Shader linearGradient = LinearGradient(
-    colors: <Color>[Color(0xff5DF2FF), Color(0xff18AAB7)],
-  ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "Tele Doctor",
-      style: GoogleFonts.staatliches(
-          fontSize: 50, foreground: Paint()..shader = linearGradient),
-    );
-  }
-}
 //     var width = MediaQuery.of(context).size.width;
 //     return Scaffold(
 //       resizeToAvoidBottomPadding: false,

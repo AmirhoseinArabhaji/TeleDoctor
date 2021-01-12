@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tele_doctor/models/person/patient/widgets/patient_notify.dart';
 import 'package:tele_doctor/models/utilities/colors.dart';
 import 'package:tele_doctor/views/pages/notifications/widgets/list_card.dart';
@@ -37,8 +38,25 @@ class _NotificationsState extends State<Notifications> {
         width: width,
         height: height,
         child: Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.notifications_paused,
+                  size: 60,
+                  color: Colors.black.withOpacity(0.7),
+                ),
+                Text(
+                  "No New Notifications!",
+                  style: GoogleFonts.roboto(
+                    fontSize: 26,
+                    color: Colors.black.withOpacity(0.7),
+                  ),
+                )
+              ],
+            ) /*ListView.builder(
             itemCount: widget.notifications.length,
             itemBuilder: (BuildContext context, int index) {
               return ListCard(
@@ -52,8 +70,8 @@ class _NotificationsState extends State<Notifications> {
                 },
               );
             },
-          ),
-        ),
+          ),*/
+            ),
       ),
     );
   }

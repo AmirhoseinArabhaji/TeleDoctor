@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
     this._page = index;
     screens = {
       0: Notifications(),
-      1: AddPage(),
+      1: AddPage(patientHandler),
       2: PatientProfile(patientHandler),
     };
   }
@@ -44,7 +44,10 @@ class _MainPageState extends State<MainPage> {
     /** fill device object and get physical Device's informations */
     device = Device(MediaQuery.of(context).size);
     return Scaffold(
-      drawer: MyDrawer(ph: patientHandler,),
+      resizeToAvoidBottomPadding: false,
+      drawer: MyDrawer(
+        ph: patientHandler,
+      ),
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 20,
@@ -56,8 +59,7 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: kAppBar,
       ),
       bottomNavigationBar: CurvedNavigationBar(
-
-        height: device.height/16,
+        height: device.height / 16,
         key: _bottomNavigationKey,
         onTap: (index) {
           setState(

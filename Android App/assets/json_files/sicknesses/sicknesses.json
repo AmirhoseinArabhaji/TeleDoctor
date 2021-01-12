@@ -1,0 +1,28 @@
+{
+  "generalSurgeon": {
+    "title": "General Surgeon",
+    "color": "mediumSpringGreen",
+    "image": "IMAGE_ADDRESS"
+  },
+  "cosmeticSurgery": {
+    "title": "Cosmetic Surgery",
+    "color": "blueGreen",
+    "image": "IMAGE_ADDRESS"
+  },
+  "pediatricSurgeon": {
+    "title" : "Pediatric Surgeon",
+    "color" : "raspberry",
+    "image" : "IMADD"
+  },
+  "infectiousDiseaseSpecialist": {
+    "title" : "Infectious Disease Specialist",
+    "color" : "purpleX11",
+    "image" : "IMADD"
+  },
+  "Neurologist": {
+    "title" : "Neurologist",
+    "color" : "darkPastelGreen",
+    "image" : "IMADD"
+  }
+
+}
