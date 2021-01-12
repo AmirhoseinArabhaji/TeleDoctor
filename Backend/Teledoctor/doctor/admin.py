@@ -19,10 +19,20 @@ class DoctorAdmin(admin.ModelAdmin):
     def social_id(self, obj):
         return obj.user.social_id
 
-    def id(self, obj):
-        return obj.user.id
+    # def id(self, obj):
+    #     return obj.user.id
+
+
+class DayAdmin(admin.ModelAdmin):
+    list_display = ('id', 'date', 'visit_count', 'reserved', 'first_name', 'last_name',)
+
+    def first_name(self, obj):
+        return obj.plan.doctor.user.first_name
+
+    def last_name(self, obj):
+        return obj.plan.doctor.user.last_name
 
 
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(Plan)
-admin.site.register(Day)
+admin.site.register(Day, DayAdmin)

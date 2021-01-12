@@ -109,17 +109,17 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     def __str__(self):
-        if self.first_name == None or self.last_name == None or self.social_id == None:
+        if self.first_name is None or self.last_name is None or self.social_id is None:
             return self.email
         return self.first_name + ' ' + self.last_name + ' ' + self.social_id
 
     def get_full_name(self):
-        if self.first_name == None or self.last_name == None:
+        if self.first_name is None or self.last_name is None:
             return self.email
         return self.first_name + ' ' + self.last_name
 
     def get_short_name(self):
-        if self.last_name == None:
+        if self.last_name is None:
             return 'Unknown'
         return self.last_name
 
