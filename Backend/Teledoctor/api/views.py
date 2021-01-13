@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 from rest_framework import status, generics
 from rest_framework.response import Response
-from rest_framework.generics import UpdateAPIView, ListAPIView
+from rest_framework.views import APIView
+from rest_framework.generics import UpdateAPIView, ListAPIView, CreateAPIView, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -13,7 +14,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from datetime import datetime
 
 from users.models import User
-from doctor.models import Doctor
+from doctor.models import Doctor, Plan, Day
 from patient.models import Patient, Visit
 
 from .serializers import (
@@ -33,6 +34,8 @@ from .serializers import (
 
     VisitSerializer,
     PatientVisitSerializer,
+
+    DaySerializer,
 )
 
 
@@ -252,7 +255,6 @@ def get_visits_from_now_for_doctor(request):
 #         pass
 
 class CustomAuthToken(ObtainAuthToken):
-
     authentication_classes = []
     permission_classes = []
 
@@ -295,3 +297,35 @@ class CustomAuthToken(ObtainAuthToken):
             data.update(doctor)
 
         return Response(data=data)
+
+
+@api_view(['POST', ])
+@permission_classes((IsAuthenticated,))
+def add_visit_count_for_day(request):
+    doctor = Token.objects.get(key=request.auth.key).user.doctor
+    plan = Plan.objects.get(doctor=doctor)
+
+    day = Day(plan=plan)
+
+    if request.method == 'POST':
+        serializer = DaySerializer(day, data=request.data)
+        data = {}
+        if serializer.is_valid():
+            serializer.save()
+            data['response'] = 'successfully added.'
+            data.update(serializer.data)
+        else:
+            data = serializer.errors
+        return Response(data)
+
+
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated,))
+def get_plan_of_doctor_for_year(request, doctor_pk, year):
+    doctor = Doctor.objects.get(pk=doctor_pk)
+    plan = Plan.objects.get(doctor=doctor)
+
+    days = Day.objects.filter(date__year=year, plan=plan).order_by('date')
+
+    serializer = DaySerializer(days, many=True)
+    return Response(serializer.data)

@@ -5,7 +5,7 @@ from drf_writable_nested.serializers import WritableNestedModelSerializer
 from drf_writable_nested.mixins import NestedCreateMixin, NestedUpdateMixin, UniqueFieldsMixin
 
 from users.models import User
-from doctor.models import Doctor
+from doctor.models import Doctor, Plan, Day
 from patient.models import Patient, Visit
 
 
@@ -165,3 +165,9 @@ class PatientVisitSerializer(serializers.ModelSerializer):
         # depth = 2 # should make serializers for doctor and maybe patient
 
 
+class DaySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Day
+        fields = ['visit_count', 'date', 'reserved']
+        read_only_fields = ['reserved']

@@ -21,6 +21,9 @@ from .views import (
     get_visits_from_now_for_doctor,
 
     CustomAuthToken,
+
+    add_visit_count_for_day,
+    get_plan_of_doctor_for_year,
 )
 
 from rest_framework.authtoken.views import obtain_auth_token
@@ -50,4 +53,7 @@ urlpatterns = [
 
     path('patient/visits/', get_visits_from_now_for_patient, name='get-visits-patient'),
     path('doctor/visits/', get_visits_from_now_for_doctor, name='get-visits-doctor'),
+
+    path('doctor/plan/day/add', add_visit_count_for_day, name='add-visit-count'),
+    path('doctor/plan/<int:doctor_pk>/<year>', get_plan_of_doctor_for_year, name='add-visit-count'),
 ]
