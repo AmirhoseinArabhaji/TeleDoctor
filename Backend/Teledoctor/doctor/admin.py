@@ -23,8 +23,18 @@ class DoctorAdmin(admin.ModelAdmin):
     #     return obj.user.id
 
 
+class PlanAdmin(admin.ModelAdmin):
+    list_display = ('id', 'first_name', 'last_name',)
+
+    def first_name(self, obj):
+        return obj.doctor.user.first_name
+
+    def last_name(self, obj):
+        return obj.doctor.user.last_name
+
+
 class DayAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'visit_count', 'reserved', 'first_name', 'last_name',)
+    list_display = ('id', 'plan_id', 'doctor_id', 'date', 'visit_count', 'reserved', 'first_name', 'last_name',)
 
     def first_name(self, obj):
         return obj.plan.doctor.user.first_name
@@ -32,7 +42,13 @@ class DayAdmin(admin.ModelAdmin):
     def last_name(self, obj):
         return obj.plan.doctor.user.last_name
 
+    def plan_id(self, obj):
+        return obj.plan.id
+
+    def doctor_id(self, obj):
+        return obj.plan.doctor.id
+
 
 admin.site.register(Doctor, DoctorAdmin)
-admin.site.register(Plan)
+admin.site.register(Plan, PlanAdmin)
 admin.site.register(Day, DayAdmin)

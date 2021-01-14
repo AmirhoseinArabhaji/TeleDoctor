@@ -23,5 +23,9 @@ class PatientAdmin(admin.ModelAdmin):
         return obj.user.id
 
 
+class VisitAdmin(admin.ModelAdmin):
+    list_display = ('id', 'date', 'time', 'doctor', 'patient', 'cost')
+
+
 admin.site.register(Patient, PatientAdmin)
-admin.site.register(Visit)
+admin.site.register(Visit, VisitAdmin)

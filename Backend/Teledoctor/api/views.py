@@ -153,36 +153,6 @@ def doctor_profile_view(request, pk):
         return Response(serializer.data)
 
 
-@api_view(['POST', ])
-@permission_classes((IsAuthenticated,))
-def add_visit_view(request, doctor_pk):
-    try:
-        patient = Token.objects.get(key=request.auth.key).user.patient
-        doctor = Doctor.objects.get(pk=doctor_pk)
-    except Patient.DoesNotExist:
-        return Response(data={'error': 'patient does not exist.'}, status=status.HTTP_404_NOT_FOUND)
-    except Doctor.DoesNotExist:
-        return Response(data={'error': 'doctor does not exist.'}, status=status.HTTP_404_NOT_FOUND)
-
-    # user = request.user
-    # if patient != user:
-    #     return Response({'error': 'user and patient do not match'}, status=status.HTTP_400_BAD_REQUEST)
-
-    context = {
-        'doctor': doctor,
-        'patient': patient
-    }
-    serializer = VisitSerializer(data=request.data, context=context)
-    data = {}
-    if serializer.is_valid():
-        patient = serializer.save(doctor=doctor, patient=patient)
-        data['message'] = 'visit added successfully'
-    else:
-        data = serializer.errors
-
-    return Response(data)
-
-
 # @api_view(['PUT', ])
 # @permission_classes((IsAuthenticated,))
 # def user_update_view(request):
@@ -247,13 +217,6 @@ def get_visits_from_now_for_doctor(request):
     return Response(data=serializer.data)
 
 
-#
-# class VisitListView(ListAPIView):
-#     queryset = Visit.objects.all()
-#
-#     def get_queryset(self):
-#         pass
-
 class CustomAuthToken(ObtainAuthToken):
     authentication_classes = []
     permission_classes = []
@@ -301,7 +264,7 @@ class CustomAuthToken(ObtainAuthToken):
 
 @api_view(['POST', ])
 @permission_classes((IsAuthenticated,))
-def add_visit_count_for_day(request):
+def add_visit_count_for_day_view(request):
     doctor = Token.objects.get(key=request.auth.key).user.doctor
     plan = Plan.objects.get(doctor=doctor)
 
@@ -321,7 +284,7 @@ def add_visit_count_for_day(request):
 
 @api_view(['GET', ])
 @permission_classes((IsAuthenticated,))
-def get_plan_of_doctor_for_year(request, doctor_pk, year):
+def get_plan_of_doctor_for_year_view(request, doctor_pk, year):
     doctor = Doctor.objects.get(pk=doctor_pk)
     plan = Plan.objects.get(doctor=doctor)
 
@@ -329,3 +292,38 @@ def get_plan_of_doctor_for_year(request, doctor_pk, year):
 
     serializer = DaySerializer(days, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST', ])
+@permission_classes((IsAuthenticated,))
+def add_visit_view(request, doctor_pk):
+    try:
+        patient = Token.objects.get(key=request.auth.key).user.patient
+        doctor = Doctor.objects.get(pk=doctor_pk)
+    except Patient.DoesNotExist:
+        return Response(data={'error': 'patient does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+    except Doctor.DoesNotExist:
+        return Response(data={'error': 'doctor does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        # get all days of doctor's plan
+        days = Day.objects.filter(plan__doctor__pk=doctor_pk)
+        day = days.get(date=request.data['date'])
+    except Day.DoesNotExist:
+        return Response(data={'error': 'no plan for this day found.'})
+
+    # check for available visit for day
+    if day.reserved >= day.visit_count:
+        return Response(data={'error': 'no available visit for this day'})
+    else:
+        # increase reserved visits for day
+        day.reserved += 1
+        day.save()
+
+    visit = Visit(doctor=doctor, patient=patient)
+    serializer = VisitSerializer(visit, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)

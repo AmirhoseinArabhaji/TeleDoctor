@@ -149,15 +149,6 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'specialty', 'user']
 
 
-class VisitSerializer(serializers.ModelSerializer):
-    patient = serializers.ReadOnlyField()
-    doctor = serializers.ReadOnlyField()
-
-    class Meta:
-        model = Visit
-        fields = '__all__'
-
-
 class PatientVisitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Visit
@@ -166,8 +157,14 @@ class PatientVisitSerializer(serializers.ModelSerializer):
 
 
 class DaySerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Day
         fields = ['visit_count', 'date', 'reserved']
         read_only_fields = ['reserved']
+
+
+class VisitSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Visit
+        fields = ['date', 'time', 'title', 'detail', 'cost', ]
