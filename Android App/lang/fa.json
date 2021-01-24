@@ -1,0 +1,20 @@
+{
+  "edit": "ویرایش",
+  "editInformation": "ویرایش اطلاعات",
+  "information": "اطلاعات",
+  "personal": "فردی",
+  "insurance": "بیمه",
+  "firstName": "نام",
+  "lastName": "نام خانوادگی",
+  "email": "ایمیل",
+  "phoneNumber": "شماره تلفن همراه",
+  "socialID": "کد ملی",
+  "profileInfoTag": "اطلاعات شخصی",
+  "insuranceInfoTag": "اطلاعات بیمه",
+  "insuranceCode": "کد بیمه",
+  "insuranceTitle": "نام شرکت بیمه",
+  "changeBirthDate" : "تغییر تاریخ تولد",
+  "changeExpiredDateButton": "تغییر تاریخ ابطال بیمه",
+  "submit": "ثبت",
+  "logOut": "خروج"
+}

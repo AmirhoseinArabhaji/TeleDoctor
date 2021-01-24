@@ -1,0 +1,50 @@
+name: tele_doctor
+description: A new Flutter project.
+
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+
+  cupertino_icons: ^0.1.3
+  curved_navigation_bar: ^0.3.4
+  google_fonts: ^1.1.0
+  flutter_slidable: ^0.5.7
+  http: ^0.12.2
+  google_sign_in: ^4.5.5
+  json_serializable: ^3.5.0
+  path_provider: ^1.6.21
+  flutter_datetime_picker: ^1.4.0
+  font_awesome_flutter: ^8.10.0
+  shared_preferences: ^0.5.12+4
+  datetime_picker_formfield: ^1.0.0
+
+  flutter_localizations:
+    sdk: flutter
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+flutter:
+  assets:
+    - assets/
+    - assets/json_files/enter_properties/enter_properties.json
+    - assets/json_files/sicknesses/sicknesses.json
+    - assets/fonts/IRANSansMobile.ttf
+    - lang/fa.json
+    - lang/en.json
+  uses-material-design: true

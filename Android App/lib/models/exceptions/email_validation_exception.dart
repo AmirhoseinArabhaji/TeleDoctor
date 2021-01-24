@@ -1,0 +1,3 @@
+class EmailValidationException implements Exception{
+
+}
