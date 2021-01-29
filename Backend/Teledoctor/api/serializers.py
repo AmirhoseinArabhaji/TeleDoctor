@@ -110,7 +110,7 @@ class DoctorUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.M
 
     class Meta:
         model = Doctor
-        fields = ['id', 'user', 'mc_code', 'specialty']
+        fields = ['id', 'user', 'mc_code', 'specialty', 'location', 'about_me']
 
 
 class PatientUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.ModelSerializer):
@@ -124,7 +124,7 @@ class PatientUpdateSerializer(UniqueFieldsMixin, NestedUpdateMixin, serializers.
 class UserDoctorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'gender', 'profile_pic']
+        fields = ['id', 'first_name', 'last_name', 'email', 'gender', 'profile_pic']
 
 
 class DoctorListSerializer(serializers.ModelSerializer):
@@ -138,7 +138,7 @@ class DoctorListSerializer(serializers.ModelSerializer):
 class UserDoctorProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'gender', 'profile_pic']
+        fields = ['id', 'first_name', 'last_name', 'email', 'gender', 'profile_pic']
 
 
 class DoctorProfileSerializer(serializers.ModelSerializer):

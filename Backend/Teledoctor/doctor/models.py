@@ -6,6 +6,8 @@ class Doctor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='doctor')
     mc_code = models.PositiveIntegerField(null=True, blank=False)  # Medical Council Code
     specialty = models.CharField(max_length=50, null=True, blank=False)
+    location = models.TextField(null=True, blank=False)
+    about_me = models.TextField(null=True, blank=False)
 
     def __str__(self):
         return self.user.get_full_name()

@@ -24,7 +24,7 @@ class PatientAdmin(admin.ModelAdmin):
 
 
 class VisitAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'time', 'doctor', 'patient', 'cost')
+    list_display = ('id', 'date', 'time', 'doctor', 'patient')
 
 
 admin.site.register(Patient, PatientAdmin)

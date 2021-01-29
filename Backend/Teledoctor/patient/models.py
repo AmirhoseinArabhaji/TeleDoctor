@@ -27,8 +27,7 @@ class Visit(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False, null=False, blank=False)
     time = models.TimeField(auto_now=False, auto_now_add=False, null=False, blank=False)
     title = models.CharField(max_length=100, null=False, blank=False)
-    detail = models.TextField(null=False, blank=False)
-    cost = models.PositiveIntegerField(null=False, blank=False)
+    # detail = models.TextField(null=False, blank=False)
 
     def __str__(self):
         return 'patient: ' + str(self.patient) + ', doctor: ' + str(self.doctor) + ', title: ' + self.title
