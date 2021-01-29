@@ -132,7 +132,7 @@ class DoctorListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
-        fields = ['id', 'specialty', 'user']
+        fields = ['id', 'specialty', 'user', 'location', 'about_me']
 
 
 class UserDoctorProfileSerializer(serializers.ModelSerializer):
@@ -146,7 +146,7 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
-        fields = ['id', 'specialty', 'user']
+        fields = ['id', 'specialty', 'user', 'location', 'about_me']
 
 
 class PatientVisitSerializer(serializers.ModelSerializer):
@@ -164,7 +164,29 @@ class DaySerializer(serializers.ModelSerializer):
 
 
 class VisitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Visit
+        fields = ['date', 'time', 'title', ]
+
+
+class VisitListUSerDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'date_of_birth', 'gender', ]
+
+
+class VisitListPatientDetailSerializer(serializers.ModelSerializer):
+    user = VisitListUSerDetailSerializer()
+
+    class Meta:
+        model = Patient
+        fields = ['user', 'booklet_code', 'booklet_expire_date', ]
+
+
+class VisitListSerializer(serializers.ModelSerializer):
+    patient = VisitListPatientDetailSerializer()
 
     class Meta:
         model = Visit
-        fields = ['date', 'time', 'title', 'detail', 'cost', ]
+        fields = ['date', 'time', 'title', 'patient']
+

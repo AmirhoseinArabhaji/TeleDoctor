@@ -15,8 +15,6 @@ from .views import (
     ApiDoctorListView,
     doctor_profile_view,
 
-    add_visit_view,
-
     get_visits_from_now_for_patient,
     get_visits_from_now_for_doctor,
 
@@ -25,6 +23,9 @@ from .views import (
     add_visit_count_for_day_view,
     get_plan_of_doctor_for_year_view,
     add_visit_view,
+
+    get_doctor_visit_list,
+    get_doctor_today_visit_list,
 )
 
 from rest_framework.authtoken.views import obtain_auth_token
@@ -57,5 +58,8 @@ urlpatterns = [
     path('doctor/plan/day/add', add_visit_count_for_day_view, name='add-visit-count'),
     path('doctor/plan/<int:doctor_pk>/<year>', get_plan_of_doctor_for_year_view, name='add-visit-count'),
     path('visit/add/<int:doctor_pk>', add_visit_view, name='add-visit'),
+
+    path('doctor/visit-list/<date>', get_doctor_visit_list, name='visit-list'),
+    path('doctor/today-visit-list', get_doctor_today_visit_list, name='today-visit-list')
 
 ]

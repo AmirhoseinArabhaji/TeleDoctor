@@ -17,6 +17,8 @@ from users.models import User
 from doctor.models import Doctor, Plan, Day
 from patient.models import Patient, Visit
 
+from datetime import datetime
+
 from .serializers import (
     UserRegisterSerializer,
     DoctorRegisterSerializer,
@@ -36,6 +38,7 @@ from .serializers import (
     PatientVisitSerializer,
 
     DaySerializer,
+    VisitListSerializer,
 )
 
 
@@ -254,7 +257,9 @@ class CustomAuthToken(ObtainAuthToken):
             doctor = {'doctor': {
                 'id': user.doctor.id,
                 'mc_code': user.doctor.mc_code,
-                'specialty': user.doctor.specialty
+                'specialty': user.doctor.specialty,
+                'about_me': user.doctor.about_me,
+                'location': user.doctor.location,
             }
             }
             data.update(doctor)
@@ -327,3 +332,28 @@ def add_visit_view(request, doctor_pk):
         return Response(serializer.data)
     else:
         return Response(serializer.errors)
+
+
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated,))
+def get_doctor_visit_list(request, date):
+    doctor = Token.objects.get(key=request.auth.key).user.doctor
+    visits = Visit.objects.filter(doctor=doctor).filter(date=date)
+    serializer = VisitListSerializer(visits, many=True)
+    if not visits.exists():
+        return Response({'response': 'no visit found'})
+    else:
+        return Response(serializer.data)
+
+
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated,))
+def get_doctor_today_visit_list(request):
+    doctor = Token.objects.get(key=request.auth.key).user.doctor
+    date = datetime.today().strftime('%Y-%m-%d')
+    visits = Visit.objects.filter(doctor=doctor).filter(date=date)
+    serializer = VisitListSerializer(visits, many=True)
+    if not visits.exists():
+        return Response({'response': 'no visit found'})
+    else:
+        return Response(serializer.data)
